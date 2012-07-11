@@ -106,8 +106,6 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
         if (!_isStopped) {
             _requestAnimationFrame(_drawScene);
             _scene.traverse(_process);
-            _socket.open("ws://localhost:9000/socket");
-            _socket.send("");
             _hasChanged = false;
         }
     };
@@ -130,16 +128,18 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
             utils.log("Rot Node", _cubeRotationNode);
 
             _socket = new WebSocket("ws://localhost:9000/socket");
+            utils.log("Socket", _socket);
             _socket.onmessage = function (event) {
                 utils.log("Data", event.data);
                 _angle = parseInt(event.data, 10);
-                utils.log("_angle", _angle);
                 _cubeRotationNode.angle += _angle;
             };
 
-            _socket.onopen = function (event) {
-                _socket.send("");
-            };
+            document.addEventListener("keydown", function (event) {
+                if (event.keyCode === 37) {
+                    _socket.send("");
+                }
+            }, false);
 
             renderer = _scene.findNodesByType("renderer")[0];
             _updateRenderer(renderer);

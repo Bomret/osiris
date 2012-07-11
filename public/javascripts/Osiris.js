@@ -11,9 +11,7 @@ define(["amplify", "utils", "webgl", "loadObjModel", "loadShaders", "renderScene
             _canvas,
             _shaderProgram,
             _cubeScene,
-            _cubeRotationNode,
-            _socket,
-            _angle = 1;
+            _cubeRotationNode;
 
         var setupWebGlContext = function (spec) {
             _canvas = document.getElementById(spec.canvasId);
