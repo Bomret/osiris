@@ -119,7 +119,17 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="scala-2.9.1" level="project" />
-    <orderEntry type="library" name="siris" level="project" />
+    <orderEntry type="module-library" exported="" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../siris" />
+        </CLASSES>
+        <JAVADOC>
+          <root url="file://$MODULE_DIR$/../../siris/core/lib/owl/javadoc" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
