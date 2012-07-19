@@ -119,7 +119,7 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="scala-2.9.1" level="project" />
-    <orderEntry type="module-library" exported="" scope="PROVIDED">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
           <root url="file://$MODULE_DIR$/../../siris" />
@@ -128,6 +128,49 @@
           <root url="file://$MODULE_DIR$/../../siris/core/lib/owl/javadoc" />
         </JAVADOC>
         <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../siris/core/lib/simplex3d" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../siris/core/lib/simplex3d" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../siris/core/lib/owl" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/../../siris/core/lib/owl" />
+        </SOURCES>
+        <jarDirectory url="file://$MODULE_DIR$/../../siris/core/lib/owl" recursive="false" />
+        <jarDirectory url="file://$MODULE_DIR$/../../siris/core/lib/owl" recursive="false" type="SOURCES" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../siris/core/lib/slf4j-1.6.1" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../siris/core/lib/slf4j-1.6.1" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://$MODULE_DIR$/../../siris/components/physics/jbullet/lib/jbullet" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://$MODULE_DIR$/../../siris/components/physics/jbullet/lib/jbullet" recursive="false" />
       </library>
     </orderEntry>
   </component>

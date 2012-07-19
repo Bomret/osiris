@@ -5,6 +5,7 @@ import siris.components.physics.jbullet.JBulletComponent
 import siris.components.physics.PhysicsConfiguration
 import siris.core.entity.EntityCreationHandling
 import siris.core.svaractor.SVarActorHW
+import simplex3d.math.floatm.ConstVec3f
 
 /**
  * User: Stefan Reichel
@@ -14,7 +15,10 @@ import siris.core.svaractor.SVarActorHW
 
 object BuildScene extends SVarActorHW with EntityCreationHandling with IORegistryHandling {
   createActor[JBulletComponent]()(physics => {
-    println("Components created")
+
+    physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
+    println("Components created for Osiris")
+
   })(error => {
     println(error.getMessage)
   })
