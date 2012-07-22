@@ -3,15 +3,14 @@
  * Date: 13.06.12
  */
 
-define(["amplify", "utils", "webgl", "loadObjModel", "loadShaders", "renderScene", "rendering", "scene"],
-    function (amplify, utils, webgl, loadObjModel, loadShaders, renderScene, rendering, scene) {
+define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "renderScene", "rendering", "scene"],
+    function (utils, webgl, glmatrix, loadObjModel, loadShaders, renderScene, rendering, scene) {
         "use strict";
 
         var _gl,
             _canvas,
             _shaderProgram,
-            _cubeScene,
-            _cubeRotationNode;
+            _cubeScene;
 
         var setupWebGlContext = function (spec) {
             _canvas = document.getElementById(spec.canvasId);
@@ -44,12 +43,10 @@ define(["amplify", "utils", "webgl", "loadObjModel", "loadShaders", "renderScene
 
                 //var cube = loadObjModel.execute("models/cube/cube.obj", context);
                 var cube = rendering.makeCube(0.5, _gl);
-                _cubeRotationNode = scene.makeRotationNode("rotate-cube-y", "y", 45);
-                var cubeNode = scene.makeModelNode("cube", cube);
+                var cubeNode = scene.makeModelNode("cube", cube, glmatrix.mat4.identity());
 
                 rendererNode.addChild(cameraNode);
-                cameraNode.addChild(_cubeRotationNode);
-                _cubeRotationNode.addChild(cubeNode);
+                cameraNode.addChild(cubeNode);
 
                 _cubeScene = scene.makeSceneDescription("Simple cube", rendererNode);
                 utils.log("Scene", _cubeScene);

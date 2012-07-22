@@ -97,38 +97,20 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
     };
 
     return {
+        makeGroupNode: function(id) {
+          var that = makeBaseNode(id, "group");
+
+        },
 
         /**
          *
          * @param {string} id
          * @param {RenderableModel} model
          */
-        makeModelNode: function(id, model) {
+        makeModelNode: function(id, model, transformation) {
             var that = makeBaseNode(id, "model");
             that.model = model;
-            that.matrix = null;
-
-            return Object.seal(that);
-        },
-
-        makeRotationNode: function(id, axis, angle) {
-            var that;
-            //                mat = glmatrix.mat4.create(glmatrix.mat4.identity());
-            //
-            //            glmatrix.mat4.rotate(mat, utils.degreesToRadians(angle), axis, mat);
-            //
-            //            that = this.makeTransformationNode(id, "rotate", mat);
-
-            that = makeBaseNode(id, "rotation");
-            that.axis = axis;
-            that.angle = angle;
-            return that;
-        },
-
-        makeTransformationNode: function(id, transformType, matrix) {
-            var that = makeBaseNode(id, "transform");
-            that.transformType = transformType;
-            that.matrix = matrix;
+            that.transformation = transformation;
 
             return Object.seal(that);
         },
