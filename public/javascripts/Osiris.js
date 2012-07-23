@@ -45,10 +45,10 @@ define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "renderScen
                 var cube = rendering.makeCube(0.5, _gl);
                 var cubeNode = scene.makeModelNode("cube", cube, glmatrix.mat4.identity());
 
-                rendererNode.addChild(cameraNode);
+                //rendererNode.addChild(cameraNode);
                 cameraNode.addChild(cubeNode);
 
-                _cubeScene = scene.makeSceneDescription("Simple cube", rendererNode);
+                _cubeScene = scene.makeSceneDescription("Simple cube", cameraNode);
                 utils.log("Scene", _cubeScene);
 
                 renderScene.execute(_cubeScene);

@@ -1,0 +1,8 @@
+{
+    "scenes":[
+        {
+            "name":"Simple cube",
+            "file":"simple_cube.json"
+        }
+    ]
+}

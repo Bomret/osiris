@@ -119,39 +119,39 @@ define(["utils", "webgl", "glmatrix", "rendering"], function (utils, webgl, glma
             utils.log("Socket", _socket);
             _socket.onmessage = function (event) {
                 utils.log("Data", event.data);
-                _angle = parseInt(event.data, 10);
-                glmatrix.mat4.rotateY(_cubeNode.transformation, utils.degreesToRadians(_angle), _cubeNode.transformation);
+                //_angle = parseInt(event.data, 10);
+                //glmatrix.mat4.rotateY(_cubeNode.transformation, utils.degreesToRadians(_angle), _cubeNode.transformation);
             };
 
             document.addEventListener("keydown", function (event) {
                 if (event.keyCode === 37) {
-                    _socket.send("");
+                    _socket.send(JSON.stringify(_scene));
                 }
             }, false);
 
-            renderer = _scene.findNodesByType("renderer")[0];
-            utils.log("Renderer", renderer);
-            _updateRenderer(renderer);
+            //renderer = _scene.findNodesByType("renderer")[0];
+            //utils.log("Renderer", renderer);
+            //_updateRenderer(renderer);
 
-            _vertexPositionAttributeLocation = _gl.getAttribLocation(_program, _bindables.attributes.vertexPosition);
-            _gl.enableVertexAttribArray(_vertexPositionAttributeLocation);
-            utils.log("VertexPosition uniform location", _vertexPositionAttributeLocation);
+            //_vertexPositionAttributeLocation = _gl.getAttribLocation(_program, _bindables.attributes.vertexPosition);
+            //_gl.enableVertexAttribArray(_vertexPositionAttributeLocation);
+            //utils.log("VertexPosition uniform location", _vertexPositionAttributeLocation);
 
             //_vertexNormalAttributeLocation = _gl.getAttribLocation(_program, _bindables.attributes.vertexNormal);
             //_gl.enableVertexAttribArray(_vertexNormalAttributeLocation);
 
-            utils.log("Matrices", _modelViewMatrix, _projectionMatrix);
-            _modelViewMatrixUniformLocation = _gl.getUniformLocation(_program, _bindables.uniforms.modelViewMatrix);
-            utils.log("mvMatrix uniform location", _modelViewMatrixUniformLocation);
+            //utils.log("Matrices", _modelViewMatrix, _projectionMatrix);
+            //_modelViewMatrixUniformLocation = _gl.getUniformLocation(_program, _bindables.uniforms.modelViewMatrix);
+            //utils.log("mvMatrix uniform location", _modelViewMatrixUniformLocation);
 
-            _projectionMatrixUniformLocation = _gl.getUniformLocation(_program, _bindables.uniforms.projectionMatrix);
-            utils.log("pMatrix uniform location", _projectionMatrixUniformLocation);
+            //_projectionMatrixUniformLocation = _gl.getUniformLocation(_program, _bindables.uniforms.projectionMatrix);
+            //utils.log("pMatrix uniform location", _projectionMatrixUniformLocation);
 
             //_normalMatrixUniformLocation = _gl.getUniformLocation(_program, _bindables.uniforms.normalMatrix);
             //utils.log("nMatrix uniform location", _normalMatrixUniformLocation);
 
             try {
-                _drawScene();
+                //_drawScene();
             } catch (error) {
                 alert("An error has occured during rendering. See log for details.");
                 utils.log("Error", error.message);

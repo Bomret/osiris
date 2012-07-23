@@ -6,13 +6,13 @@ import play.api.libs.json.Json
 
 /**
  * User: Stefan Reichel
- * Date: 19.07.12
- * Time: 14:59
+ * Date: 23.07.12
+ * Time: 23:38
  */
 
-object ShaderController extends Controller {
-  def getShaders = Action {
-    val availableShaders = Source.fromFile("public/shaders/availableShaders.json")
+object SceneController extends Controller {
+  def getAvailableScenes = Action {
+    val availableShaders = Source.fromFile("public/scenes/availableScenes.json")
     val lines = availableShaders.mkString
     availableShaders.close()
 
@@ -21,11 +21,7 @@ object ShaderController extends Controller {
       Ok(json)
     } catch {
       case e: Exception =>
-        InternalServerError("There was an error retrieving the available shaders.")
+        InternalServerError("There was an error retrieving the available scenes.")
     }
-  }
-
-  def getShaderByName = Action {
-    Ok
   }
 }

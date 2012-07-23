@@ -1,0 +1,14 @@
+{
+    "shaders":[
+        {
+            "name":"Flat",
+            "description":"Simple flat shading without any lights or textures. Just a settable color for the object.",
+            "config":"flat/flat.config"
+        },
+        {
+            "name":"Fancy",
+            "description":"Enhanced shading with lighting and different texture maps.",
+            "config":"fancy/fancy.config"
+        }
+    ]
+}

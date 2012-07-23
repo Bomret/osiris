@@ -88,6 +88,7 @@ define(["utils"], function (utils) {
         return {
             id:id,
             type:type,
+            children:_children,
             addChild:_add,
             removeChild:_remove,
             findChildById:_findChildById,
@@ -152,9 +153,9 @@ define(["utils"], function (utils) {
         },
 
         makeSceneDescription:function (sceneName, rendererNode) {
-            if (rendererNode.type !== "renderer") {
-                throw new TypeError("The given renderer node for the scene '" + sceneName + "' is not of type 'renderer'");
-            }
+            //if (rendererNode.type !== "renderer") {
+            //    throw new TypeError("The given renderer node for the scene '" + sceneName + "' is not of type 'renderer'");
+            //}
 
             var _sceneRenderer = rendererNode;
 
@@ -182,7 +183,8 @@ define(["utils"], function (utils) {
             };
 
             return Object.seal({
-                name:sceneName,
+                id:sceneName,
+                type: "scene",
                 rootNode:_sceneRenderer,
                 findNodeById:_byNodeId,
                 findNodesByType:_byType,
