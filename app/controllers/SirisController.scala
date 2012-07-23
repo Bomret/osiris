@@ -2,9 +2,8 @@ package controllers
 
 import play.api.mvc.{WebSocket, Controller}
 import play.api.libs.iteratee.{Iteratee, Enumerator}
-import actors.AbstractActor
-import siris.core.svaractor.SVarActorHW
-import osiris.BuildScene
+import osiris.contracts.MessageFromClient
+import osiris.OsirisMissionControl
 
 /**
  * User: Stefan Reichel
@@ -13,12 +12,16 @@ import osiris.BuildScene
  */
 
 object SirisController extends Controller {
-  var actor:AbstractActor = BuildScene
+  val out = Enumerator.imperative[String]()
+  val actor = new OsirisMissionControl((msg: String) => {
+    out.push(msg)
+  })
+
+  actor.start()
 
   def socket = WebSocket.using[String] {
     request =>
-      val out = Enumerator.imperative[String]()
-      val in = Iteratee.foreach[String](content => out.push("5"))
+      val in = Iteratee.foreach[String](content => actor ! MessageFromClient(content))
 
       (in, out)
   }
