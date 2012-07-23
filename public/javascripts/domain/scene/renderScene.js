@@ -4,7 +4,7 @@
  * Time: 21:08
  */
 
-define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, webgl, glmatrix, amplify, rendering) {
+define(["utils", "webgl", "glmatrix", "rendering"], function (utils, webgl, glmatrix, rendering) {
     "use strict";
 
     var _gl,
@@ -13,7 +13,7 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
         _socket,
         _angle,
         _scene,
-        _cubeRotationNode,
+        _cubeNode,
         _vertexPositionAttributeLocation,
         _vertexNormalAttributeLocation,
         _modelViewMatrix = glmatrix.mat4.create(),
@@ -30,29 +30,21 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
             _updateRenderer(node);
         } else if (node.type === "camera") {
             _updateCamera(node);
-            //        } else if (node.type === "transform") {
-            //            glmatrix.mat4.multiply(_modelViewMatrix, node.matrix, _modelViewMatrix);
-        } else if (node.type === "rotation") {
-            var transformedAxis;
-            if (node.axis === "x") transformedAxis = [1, 0, 0];
-            else if (node.axis === "y") transformedAxis = [0, 1, 0];
-            else if (node.axis === "z") transformedAxis = [0, 0, 1];
-
-            glmatrix.mat4.rotate(_modelViewMatrix, utils.degreesToRadians(node.angle), transformedAxis, _modelViewMatrix);
         } else if (node.type === "model") {
-            _renderModel(node.model);
+            _renderModel(node);
         }
     };
 
-    var _renderModel = function (model) {
-        _gl.bindBuffer(_gl.ARRAY_BUFFER, model.verts);
+    var _renderModel = function (modelNode) {
+        glmatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
+        _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.model.verts);
         _gl.vertexAttribPointer(_vertexPositionAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
         _gl.vertexAttribPointer(_vertexNormalAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
 
-        _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, model.inds);
+        _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.model.inds);
 
         _updateRenderMatrices();
-        _gl.drawElements(_gl.TRIANGLES, model.numIndices, _gl.UNSIGNED_SHORT, 0);
+        _gl.drawElements(_gl.TRIANGLES, modelNode.model.numIndices, _gl.UNSIGNED_SHORT, 0);
     };
 
     var _updateRenderer = function (renderer) {
@@ -79,8 +71,8 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
     };
 
     var _updateCamera = function (node) {
-        var position = node.position;
-        var optics = node.optics;
+        var position = node.position,
+            optics = node.optics;
 
         if (optics.type === "perspective") {
             glmatrix.mat4.perspective(optics.focalDistance, optics.aspectRatio, optics.near, optics.far, _projectionMatrix);
@@ -106,8 +98,6 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
         if (!_isStopped) {
             _requestAnimationFrame(_drawScene);
             _scene.traverse(_process);
-            _socket.open("ws://localhost:9000/socket");
-            _socket.send("");
             _hasChanged = false;
         }
     };
@@ -121,27 +111,26 @@ define(["utils", "webgl", "glmatrix", "amplify", "rendering"], function (utils, 
         execute:function (sceneDescription) {
             var renderer;
 
-            amplify.subscribe("osiris-scene-change", function () {
-                _hasChanged = true;
-            });
-
             _scene = sceneDescription;
-            _cubeRotationNode = _scene.findNodeById("rotate-cube-y");
-            utils.log("Rot Node", _cubeRotationNode);
+            _cubeNode = _scene.findNodeById("cube");
+            utils.log("Cube node", _cubeNode);
 
             _socket = new WebSocket("ws://localhost:9000/socket");
+            utils.log("Socket", _socket);
             _socket.onmessage = function (event) {
                 utils.log("Data", event.data);
                 _angle = parseInt(event.data, 10);
-                utils.log("_angle", _angle);
-                _cubeRotationNode.angle += _angle;
+                glmatrix.mat4.rotateY(_cubeNode.transformation, utils.degreesToRadians(_angle), _cubeNode.transformation);
             };
 
-            _socket.onopen = function (event) {
-                _socket.send("");
-            };
+            document.addEventListener("keydown", function (event) {
+                if (event.keyCode === 37) {
+                    _socket.send("");
+                }
+            }, false);
 
             renderer = _scene.findNodesByType("renderer")[0];
+            utils.log("Renderer", renderer);
             _updateRenderer(renderer);
 
             _vertexPositionAttributeLocation = _gl.getAttribLocation(_program, _bindables.attributes.vertexPosition);

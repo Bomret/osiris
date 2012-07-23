@@ -4,15 +4,18 @@ import PlayProject._
 
 object ApplicationBuild extends Build {
 
-    val appName         = "Osiris"
-    val appVersion      = "1.0-SNAPSHOT"
+  val appName = "Osiris"
+  val appVersion = "1.0-SNAPSHOT"
 
-    val appDependencies = Seq(
-      // Add your project dependencies here,
-    )
+  val appDependencies = Seq(
+    // Add your project dependencies here,
+  )
 
-    val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
-      // Add your own project settings here      
-    )
+  // Siris is its own root project. It is also assumed that osiris and siris share the same parent directory
+  lazy val siris = RootProject(file("../siris"))
+
+  val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(
+    // Add your own project settings here
+  ) dependsOn(siris) // Osiris depends on Siris
 
 }

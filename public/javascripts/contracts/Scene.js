@@ -4,13 +4,13 @@
  * Time: 20:40
  */
 
-define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
+define(["utils"], function (utils) {
     "use strict";
 
-    var makeBaseNode = function(id, type) {
+    var makeBaseNode = function (id, type) {
         var _children = {};
 
-        var _add = function(node) {
+        var _add = function (node) {
             if (!_children[node.id]) {
                 _children[node.id] = node;
                 utils.log("Added node", this, node);
@@ -23,7 +23,7 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
             }
         };
 
-        var _remove = function(node) {
+        var _remove = function (node) {
             if (_children[node.id]) {
                 delete _children[node.id];
                 utils.log("Removed node", this, node);
@@ -36,7 +36,7 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
             }
         };
 
-        var _visit = function(executor) {
+        var _visit = function (executor) {
             var child;
 
             if (typeof executor !== "function") {
@@ -53,7 +53,7 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
             }
         };
 
-        var _findChildById = function(id) {
+        var _findChildById = function (id) {
             var child;
 
             for (var prop in _children) {
@@ -69,7 +69,7 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
             }
         };
 
-        var _findChildrenByType = function(type) {
+        var _findChildrenByType = function (type) {
             var child,
                 children = [];
 
@@ -86,67 +86,44 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
         };
 
         return {
-            id: id,
-            type: type,
-            addChild: _add,
-            removeChild: _remove,
-            findChildById: _findChildById,
-            findChildrenByType: _findChildrenByType,
-            visit: _visit
+            id:id,
+            type:type,
+            addChild:_add,
+            removeChild:_remove,
+            findChildById:_findChildById,
+            findChildrenByType:_findChildrenByType,
+            visit:_visit
         };
     };
 
     return {
-
         /**
          *
          * @param {string} id
          * @param {RenderableModel} model
          */
-        makeModelNode: function(id, model) {
+        makeModelNode:function (id, model, transformation) {
             var that = makeBaseNode(id, "model");
             that.model = model;
-            that.matrix = null;
+            that.transformation = transformation;
 
             return Object.seal(that);
         },
 
-        makeRotationNode: function(id, axis, angle) {
-            var that;
-            //                mat = glmatrix.mat4.create(glmatrix.mat4.identity());
-            //
-            //            glmatrix.mat4.rotate(mat, utils.degreesToRadians(angle), axis, mat);
-            //
-            //            that = this.makeTransformationNode(id, "rotate", mat);
-
-            that = makeBaseNode(id, "rotation");
-            that.axis = axis;
-            that.angle = angle;
-            return that;
-        },
-
-        makeTransformationNode: function(id, transformType, matrix) {
-            var that = makeBaseNode(id, "transform");
-            that.transformType = transformType;
-            that.matrix = matrix;
-
-            return Object.seal(that);
-        },
-
-        makeCameraNode: function(id, attributes) {
+        makeCameraNode:function (id, attributes) {
             var that = makeBaseNode(id, "camera");
             var _specs = attributes || {};
             that.position = _specs.position || {
-                eye: [1, 1, 1],
-                target: [0, 0, 0],
-                up: [0, 1, 0]
+                eye:[1, 1, 1],
+                target:[0, 0, 0],
+                up:[0, 1, 0]
             };
             that.optics = _specs.optics || {
-                type: "perspective",
-                focalDistance: 60,
-                aspectRatio: 1.0,
-                near: 0.1,
-                far: 100
+                type:"perspective",
+                focalDistance:60,
+                aspectRatio:1.0,
+                near:0.1,
+                far:100
             };
 
             return Object.seal(that);
@@ -159,29 +136,29 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
          * @param {object} [clearColor]
          * @param {object} [options]
          */
-        makeRendererNode: function(id, glInfo, clearColor, options) {
+        makeRendererNode:function (id, glInfo, clearColor, options) {
             var that = makeBaseNode(id, "renderer");
             that.glContext = glInfo.glContext;
             that.shaderProgram = glInfo.shaderProgram;
             that.clearColor = clearColor || {
-                r: 0.3,
-                g: 0.3,
-                b: 0.6,
-                a: 1.0
+                r:0.3,
+                g:0.3,
+                b:0.6,
+                a:1.0
             };
             that.clear = glInfo.glContext.COLOR_BUFFER_BIT | glInfo.glContext.DEPTH_BUFFER_BIT;
 
             return Object.seal(that);
         },
 
-        makeSceneDescription: function(sceneName, rendererNode) {
+        makeSceneDescription:function (sceneName, rendererNode) {
             if (rendererNode.type !== "renderer") {
                 throw new TypeError("The given renderer node for the scene '" + sceneName + "' is not of type 'renderer'");
             }
 
             var _sceneRenderer = rendererNode;
 
-            var _byNodeId = function(nodeId) {
+            var _byNodeId = function (nodeId) {
                 utils.log("Looking for id", nodeId);
                 if (_sceneRenderer.id === nodeId) {
                     return _sceneRenderer;
@@ -189,14 +166,14 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
                 return _sceneRenderer.findChildById(nodeId);
             };
 
-            var _byType = function(nodeType) {
+            var _byType = function (nodeType) {
                 if (_sceneRenderer.type === nodeType) {
                     return [_sceneRenderer];
                 }
                 return _sceneRenderer.findChildrenByType(nodeType);
             };
 
-            var _traverse = function(processor, modelViewMatrix) {
+            var _traverse = function (processor, modelViewMatrix) {
                 if (typeof processor !== "function") {
                     throw new TypeError("Parameter 'processor' must be a function.");
                 }
@@ -204,17 +181,12 @@ define(["utils", "amplify", "glmatrix"], function(utils, amplify, glmatrix) {
                 rendererNode.visit(processor, modelViewMatrix);
             };
 
-            var _notify = function() {
-                amplify.publish("osiris-scene-change");
-            };
-
             return Object.seal({
-                name: sceneName,
-                rootNode: _sceneRenderer,
-                notifyOfChange: _notify,
-                findNodeById: _byNodeId,
-                findNodesByType: _byType,
-                traverse: _traverse
+                name:sceneName,
+                rootNode:_sceneRenderer,
+                findNodeById:_byNodeId,
+                findNodesByType:_byType,
+                traverse:_traverse
             });
         }
     };

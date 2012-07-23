@@ -1,0 +1,96 @@
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Error while stopping akka
+java.lang.ClassCastException: org.slf4j.impl.Log4jLoggerFactory cannot be cast to ch.qos.logback.classic.LoggerContext
+	at play.api.Logger$.shutdown(Logger.scala:277)
+	at play.core.server.Server$class.stop(Server.scala:108)
+	at play.core.server.NettyServer.stop(NettyServer.scala:79)
+	at sbt.PlayCommands$$anonfun$61$$anonfun$63.apply(PlayCommands.scala:683)
+	at sbt.PlayCommands$$anonfun$61$$anonfun$63.apply(PlayCommands.scala:534)
+	at scala.Either$RightProjection.map(Either.scala:285)
+	at sbt.PlayCommands$$anonfun$61.apply(PlayCommands.scala:534)
+	at sbt.PlayCommands$$anonfun$61.apply(PlayCommands.scala:516)
+	at sbt.Command$$anonfun$sbt$Command$$apply1$1$$anonfun$apply$6.apply(Command.scala:74)
+	at sbt.Command$.process(Command.scala:92)
+	at sbt.MainLoop$$anonfun$next$1$$anonfun$apply$1.apply(Main.scala:121)
+	at sbt.MainLoop$$anonfun$next$1$$anonfun$apply$1.apply(Main.scala:121)
+	at sbt.State$$anon$1.process(State.scala:154)
+	at sbt.MainLoop$$anonfun$next$1.apply(Main.scala:121)
+	at sbt.MainLoop$$anonfun$next$1.apply(Main.scala:121)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:18)
+	at sbt.MainLoop$.next(Main.scala:121)
+	at sbt.MainLoop$.run(Main.scala:114)
+	at sbt.MainLoop$$anonfun$runWithNewLog$1.apply(Main.scala:103)
+	at sbt.MainLoop$$anonfun$runWithNewLog$1.apply(Main.scala:100)
+	at sbt.Using.apply(Using.scala:25)
+	at sbt.MainLoop$.runWithNewLog(Main.scala:100)
+	at sbt.MainLoop$.runAndClearLast(Main.scala:83)
+	at sbt.MainLoop$.runLoggedLoop(Main.scala:67)
+	at sbt.MainLoop$.runLogged(Main.scala:60)
+	at sbt.xMain.run(Main.scala:33)
+	at xsbt.boot.Launch$.run(Launch.scala:54)
+	at xsbt.boot.Launch$$anonfun$explicit$1.apply(Launch.scala:43)
+	at xsbt.boot.Launch$.launch(Launch.scala:68)
+	at xsbt.boot.Launch$.apply(Launch.scala:14)
+	at xsbt.boot.Boot$.runImpl(Boot.scala:25)
+	at xsbt.boot.Boot$.main(Boot.scala:15)
+	at xsbt.boot.Boot.main(Boot.scala)
+	at SbtJansiLaunch.main(SbtJansiLaunch.java:4)
+Stopping server...
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Error while stopping akka
+java.lang.ClassCastException: org.slf4j.impl.Log4jLoggerFactory cannot be cast to ch.qos.logback.classic.LoggerContext
+	at play.api.Logger$.shutdown(Logger.scala:277)
+	at play.core.server.Server$class.stop(Server.scala:108)
+	at play.core.server.NettyServer.stop(NettyServer.scala:79)
+	at sbt.PlayCommands$$anonfun$61$$anonfun$63.apply(PlayCommands.scala:683)
+	at sbt.PlayCommands$$anonfun$61$$anonfun$63.apply(PlayCommands.scala:534)
+	at scala.Either$RightProjection.map(Either.scala:285)
+	at sbt.PlayCommands$$anonfun$61.apply(PlayCommands.scala:534)
+	at sbt.PlayCommands$$anonfun$61.apply(PlayCommands.scala:516)
+	at sbt.Command$$anonfun$sbt$Command$$apply1$1$$anonfun$apply$6.apply(Command.scala:74)
+	at sbt.Command$.process(Command.scala:92)
+	at sbt.MainLoop$$anonfun$next$1$$anonfun$apply$1.apply(Main.scala:121)
+	at sbt.MainLoop$$anonfun$next$1$$anonfun$apply$1.apply(Main.scala:121)
+	at sbt.State$$anon$1.process(State.scala:154)
+	at sbt.MainLoop$$anonfun$next$1.apply(Main.scala:121)
+	at sbt.MainLoop$$anonfun$next$1.apply(Main.scala:121)
+	at sbt.ErrorHandling$.wideConvert(ErrorHandling.scala:18)
+	at sbt.MainLoop$.next(Main.scala:121)
+	at sbt.MainLoop$.run(Main.scala:114)
+	at sbt.MainLoop$$anonfun$runWithNewLog$1.apply(Main.scala:103)
+	at sbt.MainLoop$$anonfun$runWithNewLog$1.apply(Main.scala:100)
+	at sbt.Using.apply(Using.scala:25)
+	at sbt.MainLoop$.runWithNewLog(Main.scala:100)
+	at sbt.MainLoop$.runAndClearLast(Main.scala:83)
+	at sbt.MainLoop$.runLoggedLoop(Main.scala:67)
+	at sbt.MainLoop$.runLogged(Main.scala:60)
+	at sbt.xMain.run(Main.scala:33)
+	at xsbt.boot.Launch$.run(Launch.scala:54)
+	at xsbt.boot.Launch$$anonfun$explicit$1.apply(Launch.scala:43)
+	at xsbt.boot.Launch$.launch(Launch.scala:68)
+	at xsbt.boot.Launch$.apply(Launch.scala:14)
+	at xsbt.boot.Boot$.runImpl(Boot.scala:25)
+	at xsbt.boot.Boot$.main(Boot.scala:15)
+	at xsbt.boot.Boot.main(Boot.scala)
+	at SbtJansiLaunch.main(SbtJansiLaunch.java:4)
+Stopping server...
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Cannot invoke the action, eventually got an error: Thrown(akka.pattern.AskTimeoutException: Timed out)
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
