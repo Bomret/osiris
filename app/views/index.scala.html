@@ -1,6 +1,33 @@
-@(message: String)
+@(sceneInformation: Array[SceneInformation],shaderInformation: Array[ShaderInformation])
 
 @main("Osiris") {
-    <p>The canvas is below<p>
-    <canvas id="renderCanvas"></canvas>
+
+<h1>Osiris Renderer</h1>
+<canvas id="renderCanvas"></canvas>
+<div id="settings">
+    <div class="columnleft">
+        <fieldset id="scenes">
+            <legend>
+                Available Scenes
+            </legend>
+            <select id="availableScenes">
+                @for(info <- sceneInformation) {
+                <option value="@info.file">@info.name</option>
+                }
+            </select>
+        </fieldset>
+    </div>
+    <div class="columnleft">
+        <fieldset id="shaders">
+            <legend>
+                Available Shaders
+            </legend>
+            <select id="availableShaders">
+                @for(info <- shaderInformation) {
+                <option value="@info.config">@info.name</option>
+                }
+            </select>
+        </fieldset>
+    </div>
+</div>
 }

@@ -57,7 +57,7 @@
  */
 
 // modified by Stefan Reichel to fit AMD
-define(function() {
+define(function () {
     "use strict";
 
     /**
@@ -65,7 +65,7 @@ define(function() {
      * @param {string} msg the message to be displayed.
      * @return {string} The html.
      */
-    var makeFailHTML = function(msg) {
+    var makeFailHTML = function (msg) {
         return '' +
             '<table style="background-color: #8CE; width: 100%; height: 100%;"><tr>' +
             '<td align="center">' +
@@ -97,11 +97,11 @@ define(function() {
      * tag to an error message with the correct links for WebGL.
      * @param {Element} canvas. The canvas element to create a
      *     context from.
-     * @param {WebGLContextCreationAttributes} opt_attribs Any
+     * @param {WebGLContextCreationAttributes} [opt_attribs] Any
      *     creation attributes you want to pass in.
      * @return {WebGLRenderingContext} The created context.
      */
-    var setupWebGL = function(canvas, opt_attribs) {
+    var setupWebGL = function (canvas, opt_attribs) {
         function showLink(str) {
             var container = canvas.parentNode;
             if (container) {
@@ -127,7 +127,7 @@ define(function() {
      *     from. If one is not passed in one will be created.
      * @return {!WebGLContext} The created context.
      */
-    var create3DContext = function(canvas, opt_attribs) {
+    var create3DContext = function (canvas, opt_attribs) {
         var names = ["webgl", "experimental-webgl", "webkit-3d", "moz-webgl"];
         var context = null;
         for (var ii = 0; ii < names.length; ++ii) {
@@ -145,13 +145,13 @@ define(function() {
     /**
      * Provides requestAnimationFrame in a cross browser way.
      */
-    var requestAnimFrame = (function() {
+    var requestAnimFrame = (function () {
         return window.requestAnimationFrame ||
             window.webkitRequestAnimationFrame ||
             window.mozRequestAnimationFrame ||
             window.oRequestAnimationFrame ||
             window.msRequestAnimationFrame ||
-            function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
+            function (/* function FrameRequestCallback */ callback, /* DOMElement Element */ element) {
                 return window.setTimeout(callback, 1000 / 60);
             };
     }());
@@ -159,7 +159,7 @@ define(function() {
     /**
      * Provides cancelAnimationFrame in a cross browser way.
      */
-    var cancelAnimFrame = function() {
+    var cancelAnimFrame = function () {
         return window.cancelAnimationFrame ||
             window.webkitCancelAnimationFrame ||
             window.mozCancelAnimationFrame ||
@@ -169,10 +169,10 @@ define(function() {
     };
 
     return {
-        create3DContext: create3DContext,
-        setupWebGL: setupWebGL,
-        requestAnimFrame: requestAnimFrame,
-        cancelAnimFrame: cancelAnimFrame
+        create3DContext:create3DContext,
+        setupWebGL:setupWebGL,
+        requestAnimFrame:requestAnimFrame,
+        cancelAnimFrame:cancelAnimFrame
     };
 });
 

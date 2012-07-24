@@ -1,15 +1,26 @@
 /**
  * User: Stefan Reichel
- * Date: 26.06.12
- * Time: 01:20
+ * Date: 24.07.12
+ * Time: 16:21
  */
 
-define(["utils", "loadModel"], function(utils, loadModel) {
+define(["utils"], function (utils) {
     "use strict";
 
     return {
-        execute: function(sceneDescription) {
+        execute:function (sceneUrl) {
+            var worker = new Worker("assets/javascripts/domain/scene/loadSceneById.js");
+            utils.log(worker);
 
+            worker.onerror = function (event) {
+                utils.log("Worker error", event.data);
+            };
+
+            worker.onmessage = function (event) {
+                utils.log("Worker responded " + event.data);
+            };
+
+            worker.postMessage("Hello");
         }
     };
 });

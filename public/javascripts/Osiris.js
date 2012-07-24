@@ -3,55 +3,36 @@
  * Date: 13.06.12
  */
 
-define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "renderScene", "rendering", "scene"],
-    function (utils, webgl, glmatrix, loadObjModel, loadShaders, renderScene, rendering, scene) {
+define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "loadScene", "renderScene"],
+    function (utils, webgl, glmatrix, loadObjModel, loadShaders, loadScene, renderScene) {
         "use strict";
 
-        var _gl,
-            _canvas,
-            _shaderProgram,
-            _cubeScene;
-
         var setupWebGlContext = function (spec) {
-            _canvas = document.getElementById(spec.canvasId);
-            _canvas.width = spec.width || Math.floor(window.innerWidth * 0.9);
-            _canvas.height = spec.height || Math.floor(window.innerHeight * 0.9);
-            _gl = webgl.setupWebGL(_canvas);
+            var canvas;
+            canvas = document.getElementById(spec.canvasId);
+            canvas.width = spec.width || Math.floor(window.innerWidth * 0.9);
+            canvas.height = spec.height || Math.floor(window.innerHeight * 0.9);
+
+            return webgl.setupWebGL(canvas);
         };
 
         return {
+            currentContext:null,
+            currentShaderProgram:null,
             init:function (specification) {
-                setupWebGlContext(specification);
-                utils.log("WebGl context", _gl);
+                var shaderProgram,
+                    cubeScene;
 
-                _shaderProgram = loadShaders.execute("assets/shaders/flat/flat.config", _gl);
-                utils.log("ShaderProgram", _shaderProgram);
+                this.currentContext = setupWebGlContext(specification);
+                utils.log("WebGl context", this.currentContext);
 
-                var cameraNode = scene.makeCameraNode("cam", {
-                    optics:{
-                        type:"perspective",
-                        focalDistance:60,
-                        aspectRatio:_canvas.width / _canvas.height,
-                        near:0.1,
-                        far:100
-                    }
-                });
-                var rendererNode = scene.makeRendererNode("renderer", {
-                    glContext:_gl,
-                    shaderProgram:_shaderProgram
-                });
+                //this.currentShaderProgram = loadShaders.execute("assets/shaders/flat/flat.config", this.currentContext);
+                //utils.log("ShaderProgram", this.currentShaderProgram);
 
-                //var cube = loadObjModel.execute("models/cube/cube.obj", context);
-                var cube = rendering.makeCube(0.5, _gl);
-                var cubeNode = scene.makeModelNode("cube", cube, glmatrix.mat4.identity());
+                cubeScene = loadScene.execute("assets/scenes/simple_cube.json");
+                utils.log("Scene", cubeScene);
 
-                //rendererNode.addChild(cameraNode);
-                cameraNode.addChild(cubeNode);
-
-                _cubeScene = scene.makeSceneDescription("Simple cube", cameraNode);
-                utils.log("Scene", _cubeScene);
-
-                renderScene.execute(_cubeScene);
+                //renderScene.execute(cubeScene);
             }
         };
     });

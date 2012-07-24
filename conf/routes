@@ -5,7 +5,6 @@
 # Home page
 GET     /                           controllers.Application.index
 GET     /shaders                    controllers.ShaderController.getShaders
-GET     /scenes                     controllers.SceneController.getAvailableScenes
 POST    /shaders                    controllers.ShaderController.getShaderByName
 GET     /socket                     controllers.SirisController.socket
 

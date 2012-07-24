@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    font-size: 0.8em;
+}
+
+fieldset {
+    margin:0.3em;
+    padding:0.5em;
+    border: 1px solid #888;
+}
+
+#settings {
+    float: left;
+}
+
+.columnleft {
+    float: left;
+}

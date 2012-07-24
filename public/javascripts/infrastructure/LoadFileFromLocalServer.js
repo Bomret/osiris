@@ -4,22 +4,25 @@
  * Time: 21:26
  */
 
-define(function() {
+define(function () {
     "use strict";
 
     return {
-        execute: function(pathToFileOnServer) {
-            var request = new XMLHttpRequest();
-            request.open("GET", pathToFileOnServer, false);
-            request.send(null);
-
-            if (request.readyState === 4) {
-                if (request.status === 200) {
-                    return request.response;
+        execute:function (pathToFileOnServer, successCallback, errorCallback) {
+            var onResponse = function () {
+                if (request.readyState === 4) {
+                    if (request.status === 200) {
+                        successCallback(request.response);
+                    }
                 }
-            }
+                errorCallback(request.statusText);
+            };
 
-            throw new Error("The file " + pathToFileOnServer + " could not be loaded");
+            var request = new XMLHttpRequest();
+            request.onreadystatechange = onResponse;
+
+            request.open("GET", pathToFileOnServer, true);
+            request.send(null);
         }
     };
 });
