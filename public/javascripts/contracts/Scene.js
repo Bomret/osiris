@@ -152,10 +152,18 @@ define(["utils"], function (utils) {
             return Object.seal(that);
         },
 
+        /**
+         * This object contains the necessary information to get a load a scene specified by the given name and file from the application server.
+         *
+         * @constructor
+         * @param {String} name The name of the shader
+         * @param {String} file The file containing the scene information
+         */
         SceneInformation:function (name, file) {
             this.name = name;
             this.file = file;
         },
+
 
         makeSceneDescription:function (sceneName, rendererNode) {
             //if (rendererNode.type !== "renderer") {

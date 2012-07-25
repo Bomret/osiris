@@ -18,16 +18,37 @@ define(function () {
             };
         },
 
+        /**
+         *
+         * @constructor
+         * @param {String} name
+         * @param {String} file
+         */
         ShaderInformation:function (name, file) {
             this.name = name;
             this.file = file;
         },
 
-        makeShader:function (type) {
-            return {
-                type:type,
-                shader:null
-            };
+        /**
+         *
+         * @constructor
+         * @param {Object} obj
+         */
+        ShaderConfig:function (obj) {
+            var json;
+        },
+
+
+        /**
+         *
+         * @param {String} type
+         * @param shader
+         * @constructor
+         */
+        Shader:function (type, shader) {
+            this.type = type;
+            this.shader = shader;
         }
     };
-});
+})
+;

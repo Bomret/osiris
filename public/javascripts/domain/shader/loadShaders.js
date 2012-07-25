@@ -4,45 +4,48 @@
  * Time: 21:09
  */
 
-define(["utils", "loadFile", "buildShaderProgram", "rendering"], function(utils, loadFile, buildShaderProgram, rendering) {
+define(["utils", "jquery", "buildShaderProgram", "rendering"], function (utils, $, ServerRequest, buildShaderProgram) {
     "use strict";
 
     var _shaderProgramCache = {};
 
     /**
      *
-     * @param pathToShaderConfig
+     * @param {ShaderInformation} shaderInformation
      * @return {ShaderConfig}
      */
-    var loadConfig = function(pathToShaderConfig) {
-        var configFile;
+    var loadConfig = function (shaderInformation, loaded) {
+        var configFile,
+            pathToShaderConfig;
 
-        configFile = loadFile.execute(pathToShaderConfig);
-        return JSON.parse(configFile);
-    };
-
-    var loadShaderCode = function(pathToShaderFile) {
-        var shaderCode;
-
-        shaderCode = loadFile.execute(pathToShaderFile);
-        return shaderCode;
+        pathToShaderConfig = "http://localhost:9000/shaders";
+        $.ajax(pathToShaderConfig, {
+            type:"POST",
+            contentType:"application/json",
+            data:JSON.stringify(shaderInformation),
+            success:loaded,
+            error:function (status) {
+                utils.log("ERROR", status);
+            }
+        });
     };
 
     return {
-        execute: function(pathToShaderConfig, context) {
+        execute:function (shaderInformation, context) {
             var config,
                 pathElements,
                 shaderProgram;
 
-            config = loadConfig(pathToShaderConfig);
+            utils.log("Shader to load", shaderInformation);
+            loadConfig(shaderInformation, function (response) {
+                utils.log("Shader config", response);
+            });
 
-            utils.log("Shader config", config);
-
-            if(_shaderProgramCache[config.name]) {
+            if (_shaderProgramCache[config.name]) {
                 return _shaderProgramCache[config.name];
             }
 
-            pathElements = utils.breakPathIntoElements(pathToShaderConfig);
+            pathElements = utils.breakPathIntoElements(shaderInformation);
 
             // augment the config object with the loaded shader code
             config.vertexShader.code = loadShaderCode(pathElements.dir + "/" + config.vertexShader.file);
@@ -54,4 +57,5 @@ define(["utils", "loadFile", "buildShaderProgram", "rendering"], function(utils,
             return shaderProgram;
         }
     };
-});
+})
+;

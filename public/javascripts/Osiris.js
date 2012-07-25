@@ -4,10 +4,8 @@
  */
 
 define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShaders", "loadScene", "renderScene"],
-    function (utils, webgl, glmatrix, mainViewModel, loadObjModel, loadShaders, loadScene, renderScene) {
+    function (utils, webgl, glmatrix, ui, loadObjModel, loadShaders, loadScene, renderScene) {
         "use strict";
-
-        var _ui;
 
         var _setupWebGlContext = function (spec) {
             var canvas;
@@ -28,12 +26,12 @@ define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShad
                 this.currentContext = _setupWebGlContext(specification);
                 utils.log("WebGl context", this.currentContext);
 
-                _ui = mainViewModel.init(function() {
+                ui.init(function () {
                     utils.log("Reset!");
                 });
 
-                //this.currentShaderProgram = loadShaders.execute("assets/shaders/flat/flat.config", this.currentContext);
-                //utils.log("ShaderProgram", this.currentShaderProgram);
+                this.currentShaderProgram = loadShaders.execute(ui.getCurrentShader(), this.currentContext);
+                utils.log("ShaderProgram", this.currentShaderProgram);
 
                 cubeScene = loadScene.execute("assets/scenes/simple_cube.json");
                 utils.log("Scene", cubeScene);

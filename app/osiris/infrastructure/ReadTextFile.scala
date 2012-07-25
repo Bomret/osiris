@@ -1,6 +1,7 @@
 package osiris.infrastructure
 
 import io.Source
+import java.io.File
 
 /**
  * User: Stefan Reichel

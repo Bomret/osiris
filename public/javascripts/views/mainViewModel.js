@@ -59,6 +59,10 @@ define(["utils", "scene", "shader"], function (utils, scene, shader) {
     }
 
     return {
+        /**
+         *
+         * @param {Function} resetCallback
+         */
         init:function (resetCallback) {
             _resetCallback = resetCallback;
             _setupAvailableShaders();
@@ -66,10 +70,18 @@ define(["utils", "scene", "shader"], function (utils, scene, shader) {
             _setupRenderButton();
         },
 
+        /**
+         *
+         * @return {SceneInformation}
+         */
         getCurrentScene:function () {
             return _currentScene;
         },
 
+        /**
+         *
+         * @return {ShaderInformation}
+         */
         getCurrentShader:function () {
             return _currentShader;
         }

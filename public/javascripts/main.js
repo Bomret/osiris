@@ -6,12 +6,10 @@
 
 require.config({
     // legacy non AMD scripts that add themselves to the global object
-    shim:{
-
-    },
 
     paths:{
         // libraries
+        jquery: "lib/jquery",
         glmatrix:"lib/glmatrix",
         webgl:"lib/webgl-utils",
         utils:"lib/utils",
@@ -20,7 +18,7 @@ require.config({
         mainViewModel:"views/mainViewModel",
 
         // infrastructure
-        loadFile:"infrastructure/loadFileFromLocalServer",
+        ServerRequest:"infrastructure/ServerRequest",
 
         // domain
         loadShaders:"domain/shader/loadShaders",
@@ -38,7 +36,8 @@ require.config({
         rendering:"contracts/rendering",
         scene:"contracts/scene"
     }
-});
+})
+;
 
 require(['osiris'], function (Osiris) {
     "use strict";
