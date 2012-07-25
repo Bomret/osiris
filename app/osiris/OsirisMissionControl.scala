@@ -3,6 +3,7 @@ package osiris
 import contracts.{JsonMessage, SceneDescription, MessageFromClient}
 import play.api.libs.json.Json
 import actors.Actor
+import akka.actor.SupervisorStrategy.Stop
 
 /**
  * User: Stefan Reichel
@@ -31,6 +32,9 @@ class OsirisMissionControl(out: (String) => Unit) extends Actor {
         case SceneDescription(sceneDescription) => {
           val scene = Json.stringify(sceneDescription)
           out(scene)
+        }
+        case Stop => {
+          shouldRun = false
         }
       }
     }

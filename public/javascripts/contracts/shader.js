@@ -4,30 +4,29 @@
  * Time: 17:59
  */
 
-define(function() {
+define(function () {
     "use strict";
 
     return {
-
-        /**
-         *
-         * @param {Object} config
-         * @return {ShaderProgram}
-         */
-        makeShaderProgram: function(config) {
+        makeShaderProgram:function (config) {
             return {
-                name: config.name,
-                program: null,
-                vertexShader: null,
-                fragmentShader: null,
-                bindables: config.bindables
+                name:config.name,
+                program:null,
+                vertexShader:null,
+                fragmentShader:null,
+                bindables:config.bindables
             };
         },
 
-        makeShader: function(type) {
+        ShaderInformation:function (name, file) {
+            this.name = name;
+            this.file = file;
+        },
+
+        makeShader:function (type) {
             return {
-                type: type,
-                shader: null
+                type:type,
+                shader:null
             };
         }
     };

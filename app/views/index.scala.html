@@ -8,25 +8,26 @@
     <div class="columnleft">
         <fieldset id="scenes">
             <legend>
-                Available Scenes
+                Scenes settings
             </legend>
+            <p>
+                Scene
+            </p>
             <select id="availableScenes">
                 @for(info <- sceneInformation) {
                 <option value="@info.file">@info.name</option>
                 }
             </select>
-        </fieldset>
-    </div>
-    <div class="columnleft">
-        <fieldset id="shaders">
-            <legend>
-                Available Shaders
-            </legend>
+
+            <p>
+                Shader
+            </p>
             <select id="availableShaders">
                 @for(info <- shaderInformation) {
                 <option value="@info.config">@info.name</option>
                 }
             </select>
+            <input id="startRender" type="button" value="Start"/>
         </fieldset>
     </div>
 </div>

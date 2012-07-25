@@ -3,11 +3,13 @@
  * Date: 13.06.12
  */
 
-define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "loadScene", "renderScene"],
-    function (utils, webgl, glmatrix, loadObjModel, loadShaders, loadScene, renderScene) {
+define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShaders", "loadScene", "renderScene"],
+    function (utils, webgl, glmatrix, mainViewModel, loadObjModel, loadShaders, loadScene, renderScene) {
         "use strict";
 
-        var setupWebGlContext = function (spec) {
+        var _ui;
+
+        var _setupWebGlContext = function (spec) {
             var canvas;
             canvas = document.getElementById(spec.canvasId);
             canvas.width = spec.width || Math.floor(window.innerWidth * 0.9);
@@ -23,8 +25,12 @@ define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "loadScene"
                 var shaderProgram,
                     cubeScene;
 
-                this.currentContext = setupWebGlContext(specification);
+                this.currentContext = _setupWebGlContext(specification);
                 utils.log("WebGl context", this.currentContext);
+
+                _ui = mainViewModel.init(function() {
+                    utils.log("Reset!");
+                });
 
                 //this.currentShaderProgram = loadShaders.execute("assets/shaders/flat/flat.config", this.currentContext);
                 //utils.log("ShaderProgram", this.currentShaderProgram);

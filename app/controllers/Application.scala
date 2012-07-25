@@ -1,22 +1,18 @@
 package controllers
 
 import play.api.mvc._
-import models.{ShaderInformation, SceneInformation}
-import io.{BufferedSource, Source}
-import play.api.libs.json.{JsObject, JsArray, Json}
+import models.{SceneAndShaderInfos, ShaderInformation, SceneInformation}
+import play.api.libs.json.{JsObject, Json}
+import play.api.Logger
+import play.api.libs.concurrent.Akka
+import play.api.Play.current
+import osiris.infrastructure.ReadTextFile
 
 object Application extends Controller {
-
-  private def _readTextFile(url: String): String = {
-    val file = Source fromFile (url)
-    val lines = file.mkString
-    file.close()
-
-    lines
-  }
+  private val _readTextFile = new ReadTextFile
 
   private def _readSceneInformation: Array[SceneInformation] = {
-    val scenesFileContent = _readTextFile("public/scenes/availableScenes.json")
+    val scenesFileContent = _readTextFile.fromPath("public/scenes/availableScenes.json")
 
     val json = Json.parse(scenesFileContent)
     val scenes: Array[JsObject] = (json \ "scenes").as[Array[JsObject]]
@@ -29,27 +25,48 @@ object Application extends Controller {
   }
 
   private def _readShaderInformation: Array[ShaderInformation] = {
-    val shadersFileContent = _readTextFile("public/shaders/availableShaders.json")
+    val shadersFileContent = _readTextFile.fromPath("public/shaders/availableShaders.json")
 
     val json = Json.parse(shadersFileContent)
     val shaders: Array[JsObject] = (json \ "shaders").as[Array[JsObject]]
 
     shaders map (obj => {
       val name = (obj \ "name").as[String]
-      val description = (obj \ "description").as[String]
       val config = (obj \ "config").as[String]
-      ShaderInformation(name, description, config)
+      ShaderInformation(name, config)
     })
   }
 
+  private def _retrieveSceneAndShaderInformation: SceneAndShaderInfos = {
+    val sceneInfos = _readSceneInformation
+    val shaderInfos = _readShaderInformation
+    SceneAndShaderInfos(sceneInfos, shaderInfos)
+  }
+
+  /**
+   * This Action does the necessary computations asynchronously to build the main page
+   * and serves it to the client.
+   *
+   * If anything goes wrong the occuring exception will be logged to the application log
+   * and the client will get an Internal Server Error response.
+   *
+   * @return The compiled main page or an Internal Server Error response if anything goes wrong
+   */
   def index = Action {
     try {
-      val sceneInfos = _readSceneInformation
-      val shaderInfos = _readShaderInformation
+      val promise = Akka future {
+        _retrieveSceneAndShaderInformation
+      }
 
-      Ok(views.html.index(sceneInfos, shaderInfos))
+      Async {
+        promise.map(infos => Ok(views.html.index(infos.scenes, infos.shaders)))
+      }
+
     } catch {
-      case ex:Exception => InternalServerError("There was a problem retrieving the available scenes and shaders.")
+      case ex: Exception => {
+        Logger.error("Error retrieving the available shaders and scenes in index", ex)
+        InternalServerError("There was a problem retrieving the available scenes and shaders.")
+      }
     }
   }
 }

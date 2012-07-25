@@ -11,5 +11,5 @@ import play.api.libs.json.Json
  */
 
 object SceneController extends Controller {
-  def getShaderByFileName = TODO
+  def getSceneByFilename = TODO
 }

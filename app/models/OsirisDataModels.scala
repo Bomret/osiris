@@ -10,4 +10,6 @@ sealed trait OsirisDataModels
 
 case class SceneInformation(name: String, file: String)
 
-case class ShaderInformation(name: String, description: String, config: String)
+case class ShaderInformation(name: String, config: String)
+
+case class SceneAndShaderInfos(scenes: Array[SceneInformation], shaders: Array[ShaderInformation])

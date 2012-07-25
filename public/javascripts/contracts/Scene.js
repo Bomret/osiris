@@ -152,6 +152,11 @@ define(["utils"], function (utils) {
             return Object.seal(that);
         },
 
+        SceneInformation:function (name, file) {
+            this.name = name;
+            this.file = file;
+        },
+
         makeSceneDescription:function (sceneName, rendererNode) {
             //if (rendererNode.type !== "renderer") {
             //    throw new TypeError("The given renderer node for the scene '" + sceneName + "' is not of type 'renderer'");
@@ -184,7 +189,7 @@ define(["utils"], function (utils) {
 
             return Object.seal({
                 id:sceneName,
-                type: "scene",
+                type:"scene",
                 rootNode:_sceneRenderer,
                 findNodeById:_byNodeId,
                 findNodesByType:_byType,
