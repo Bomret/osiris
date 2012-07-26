@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/com.typesafe.akka/akka-slf4j/2.0.2/jars/akka-slf4j.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

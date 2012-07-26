@@ -1,11 +1,12 @@
 package controllers
 
-import play.api.mvc.{Action, Controller}
-import io.Source
-import play.api.libs.json.Json
-import osiris.infrastructure.ReadTextFile
+import play.api.mvc.{Request, Action, Controller}
+import play.api.libs.json.{JsValue, JsObject, Json}
+import osiris.infrastructure.{OsirisConfiguration, ReadTextFile}
 import play.api.Logger
-import java.io.{File, FileNotFoundException}
+import java.io.FileNotFoundException
+import models.ShaderType
+import models.ShaderType._
 
 /**
  * User: Stefan Reichel
@@ -14,16 +15,32 @@ import java.io.{File, FileNotFoundException}
  */
 
 object ShaderController extends Controller {
-  val _readFile = new ReadTextFile
 
-  def getShaderByFilename = Action(parse.json) {
+  /**
+   *
+   * @return The requested
+   */
+  def getShaderConfigurationByFilename = Action(parse.json) {
     request =>
       try {
-        val filename = (request.body \ "file").as[String]
-        val shaderconfig = _readFile.fromPath("public/shaders/" + filename)
-        val configJson = Json.parse(shaderconfig)
+        val name = (request.body \ "name").as[JsValue]
+        val path = (request.body \ "config" \ "path").as[String] + "/"
 
-        Ok(configJson)
+        val configJson = _retrieveShaderConfigFile(request, path)
+        val vertexShaderCode = _retrieveShaderCode(ShaderType.VertexShader, path, configJson)
+        val fragmentShaderCode = _retrieveShaderCode(ShaderType.FragmentShader, path, configJson)
+        val bindables = (configJson \ "bindables").as[JsValue]
+
+        val response = Json.toJson(
+          Map(
+            "name" -> name,
+            "vertexShader" -> vertexShaderCode,
+            "fragmentShader" -> fragmentShaderCode,
+            "bindables" -> bindables
+          )
+        )
+
+        Ok(response)
       } catch {
         case fnfEx: FileNotFoundException => {
           Logger.error("The specified shader was not found", fnfEx)
@@ -34,5 +51,32 @@ object ShaderController extends Controller {
           InternalServerError("There was a problem loading the specified shader")
         }
       }
+  }
+
+  /**
+   *
+   * @param request
+   * @param path
+   * @return
+   */
+  private def _retrieveShaderConfigFile(request: Request[JsValue], path: String): JsValue = {
+    val filename = (request.body \ "config" \ "file").as[String]
+    val configPath = OsirisConfiguration.SHADERPATH + path + filename
+    val shaderconfig = ReadTextFile.fromPath(configPath)
+    Json.parse(shaderconfig)
+  }
+
+  /**
+   *
+   * @param shaderType The type of the shader
+   * @param path The path to the directory this shader file lies in
+   * @param config The shader configuration object this shader is specified in
+   * @return The shader code wrapped as a JsValue object
+   */
+  private def _retrieveShaderCode(shaderType: ShaderType, path: String, config: JsValue): JsValue = {
+    val shaderFile = (config \ shaderType.toString \ "file").as[String]
+    val shaderFilePath = OsirisConfiguration.SHADERPATH + path + shaderFile
+    val shaderCode = ReadTextFile.fromPath(shaderFilePath)
+    Json.toJson(shaderCode)
   }
 }

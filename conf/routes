@@ -4,8 +4,8 @@
 
 # Home page
 GET     /                           controllers.Application.index
-POST    /shaders                    controllers.ShaderController.getShaderByFilename
-POST    /scenes                    controllers.SceneController.getSceneByFilename
+POST    /shaders                    controllers.ShaderController.getShaderConfigurationByFilename
+POST    /scenes                     controllers.SceneController.getSceneByFilename
 GET     /socket                     controllers.SirisController.socket
 
 # Map static resources from the /public folder to the /assets URL path

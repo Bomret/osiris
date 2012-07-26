@@ -4,13 +4,13 @@ import io.Source
 import java.io.File
 
 /**
+ * This object contains several methods to read the content of text files from specified locations.
+ *
  * User: Stefan Reichel
  * Date: 25.07.12
  * Time: 00:23
  */
-
-class ReadTextFile {
-
+object ReadTextFile {
   /**
    * Reads the content of a text file specified by a given path and returns that.
    *

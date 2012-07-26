@@ -15,14 +15,18 @@ define(["utils", "scene", "shader"], function (utils, scene, shader) {
 
     function _setupAvailableShaders() {
         var i,
+            name,
+            config,
             cmbAvailableShaders = document.getElementById("availableShaders"),
             options = cmbAvailableShaders.options,
             len = options.length;
 
         for (i = 0; i < len; i++) {
-            _availableShaders.push(new shader.ShaderInformation(options[i].text, options[i].value));
+            name = options[i].text;
+            config = JSON.parse(options[i].value);
+            _availableShaders.push(new shader.ShaderConfigurationInformation(name, config));
         }
-        _currentShader = new shader.ShaderInformation(options[0].text, options[0].value);
+        _currentShader = _availableShaders[0];
 
         utils.log("Available shaders", _availableShaders);
         utils.log("Current shader", _currentShader);

@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.16.1/jars/selenium-iphone-driver.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

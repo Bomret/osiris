@@ -1,5 +1,7 @@
 package models
 
+import play.api.libs.json.JsObject
+
 /**
  * User: Stefan Reichel
  * Date: 24.07.12
@@ -10,6 +12,10 @@ sealed trait OsirisDataModels
 
 case class SceneInformation(name: String, file: String)
 
-case class ShaderInformation(name: String, config: String)
+case class ShaderConfiguration(name: String, config: JsObject)
 
-case class SceneAndShaderInfos(scenes: Array[SceneInformation], shaders: Array[ShaderInformation])
+case class SceneAndShaderInfos(scenes: Array[SceneInformation], shaders: Array[ShaderConfiguration])
+
+case class Shader(shaderType: String, code: String)
+
+case class ShaderProgramConfiguration(name: String, vertexShader: Shader, fragmentShader: Shader, bindables: JsObject)

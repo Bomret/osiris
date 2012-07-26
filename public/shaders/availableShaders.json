@@ -1,12 +1,18 @@
 {
-    "shaders":[
+    "shaderConfigs":[
         {
             "name":"Flat",
-            "config":"flat/flat.config"
+            "config":{
+                "path":"flat",
+                "file":"flat.config"
+            }
         },
         {
             "name":"Fancy",
-            "config":"fancy/fancy.config"
+            "config":{
+                "path":"fancy",
+                "file":"fancy.config"
+            }
         }
     ]
 }

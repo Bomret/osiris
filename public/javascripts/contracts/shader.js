@@ -8,14 +8,21 @@ define(function () {
     "use strict";
 
     return {
-        makeShaderProgram:function (config) {
-            return {
-                name:config.name,
-                program:null,
-                vertexShader:null,
-                fragmentShader:null,
-                bindables:config.bindables
-            };
+        /**
+         *
+         * @param {String} name
+         * @param {WebGLProgram} program
+         * @param {WebGLShader} vertexShader
+         * @param {WebGLShader} fragmentShader
+         * @param {Object} bindables
+         * @constructor
+         */
+        ShaderProgram:function (name, program, vertexShader, fragmentShader, bindables) {
+            this.name = name;
+            this.program = program;
+            this.vertexShader = vertexShader;
+            this.fragmentShader = fragmentShader;
+            this.bindables = bindables;
         },
 
         /**
@@ -24,30 +31,9 @@ define(function () {
          * @param {String} name
          * @param {String} file
          */
-        ShaderInformation:function (name, file) {
+        ShaderConfigurationInformation:function (name, file) {
             this.name = name;
-            this.file = file;
-        },
-
-        /**
-         *
-         * @constructor
-         * @param {Object} obj
-         */
-        ShaderConfig:function (obj) {
-            var json;
-        },
-
-
-        /**
-         *
-         * @param {String} type
-         * @param shader
-         * @constructor
-         */
-        Shader:function (type, shader) {
-            this.type = type;
-            this.shader = shader;
+            this.config = file;
         }
     };
 })

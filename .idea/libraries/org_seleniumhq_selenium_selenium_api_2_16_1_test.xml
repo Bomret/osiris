@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.seleniumhq.selenium/selenium-api/2.16.1/jars/selenium-api.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

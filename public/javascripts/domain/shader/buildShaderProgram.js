@@ -4,25 +4,25 @@
  * Time: 16:16
  */
 
-define(["shader"], function(shader) {
+define(["utils", "shader"], function (utils, shader) {
     "use strict";
 
     var _gl;
 
-    var createShaderFromSource = function(type, source) {
-        var shader = _gl.createShader(type);
-        _gl.shaderSource(shader, source);
-        _gl.compileShader(shader);
+    var createShaderFromSource = function (type, source) {
+        var glShader = _gl.createShader(type);
+        _gl.shaderSource(glShader, source);
+        _gl.compileShader(glShader);
 
-        return shader;
+        return glShader;
     };
 
-    var createShaderProgram = function(vertexShader, fragmentShader) {
-        var program;
+    var createShaderProgram = function (vertexShader, fragmentShader) {
+        utils.log("Shaders", vertexShader, fragmentShader);
 
-        program = _gl.createProgram();
-        _gl.attachShader(program, vertexShader.shader);
-        _gl.attachShader(program, fragmentShader.shader);
+        var program = _gl.createProgram();
+        _gl.attachShader(program, vertexShader);
+        _gl.attachShader(program, fragmentShader);
         _gl.linkProgram(program);
 
         _gl.useProgram(program);
@@ -31,26 +31,18 @@ define(["shader"], function(shader) {
     };
 
     return {
-        execute: function(config, glContext) {
+        execute:function (config, glContext) {
             var vertexShader,
                 fragmentShader,
-                shaderProgram;
+                compiledProgram;
 
             _gl = glContext;
 
-            shaderProgram = shader.makeShaderProgram(config);
+            vertexShader = createShaderFromSource(_gl.VERTEX_SHADER, config.vertexShader);
+            fragmentShader = createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
+            compiledProgram = createShaderProgram(vertexShader, fragmentShader);
 
-            vertexShader = shader.makeShader(_gl.VERTEX_SHADER);
-            vertexShader.shader = createShaderFromSource(_gl.VERTEX_SHADER, config.vertexShader.code);
-
-            fragmentShader = shader.makeShader(_gl.FRAGMENT_SHADER);
-            fragmentShader.shader = createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader.code);
-
-            shaderProgram.program = createShaderProgram(vertexShader, fragmentShader);
-            shaderProgram.vertexShader = vertexShader;
-            shaderProgram.fragmentShader = fragmentShader;
-
-            return shaderProgram;
+            return new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables);
         }
     };
 });

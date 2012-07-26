@@ -9,16 +9,13 @@ require.config({
 
     paths:{
         // libraries
-        jquery: "lib/jquery",
+        jquery:"lib/jquery",
         glmatrix:"lib/glmatrix",
         webgl:"lib/webgl-utils",
         utils:"lib/utils",
 
         // views
         mainViewModel:"views/mainViewModel",
-
-        // infrastructure
-        ServerRequest:"infrastructure/ServerRequest",
 
         // domain
         loadShaders:"domain/shader/loadShaders",

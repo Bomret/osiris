@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.16.1/jars/selenium-android-driver.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

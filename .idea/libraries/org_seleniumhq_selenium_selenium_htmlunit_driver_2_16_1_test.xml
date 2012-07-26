@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.16.1/jars/selenium-htmlunit-driver.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>

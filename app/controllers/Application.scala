@@ -1,7 +1,7 @@
 package controllers
 
 import play.api.mvc._
-import models.{SceneAndShaderInfos, ShaderInformation, SceneInformation}
+import models.{ShaderConfiguration, SceneAndShaderInfos, SceneInformation}
 import play.api.libs.json.{JsObject, Json}
 import play.api.Logger
 import play.api.libs.concurrent.Akka
@@ -9,10 +9,8 @@ import play.api.Play.current
 import osiris.infrastructure.ReadTextFile
 
 object Application extends Controller {
-  private val _readTextFile = new ReadTextFile
-
   private def _readSceneInformation: Array[SceneInformation] = {
-    val scenesFileContent = _readTextFile.fromPath("public/scenes/availableScenes.json")
+    val scenesFileContent = ReadTextFile.fromPath("public/scenes/availableScenes.json")
 
     val json = Json.parse(scenesFileContent)
     val scenes: Array[JsObject] = (json \ "scenes").as[Array[JsObject]]
@@ -24,16 +22,16 @@ object Application extends Controller {
     })
   }
 
-  private def _readShaderInformation: Array[ShaderInformation] = {
-    val shadersFileContent = _readTextFile.fromPath("public/shaders/availableShaders.json")
+  private def _readShaderInformation: Array[ShaderConfiguration] = {
+    val shadersFileContent = ReadTextFile fromPath ("public/shaders/availableShaders.json")
 
     val json = Json.parse(shadersFileContent)
-    val shaders: Array[JsObject] = (json \ "shaders").as[Array[JsObject]]
+    val shaders: Array[JsObject] = (json \ "shaderConfigs").as[Array[JsObject]]
 
     shaders map (obj => {
       val name = (obj \ "name").as[String]
-      val config = (obj \ "config").as[String]
-      ShaderInformation(name, config)
+      val config = (obj \ "config").as[JsObject]
+      ShaderConfiguration(name, config)
     })
   }
 

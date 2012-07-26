@@ -20,8 +20,7 @@ define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShad
             currentContext:null,
             currentShaderProgram:null,
             init:function (specification) {
-                var shaderProgram,
-                    cubeScene;
+                var cubeScene;
 
                 this.currentContext = _setupWebGlContext(specification);
                 utils.log("WebGl context", this.currentContext);
@@ -30,11 +29,13 @@ define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShad
                     utils.log("Reset!");
                 });
 
-                this.currentShaderProgram = loadShaders.execute(ui.getCurrentShader(), this.currentContext);
-                utils.log("ShaderProgram", this.currentShaderProgram);
+                loadShaders.execute(ui.getCurrentShader(), this.currentContext, function (shaderProgram) {
+                    this.currentShaderProgram = shaderProgram;
+                    utils.log("ShaderProgram", this.currentShaderProgram);
+                }.bind(this));
 
-                cubeScene = loadScene.execute("assets/scenes/simple_cube.json");
-                utils.log("Scene", cubeScene);
+                //cubeScene = loadScene.execute(ui.getCurrentScene());
+                //utils.log("Scene", cubeScene);
 
                 //renderScene.execute(cubeScene);
             }

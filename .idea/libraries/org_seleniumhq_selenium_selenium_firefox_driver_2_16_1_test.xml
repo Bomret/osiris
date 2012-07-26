@@ -3,7 +3,6 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.16.1/jars/selenium-firefox-driver.jar!/" />
     </CLASSES>
-    <JAVADOC />
     <SOURCES />
   </library>
 </component>
