@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.slf4j/slf4j-api/1.6.4/jars/slf4j-api.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

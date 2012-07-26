@@ -8,4 +8,5 @@ package osiris.infrastructure
 
 object OsirisConfiguration {
   val SHADERPATH = "public/shaders/"
+  val SCENEPATH = "public/scenes/"
 }

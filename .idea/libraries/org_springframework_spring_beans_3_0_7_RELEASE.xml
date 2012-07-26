@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.springframework/spring-beans/3.0.7.RELEASE/jars/spring-beans.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

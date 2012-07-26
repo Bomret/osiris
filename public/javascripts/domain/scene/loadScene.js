@@ -4,23 +4,33 @@
  * Time: 16:21
  */
 
-define(["utils"], function (utils) {
+define(["utils", "jquery"], function (utils, $, buildShaderProgram) {
     "use strict";
 
+    var _sceneCache = {};
+
+    function _loadSceneFromServer(sceneInformation, loaded) {
+        var pathToSceneController;
+
+        pathToSceneController = "http://localhost:9000/scenes";
+        $.ajax(pathToSceneController, {
+            type:"POST",
+            contentType:"application/json",
+            data:JSON.stringify(sceneInformation),
+            success:loaded,
+            error:function (status) {
+                utils.log("ERROR", status);
+            }
+        });
+    }
+
     return {
-        execute:function (sceneUrl) {
-            var worker = new Worker("assets/javascripts/domain/scene/loadSceneById.js");
-            utils.log(worker);
+        execute:function (sceneInformation, onDone) {
+            utils.log("Scene to load", sceneInformation);
 
-            worker.onerror = function (event) {
-                utils.log("Worker error", event.data);
-            };
-
-            worker.onmessage = function (event) {
-                utils.log("Worker responded " + event.data);
-            };
-
-            worker.postMessage("Hello");
+            _loadSceneFromServer(sceneInformation, function (response) {
+                onDone(response);
+            });
         }
     };
 });

@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.15/jars/nekohtml.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

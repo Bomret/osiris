@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.slf4j/jcl-over-slf4j/1.6.4/jars/jcl-over-slf4j.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

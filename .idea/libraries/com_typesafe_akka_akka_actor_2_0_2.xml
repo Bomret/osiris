@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/com.typesafe.akka/akka-actor/2.0.2/jars/akka-actor.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

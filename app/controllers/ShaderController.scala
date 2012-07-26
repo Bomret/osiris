@@ -7,6 +7,8 @@ import play.api.Logger
 import java.io.FileNotFoundException
 import models.ShaderType
 import models.ShaderType._
+import play.api.libs.concurrent.Akka
+import play.api.Play.current
 
 /**
  * User: Stefan Reichel
@@ -16,31 +18,16 @@ import models.ShaderType._
 
 object ShaderController extends Controller {
 
-  /**
-   *
-   * @return The requested
-   */
   def getShaderConfigurationByFilename = Action(parse.json) {
     request =>
       try {
-        val name = (request.body \ "name").as[JsValue]
-        val path = (request.body \ "config" \ "path").as[String] + "/"
+        val promise = Akka.future {
+          _retrieveShaderConfiguration(request)
+        }
 
-        val configJson = _retrieveShaderConfigFile(request, path)
-        val vertexShaderCode = _retrieveShaderCode(ShaderType.VertexShader, path, configJson)
-        val fragmentShaderCode = _retrieveShaderCode(ShaderType.FragmentShader, path, configJson)
-        val bindables = (configJson \ "bindables").as[JsValue]
-
-        val response = Json.toJson(
-          Map(
-            "name" -> name,
-            "vertexShader" -> vertexShaderCode,
-            "fragmentShader" -> fragmentShaderCode,
-            "bindables" -> bindables
-          )
-        )
-
-        Ok(response)
+        Async {
+          promise.map(shaderConfig => Ok(shaderConfig))
+        }
       } catch {
         case fnfEx: FileNotFoundException => {
           Logger.error("The specified shader was not found", fnfEx)
@@ -51,6 +38,25 @@ object ShaderController extends Controller {
           InternalServerError("There was a problem loading the specified shader")
         }
       }
+  }
+
+  private def _retrieveShaderConfiguration(request: Request[JsValue]): JsValue = {
+    val name = (request.body \ "name").as[JsValue]
+    val path = (request.body \ "config" \ "path").as[String] + "/"
+
+    val configJson = _retrieveShaderConfigFile(request, path)
+    val vertexShaderCode = _retrieveShaderCode(ShaderType.VertexShader, path, configJson)
+    val fragmentShaderCode = _retrieveShaderCode(ShaderType.FragmentShader, path, configJson)
+    val bindables = (configJson \ "bindables").as[JsValue]
+
+    Json.toJson(
+      Map(
+        "name" -> name,
+        "vertexShader" -> vertexShaderCode,
+        "fragmentShader" -> fragmentShaderCode,
+        "bindables" -> bindables
+      )
+    )
   }
 
   /**

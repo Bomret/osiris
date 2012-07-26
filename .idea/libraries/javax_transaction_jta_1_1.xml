@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/javax.transaction/jta/1.1/jars/jta.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

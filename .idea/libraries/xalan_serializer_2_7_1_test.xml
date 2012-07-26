@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/xalan/serializer/2.7.1/jars/serializer.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

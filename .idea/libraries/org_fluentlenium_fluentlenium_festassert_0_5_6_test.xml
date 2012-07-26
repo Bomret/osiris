@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.fluentlenium/fluentlenium-festassert/0.5.6/jars/fluentlenium-festassert.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

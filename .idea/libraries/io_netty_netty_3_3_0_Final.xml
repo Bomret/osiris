@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/io.netty/netty/3.3.0.Final/bundles/netty.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

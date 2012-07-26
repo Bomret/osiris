@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/org.hibernate/hibernate-validator/4.2.0.Final/jars/hibernate-validator.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>

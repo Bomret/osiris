@@ -1523,3 +1523,181 @@ java.lang.RuntimeException: String expected
 Shutdown application default Akka system.
 Application started (Dev)
 Starting application default Akka system.
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\SceneController.scala - PlayException: Compilation error [type mismatch;
+ found   : Unit
+ required: play.api.mvc.Request[play.api.libs.json.JsValue] => play.api.mvc.Result]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\SceneController.scala - PlayException: Compilation error [value TODO of type play.api.mvc.Action[play.api.mvc.AnyContent] does not take type parameters.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\SceneController.scala - PlayException: Compilation error [Cannot write an instance of play.api.mvc.Request[play.api.libs.json.JsValue] to HTTP response. Try to define a Writeable[play.api.mvc.Request[play.api.libs.json.JsValue]]]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\ShaderController.scala - PlayException: Compilation error [You do not have an implicit Application in scope. If you want to bring the current running Application into context, just add import play.api.Play.current]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.
+The specified scene was not found
+java.io.FileNotFoundException: osiris.infrastructure.OsirisConfiguration$@52da03c6simple_cube.json (Das System kann die angegebene Datei nicht finden)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.<init>(Unknown Source)
+	at scala.io.Source$.fromFile(Source.scala:91)
+	at scala.io.Source$.fromFile(Source.scala:76)
+	at scala.io.Source$.fromFile(Source.scala:54)
+	at osiris.infrastructure.ReadTextFile$.fromPath(ReadTextFile.scala:25)
+	at controllers.SceneController$$anonfun$getSceneByFilename$1.apply(SceneController.scala:22)
+	at controllers.SceneController$$anonfun$getSceneByFilename$1.apply(SceneController.scala:19)
+	at play.api.mvc.Action$$anon$1.apply(Action.scala:170)
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$6.apply(Invoker.scala:126)
+	at play.core.ActionInvoker$$anonfun$receive$1$$anonfun$6.apply(Invoker.scala:126)
+	at play.utils.Threads$.withContextClassLoader(Threads.scala:17)
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:125)
+	at play.core.ActionInvoker$$anonfun$receive$1.apply(Invoker.scala:115)
+	at akka.actor.Actor$class.apply(Actor.scala:318)
+	at play.core.ActionInvoker.apply(Invoker.scala:113)
+	at akka.actor.ActorCell.invoke(ActorCell.scala:626)
+	at akka.dispatch.Mailbox.processMailbox(Mailbox.scala:197)
+	at akka.dispatch.Mailbox.run(Mailbox.scala:179)
+	at akka.dispatch.ForkJoinExecutorConfigurator$MailboxExecutionTask.exec(AbstractDispatcher.scala:516)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\SceneController.scala - PlayException: Compilation error [not enough arguments for method fromPath: (path: String)String.
+Unspecified value parameter path.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.

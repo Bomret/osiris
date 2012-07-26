@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="jar://C:/play/repository/local/xalan/xalan/2.7.1/jars/xalan.jar!/" />
     </CLASSES>
+    <JAVADOC />
     <SOURCES />
   </library>
 </component>
