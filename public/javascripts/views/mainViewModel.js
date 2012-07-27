@@ -4,90 +4,97 @@
  * Time: 01:47
  */
 
-define(["utils", "scene", "shader"], function (utils, scene, shader) {
-    "use strict";
+define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader) {
+        "use strict";
 
-    var _availableScenes = [],
-        _availableShaders = [],
-        _currentScene,
-        _currentShader,
-        _resetCallback;
+        var _availableScenes,
+            _availableShaders,
+            _currentScene,
+            _currentShader,
+            _renderCanvas,
+            _loadCallback;
 
-    function _setupAvailableShaders() {
-        var i,
-            name,
-            config,
-            cmbAvailableShaders = document.getElementById("availableShaders"),
-            options = cmbAvailableShaders.options,
-            len = options.length;
+        function _setupAvailableShaders() {
+            _availableShaders = [];
 
-        for (i = 0; i < len; i++) {
-            name = options[i].text;
-            config = JSON.parse(options[i].value);
-            _availableShaders.push(new shader.ShaderConfigurationInformation(name, config));
+            $("#availableShaders option").each(function (index, element) {
+                var name = element.text,
+                    config = JSON.parse(element.value);
+
+                _availableShaders.push(new shader.ShaderConfigurationInformation(name, config));
+            });
+            _currentShader = _availableShaders[0];
+
+            utils.log("Available shaders", _availableShaders);
+            utils.log("Current shader", _currentShader);
+
+            $("#availableShaders").change(function () {
+                _currentShader = _availableShaders[this.selectedIndex];
+                utils.log("Current shader changed", _currentShader);
+            });
         }
-        _currentShader = _availableShaders[0];
 
-        utils.log("Available shaders", _availableShaders);
-        utils.log("Current shader", _currentShader);
+        function _setupAvailableScenes() {
+            _availableScenes = [];
 
-        cmbAvailableShaders.onchange = function () {
-            _currentShader = _availableShaders[this.selectedIndex];
-            utils.log("Current shader changed", _currentShader);
+            $("#availableScenes option").each(function (index, element) {
+                _availableScenes.push(new scene.SceneInformation(element.text, element.value));
+            });
+
+            _currentScene = _availableScenes[0];
+
+            utils.log("Available scenes", _availableScenes);
+            utils.log("Current scene", _currentScene);
+
+            $("#availableScenes").change(function () {
+                _currentShader = _availableScenes[this.selectedIndex];
+                utils.log("Current scene changed", _currentScene);
+            });
+        }
+
+        function _setupRenderButton() {
+            $("#startRender").click(function (event) {
+                _loadCallback(event);
+            });
+        }
+
+        function _setupRenderCanvas() {
+            _renderCanvas = $("#renderCanvas").get(0);
+        }
+
+        return {
+
+            init:function (loadCallback) {
+                _loadCallback = loadCallback;
+                _setupRenderCanvas();
+                _setupAvailableShaders();
+                _setupAvailableScenes();
+                _setupRenderButton();
+            },
+
+            /**
+             *
+             * @return {SceneInformation}
+             */
+            getCurrentScene:function () {
+                return _currentScene;
+            },
+
+            /**
+             *
+             * @return {ShaderInformation}
+             */
+            getCurrentShader:function () {
+                return _currentShader;
+            },
+
+            /**
+             *
+             * @return {*}
+             */
+            getRenderCanvas:function () {
+                return _renderCanvas;
+            }
         };
     }
-
-    function _setupAvailableScenes() {
-        var i,
-            cmbAvailableScenes = document.getElementById("availableScenes"),
-            options = cmbAvailableScenes.options,
-            len = options.length;
-
-        for (i = 0; i < len; i++) {
-            _availableScenes.push(new scene.SceneInformation(options[i].text, options[i].value));
-        }
-        _currentScene = new scene.SceneInformation(options[0].text, options[0].value);
-
-        utils.log("Available scenes", _availableScenes);
-        utils.log("Current scene", _currentScene);
-
-        cmbAvailableScenes.onchange = function () {
-            _currentShader = _availableScenes[this.selectedIndex];
-            utils.log("Current scene changed", _currentScene);
-        };
-    }
-
-    function _setupRenderButton() {
-        var btnStartRender = document.getElementById("startRender");
-        btnStartRender.onclick = _resetCallback;
-    }
-
-    return {
-        /**
-         *
-         * @param {Function} resetCallback
-         */
-        init:function (resetCallback) {
-            _resetCallback = resetCallback;
-            _setupAvailableShaders();
-            _setupAvailableScenes();
-            _setupRenderButton();
-        },
-
-        /**
-         *
-         * @return {SceneInformation}
-         */
-        getCurrentScene:function () {
-            return _currentScene;
-        },
-
-        /**
-         *
-         * @return {ShaderInformation}
-         */
-        getCurrentShader:function () {
-            return _currentShader;
-        }
-    };
-});
+);

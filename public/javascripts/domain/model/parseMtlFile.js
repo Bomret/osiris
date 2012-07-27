@@ -4,7 +4,7 @@
  * Time: 00:43
  */
 
-define(["utils", "rendering", "loadFile"], function(utils, rendering, loadFile) {
+define(["utils", "rendering"], function(utils, rendering) {
     "use strict";
 
     return {

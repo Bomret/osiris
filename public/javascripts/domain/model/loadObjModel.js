@@ -3,7 +3,7 @@
  * Date: 13.06.12
  */
 
-define(["utils", "loadFile", "parseObjFile", "transformObjModel"], function(utils, loadFile, parseObjFile, transformObjModel) {
+define(["utils", "parseObjFile", "transformObjModel"], function(utils, parseObjFile, transformObjModel) {
     "use strict";
 
     return {

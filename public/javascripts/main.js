@@ -14,6 +14,8 @@ require.config({
         webgl:"lib/webgl-utils",
         utils:"lib/utils",
 
+        sendMessage:"domain/sendMessageToServer",
+
         // views
         mainViewModel:"views/mainViewModel",
 
