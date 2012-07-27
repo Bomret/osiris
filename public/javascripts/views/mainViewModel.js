@@ -4,15 +4,14 @@
  * Time: 01:47
  */
 
-define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader) {
+define(["utils", "jquery", "amplify", "scene", "shader"], function (utils, $, amplify, scene, shader) {
         "use strict";
 
         var _availableScenes,
             _availableShaders,
             _currentScene,
             _currentShader,
-            _renderCanvas,
-            _loadCallback;
+            _renderCanvas;
 
         function _setupAvailableShaders() {
             _availableShaders = [];
@@ -54,7 +53,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
 
         function _setupRenderButton() {
             $("#startRender").click(function (event) {
-                _loadCallback(event);
+                amplify.publish("osiris-ui-change", event);
             });
         }
 
@@ -63,9 +62,10 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
         }
 
         return {
-
-            init:function (loadCallback) {
-                _loadCallback = loadCallback;
+            /**
+             *
+             */
+            init:function () {
                 _setupRenderCanvas();
                 _setupAvailableShaders();
                 _setupAvailableScenes();
@@ -74,7 +74,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
 
             /**
              *
-             * @return {SceneInformation}
+             * @return
              */
             getCurrentScene:function () {
                 return _currentScene;
@@ -82,7 +82,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
 
             /**
              *
-             * @return {ShaderInformation}
+             * @return
              */
             getCurrentShader:function () {
                 return _currentShader;

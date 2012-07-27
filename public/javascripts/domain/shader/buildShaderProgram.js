@@ -4,7 +4,7 @@
  * Time: 16:16
  */
 
-define(["utils", "shader"], function (utils, shader) {
+define(["utils", "shader", "amplify"], function (utils, shader, amplify) {
     "use strict";
 
     var _gl;
@@ -42,7 +42,7 @@ define(["utils", "shader"], function (utils, shader) {
             fragmentShader = createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
             compiledProgram = createShaderProgram(vertexShader, fragmentShader);
 
-            return new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables);
+            amplify.publish("osiris-shader-built", new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
         }
     };
 });

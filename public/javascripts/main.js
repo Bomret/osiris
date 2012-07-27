@@ -6,27 +6,38 @@
 
 require.config({
     // legacy non AMD scripts that add themselves to the global object
+    shim:{
+        "amplify":{
+            deps:["jquery"],
+            exports:"amplify"
+        }
+    },
 
     paths:{
         // libraries
         jquery:"lib/jquery",
+        amplify:"lib/amplify.min",
         glmatrix:"lib/glmatrix",
         webgl:"lib/webgl-utils",
         utils:"lib/utils",
 
-        sendMessage:"domain/sendMessageToServer",
+        // infrastructure
+        sendMessage:"infrastructure/sendMessageToServer",
 
         // views
         mainViewModel:"views/mainViewModel",
 
         // domain
+        setupWebGlContext:"domain/rendering/setupWebGlContext",
         loadShaders:"domain/shader/loadShaders",
+        loadShaderConfig:"domain/shader/loadShaderConfig",
         buildShaderProgram:"domain/shader/buildShaderProgram",
         loadObjModel:"domain/model/loadObjModel",
         parseObjFile:"domain/model/parseObjFile",
         parseMtlFile:"domain/model/parseMtlFile",
         transformObjModel:"domain/model/transformObjModel",
         loadScene:"domain/scene/loadScene",
+        loadSceneFromServer:"domain/scene/loadSceneFromServer",
         renderScene:"domain/scene/renderScene",
 
         // contracts
@@ -35,21 +46,10 @@ require.config({
         rendering:"contracts/rendering",
         scene:"contracts/scene"
     }
-})
-;
+});
 
 require(['osiris'], function (Osiris) {
     "use strict";
 
-    Osiris.init({
-        canvasId:"renderCanvas",
-        canvasWidth:600,
-        canvasHeight:600,
-        clearColor:{
-            r:0.3,
-            g:0.3,
-            b:0.6,
-            a:1.0
-        }
-    });
+    Osiris.execute();
 });

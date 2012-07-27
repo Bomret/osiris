@@ -4,51 +4,43 @@
  * Time: 21:09
  */
 
-define(["utils", "jquery", "buildShaderProgram"], function (utils, $, buildShaderProgram) {
+define(["utils", "amplify", "loadShaderConfig", "buildShaderProgram"], function (utils, amplify, loadShaderConfig, buildShaderProgram) {
     "use strict";
 
-    var _shaderProgramCache = {};
+    var _context,
+        _shaderProgramCache = {};
 
-    /**
-     *
-     * @param {ShaderInformation} shaderInformation
-     * @return {ShaderConfig}
-     */
-    var loadConfig = function (shaderInformation, loaded) {
-        var pathToShaderController;
+    function _wire() {
+        amplify.subscribe("osiris-shader-load", function (shaderConfig) {
+            utils.log("Shader config", shaderConfig);
 
-        pathToShaderController = "http://localhost:9000/shaders";
-        $.ajax(pathToShaderController, {
-            type:"POST",
-            contentType:"application/json",
-            data:JSON.stringify(shaderInformation),
-            success:loaded,
-            error:function (status) {
-                utils.log("ERROR", status);
-            }
+            buildShaderProgram.execute(shaderConfig, _context);
         });
-    };
+
+        amplify.subscribe("osiris-shader-built", function (shaderProgram) {
+            utils.log("Shader program", shaderProgram);
+
+            amplify.publish("osiris-shader-ready", shaderProgram);
+        });
+    }
 
     return {
-        execute:function (shaderInformation, context, onDone) {
-            var config,
-                shaderProgram;
+        execute:function (shaderInformation, context) {
+            var name = shaderInformation.name;
+            _context = context;
 
             utils.log("Shader to load", shaderInformation);
 
-            loadConfig(shaderInformation, function (response) {
-                config = response;
-                utils.log("Shader config", response);
+            if (_shaderProgramCache[name]) {
+                amplify.publish("osiris-shader-ready", _shaderProgramCache[name]);
+            }
 
-                if (_shaderProgramCache[config.name]) {
-                    return _shaderProgramCache[config.name];
-                }
-
-                shaderProgram = buildShaderProgram.execute(config, context);
-                _shaderProgramCache[config.name] = shaderProgram;
-
-                onDone(shaderProgram);
-            });
+            try {
+                _wire();
+                loadShaderConfig.execute(shaderInformation);
+            } catch (error) {
+                amplify.publish("osiris-error", error);
+            }
         }
     };
 })

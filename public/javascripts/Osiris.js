@@ -3,42 +3,54 @@
  * Date: 13.06.12
  */
 
-define(["utils", "webgl", "glmatrix", "mainViewModel", "loadObjModel", "loadShaders", "loadScene", "renderScene", "sendMessage"],
-    function (utils, webgl, glmatrix, ui, loadObjModel, loadShaders, loadScene, renderScene, sendMessage) {
+define(["utils", "amplify", "webgl", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene", "sendMessage"],
+    function (utils, amplify, webgl, ui, setupWebGlContext, loadShaders, loadScene, renderScene, sendMessage) {
         "use strict";
 
-        var _setupWebGlContext = function (canvas) {
-            canvas.width = Math.floor(window.innerWidth * 0.9);
-            canvas.height = Math.floor(window.innerHeight * 0.9);
+        function _wire(osiris) {
+            amplify.subscribe("osiris-ui-change", osiris, function () {
+                utils.log("Reset!");
+                this.init();
+            });
 
-            return webgl.setupWebGL(canvas);
-        };
+            amplify.subscribe("osiris-socket-message", function (event) {
+                utils.log(event.data);
+                //renderScene.execute(cubeScene);
+            });
+
+            amplify.subscribe("osiris-error", osiris, function (error) {
+                window.alert(error.data);
+            });
+
+            amplify.subscribe("osiris-context-ready", osiris, function (context) {
+                this.currentContext = context;
+                utils.log("WebGl context", this.currentContext);
+            });
+
+            amplify.subscribe("osiris-shader-ready", osiris, function (shaderProgram) {
+                this.currentShaderProgram = shaderProgram;
+                utils.log("ShaderProgram", this.currentShaderProgram);
+            });
+
+            amplify.subscribe("osiris-scene-ready", function (loadedScene) {
+                utils.log("Scene", loadedScene);
+                amplify.store("scene", loadedScene);
+
+                sendMessage.execute(loadedScene);
+            });
+        }
 
         return {
-            currentContext:null,
-            currentShaderProgram:null,
-            init:function () {
-                ui.init(function () {
-                    utils.log("Reset!");
-                    this.init();
-                }.bind(this));
+            currentContext:undefined,
+            currentShaderProgram:undefined,
+            execute:function () {
+                ui.init();
 
-                this.currentContext = _setupWebGlContext(ui.getRenderCanvas());
-                utils.log("WebGl context", this.currentContext);
+                _wire(this);
 
-                loadShaders.execute(ui.getCurrentShader(), this.currentContext, function (shaderProgram) {
-                    this.currentShaderProgram = shaderProgram;
-                    utils.log("ShaderProgram", this.currentShaderProgram);
-                }.bind(this));
-
-                loadScene.execute(ui.getCurrentScene(), function (loadedScene) {
-                    utils.log("Scene", loadedScene);
-
-                    sendMessage.execute(loadedScene, function (event) {
-                        window.alert(event.data);
-                        //renderScene.execute(cubeScene);
-                    });
-                });
+                setupWebGlContext.execute(ui.getRenderCanvas());
+                loadShaders.execute(ui.getCurrentShader(), this.currentContext);
+                loadScene.execute(ui.getCurrentScene());
             }
         };
     });
