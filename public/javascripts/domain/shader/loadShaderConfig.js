@@ -10,19 +10,20 @@ define(["utils", "amplify", "jquery"], function (utils, amplify, $) {
     var _pathToShaderController = "http://localhost:9000/shaders";
 
     return {
-        execute:function (shaderInformation) {
-            $.ajax({
-                url:_pathToShaderController,
-                type:"POST",
-                contentType:"application/json",
-                data:JSON.stringify(shaderInformation),
-                success:function (data) {
-                    amplify.publish("osiris-shader-load", data);
-                },
-                error:function (status) {
-                    amplify.publish("osiris-shader-error", status);
-                }
-            });
+        execute:function (shaderInformation, callbacks) {
+            try {
+                $.ajax({
+                    url:_pathToShaderController,
+                    type:"POST",
+                    contentType:"application/json",
+                    dataType:"json",
+                    data:JSON.stringify(shaderInformation),
+                    success:callbacks.onSuccess,
+                    error:callbacks.onError
+                });
+            } catch (error) {
+                callbacks.onError(error);
+            }
         }
     };
 });

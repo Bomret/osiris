@@ -4,22 +4,20 @@
  * Time: 16:16
  */
 
-define(["utils", "shader", "amplify"], function (utils, shader, amplify) {
+define(["utils", "shader"], function (utils, shader) {
     "use strict";
 
     var _gl;
 
-    var createShaderFromSource = function (type, source) {
+    function _createShaderFromSource(type, source) {
         var glShader = _gl.createShader(type);
         _gl.shaderSource(glShader, source);
         _gl.compileShader(glShader);
 
         return glShader;
-    };
+    }
 
-    var createShaderProgram = function (vertexShader, fragmentShader) {
-        utils.log("Shaders", vertexShader, fragmentShader);
-
+    function _createShaderProgram(vertexShader, fragmentShader) {
         var program = _gl.createProgram();
         _gl.attachShader(program, vertexShader);
         _gl.attachShader(program, fragmentShader);
@@ -28,21 +26,25 @@ define(["utils", "shader", "amplify"], function (utils, shader, amplify) {
         _gl.useProgram(program);
 
         return program;
-    };
+    }
 
     return {
-        execute:function (config, glContext) {
+        execute:function (config, glContext, callbacks) {
             var vertexShader,
                 fragmentShader,
                 compiledProgram;
 
             _gl = glContext;
 
-            vertexShader = createShaderFromSource(_gl.VERTEX_SHADER, config.vertexShader);
-            fragmentShader = createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
-            compiledProgram = createShaderProgram(vertexShader, fragmentShader);
+            try {
+                vertexShader = _createShaderFromSource(_gl.VERTEX_SHADER, config.vertexShader);
+                fragmentShader = _createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
+                compiledProgram = _createShaderProgram(vertexShader, fragmentShader);
 
-            amplify.publish("osiris-shader-built", new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
+                callbacks.onSuccess(new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
+            } catch (error) {
+                callbacks.onError(error);
+            }
         }
     };
 });

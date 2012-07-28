@@ -9,3 +9,13 @@ Slf4jEventHandler started
 Listening for HTTP on port 9000...
 Application started (Dev)
 Starting application default Akka system.
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.

@@ -4,36 +4,37 @@
  * Time: 16:32
  */
 
-define(["glmatrix"], function(glmatrix) {
+define(["glmatrix"], function (glmatrix) {
     "use strict";
 
     return {
-        makeRenderableModel: function(modelDescription, glContext) {
-            return {
-                vertices: [],
-                normals: [],
-                texCoords: [],
-                indices: [],
-                numIndices: 0,
-                numVertices: 0,
-                numNormals: 0,
-                numTexCoords: 0,
-                material: null
-            };
+        /**
+         *
+         * @param meshDescription
+         * @constructor
+         */
+        RenderableModel:function (meshDescription, material) {
+            this.vertices = meshDescription.vertices;
+            this.numVertices = meshDescription.numVertices;
+            this.normals = meshDescription.normals;
+            this.numNormals = meshDescription.numNormals;
+            this.texCoords = meshDescription.texCoords;
+            this.numTexCoords = meshDescription.numTexCoords;
+            this.indices = meshDescription.indices;
+            this.numIndices = meshDescription.numIndices;
+            this.material = material;
         },
 
-        makeMaterial: function(name) {
-            return Object.seal({
-                name: name,
-                ambientColor: null,
-                diffuseColor: null,
-                specularity: 0.0,
-                diffuseMap: null,
-                normalMap: null
-            });
+        Material:function (name, options) {
+            this.name = name;
+            this.ambientColor = options.ambientColor || [0.5, 0.5, 0.5]; // Grey
+            this.diffuseColor = options.diffuseColor || [1.0, 0.0, 1.0]; // Fuchsia
+            this.specularity = options.specularity || 1.0;
+            this.diffuseMap = options.diffuseMap || undefined;
+            this.normalMap = options.normalMap || undefined;
         },
 
-        makePlane: function(dim, gl) {
+        makePlane:function (dim, gl) {
             var verticesBuffer = gl.createBuffer(),
                 normalsBuffer = gl.createBuffer(),
                 texCoordsBuffer = gl.createBuffer(),
@@ -75,16 +76,16 @@ define(["glmatrix"], function(glmatrix) {
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
             return Object.seal({
-                numIndices: indices.length,
-                verts: verticesBuffer,
-                numVerts: vertices.length,
-                norms: normalsBuffer,
-                tex: texCoordsBuffer,
-                inds: indicesBuffer
+                numIndices:indices.length,
+                verts:verticesBuffer,
+                numVerts:vertices.length,
+                norms:normalsBuffer,
+                tex:texCoordsBuffer,
+                inds:indicesBuffer
             });
         },
 
-        makeCube: function(dim, gl) {
+        makeCube:function (dim, gl) {
             var verticesBuffer = gl.createBuffer();
             var normalsBuffer = gl.createBuffer();
             var texCoordsBuffer = gl.createBuffer();
@@ -168,12 +169,12 @@ define(["glmatrix"], function(glmatrix) {
             gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, null);
 
             return Object.seal({
-                numIndices: indices.length,
-                verts: verticesBuffer,
-                numVerts: vertices.length,
-                norms: normalsBuffer,
-                tex: texCoordsBuffer,
-                inds: indicesBuffer
+                numIndices:indices.length,
+                verts:verticesBuffer,
+                numVerts:vertices.length,
+                norms:normalsBuffer,
+                tex:texCoordsBuffer,
+                inds:indicesBuffer
             });
         }
     };

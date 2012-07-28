@@ -3,54 +3,56 @@
  * Date: 13.06.12
  */
 
-define(["utils", "amplify", "webgl", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene", "sendMessage"],
-    function (utils, amplify, webgl, ui, setupWebGlContext, loadShaders, loadScene, renderScene, sendMessage) {
+define(["utils", "webgl", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene", "sendMessage"],
+    function (utils, webgl, ui, setupWebGlContext, loadShaders, loadScene, renderScene, sendMessage) {
         "use strict";
 
-        function _wire(osiris) {
-            amplify.subscribe("osiris-ui-change", osiris, function () {
-                utils.log("Reset!");
-                this.init();
+        var _gl,
+            _shaderProgram;
+
+        function _onGlContextCreate(glContext) {
+            _gl = glContext;
+            utils.log("WebGl context", _gl);
+
+            loadShaders.execute(ui.getCurrentShader(), _gl, {
+                onSuccess:_onShaderProgramBuilt,
+                onError:_onError
             });
 
-            amplify.subscribe("osiris-socket-message", function (event) {
-                utils.log(event.data);
-                //renderScene.execute(cubeScene);
-            });
-
-            amplify.subscribe("osiris-error", osiris, function (error) {
-                window.alert(error.data);
-            });
-
-            amplify.subscribe("osiris-context-ready", osiris, function (context) {
-                this.currentContext = context;
-                utils.log("WebGl context", this.currentContext);
-            });
-
-            amplify.subscribe("osiris-shader-ready", osiris, function (shaderProgram) {
-                this.currentShaderProgram = shaderProgram;
-                utils.log("ShaderProgram", this.currentShaderProgram);
-            });
-
-            amplify.subscribe("osiris-scene-ready", function (loadedScene) {
-                utils.log("Scene", loadedScene);
-                amplify.store("scene", loadedScene);
-
-                sendMessage.execute(loadedScene);
+            loadScene.execute(ui.getCurrentScene(), _gl, {
+                onSuccess:_onSceneLoad,
+                onError:_onError
             });
         }
 
+        function _onShaderProgramBuilt(shaderProgram) {
+            _shaderProgram = shaderProgram;
+            utils.log("Shader program", _shaderProgram);
+        }
+
+        function _onSceneLoad(loadedScene) {
+            utils.log("Scene", loadedScene);
+            renderScene.execute(loadedScene, _gl, _shaderProgram, {
+                onSuccess:undefined,
+                onError:_onError
+            });
+        }
+
+        function _onError(error) {
+            utils.log("ERROR", error.stack);
+        }
+
         return {
-            currentContext:undefined,
-            currentShaderProgram:undefined,
             execute:function () {
-                ui.init();
+                ui.init(function () {
+                    utils.log("Reset!");
+                    this.execute();
+                }.bind(this));
 
-                _wire(this);
-
-                setupWebGlContext.execute(ui.getRenderCanvas());
-                loadShaders.execute(ui.getCurrentShader(), this.currentContext);
-                loadScene.execute(ui.getCurrentScene());
+                setupWebGlContext.execute(ui.getRenderCanvas(), {
+                    onSuccess:_onGlContextCreate,
+                    onError:_onError
+                });
             }
         };
     });

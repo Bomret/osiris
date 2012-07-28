@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" line="153" mnemonic="7" />
+    <bookmark url="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" line="136" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2017300-8f93-48db-994a-b47091ace73c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/contracts/messaging.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/domain/model/transformModelNode.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js" />
+      <change type="DELETED" beforePath="C:\Users\Stefan Reichel\git\osiris-play\public\javascripts\domain\model\loadObjModel.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Stefan Reichel\git\osiris-play\public\javascripts\domain\model\parseMtlFile.js" afterPath="" />
+      <change type="DELETED" beforePath="C:\Users\Stefan Reichel\git\osiris-play\public\javascripts\domain\model\transformObjModel.js" afterPath="" />
+      <change type="MOVED" beforePath="C:\Users\Stefan Reichel\git\osiris-play\public\javascripts\Osiris.js" afterPath="$PROJECT_DIR$/public/javascripts/osiris.js" />
+      <change type="MOVED" beforePath="C:\Users\Stefan Reichel\git\osiris-play\public\javascripts\views\mainViewModel.js" afterPath="$PROJECT_DIR$/public/javascripts/view/mainViewModel.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/contracts/rendering.js" afterPath="$PROJECT_DIR$/public/javascripts/contracts/rendering.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js" afterPath="$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/main.js" afterPath="$PROJECT_DIR$/public/javascripts/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scenes/simple_cube.json" afterPath="$PROJECT_DIR$/public/scenes/simple_cube.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/siris-log4j.log" afterPath="$PROJECT_DIR$/siris-log4j.log" />
     </list>
     <ignored path="Osiris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,77 +102,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Osiris.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
+      <file leaf-file-name="osiris.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/osiris.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="68" selection-start="413" selection-end="413" vertical-scroll-proportion="0.0">
+            <state line="36" column="32" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setupWebGlContext.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js">
+      <file leaf-file-name="findNodes.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="40" selection-start="273" selection-end="273" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#64#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="loadScene.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="59" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+            <state line="9" column="12" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="loadSceneFromServer.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js">
+      <file leaf-file-name="traverseScene.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="26" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#64#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="31" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0">
+            <state line="22" column="58" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mainViewModel.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/views/mainViewModel.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="9" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.389049">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="renderScene.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="renderScene.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="34" selection-start="3850" selection-end="3850" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sendMessageToServer.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="42" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
+            <state line="63" column="31" selection-start="2125" selection-end="2125" vertical-scroll-proportion="0.9140401">
               <folding />
             </state>
           </provider>
@@ -159,7 +141,16 @@
       <file leaf-file-name="loadShaders.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="63" selection-start="490" selection-end="490" vertical-scroll-proportion="0.0">
+            <state line="17" column="24" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="buildShaderProgram.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="17" column="44" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -168,10 +159,35 @@
       <file leaf-file-name="loadShaderConfig.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="3" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#64#0" expanded="false" />
-              </folding>
+            <state line="18" column="36" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mainViewModel.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/view/mainViewModel.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="34" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="setupWebGlContext.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="16" column="0" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simple_cube.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="15" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -189,22 +205,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/controllers/ShaderController.scala" />
-        <option value="$PROJECT_DIR$/app/osiris/infrastructure/OsirisConfiguration.scala" />
-        <option value="$PROJECT_DIR$/app/controllers/SceneController.scala" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/model/loadObjModel.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/model/parseMtlFile.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/sendMessageToServer.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/contracts/messaging.js" />
         <option value="$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/main.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/Osiris.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/views/mainViewModel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/model/transformModelNode.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/view/mainViewModel.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/osiris.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
+        <option value="$PROJECT_DIR$/public/scenes/simple_cube.json" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" />
       </list>
     </option>
   </component>
@@ -356,46 +372,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="shaders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="shaders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="flat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="scenes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -436,7 +412,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
+              <option name="myItemId" value="view" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -585,6 +561,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="contracts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -926,21 +924,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.4969651" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.4908953" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59075344" sideWeight="0.4969697" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59075344" sideWeight="0.49772727" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23409091" sideWeight="0.6712329" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23409091" sideWeight="0.6746575" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32534248" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="true" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
@@ -952,7 +951,6 @@
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.4969651" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1051,110 +1049,120 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/transformObjModel.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="41" selection-start="184" selection-end="184" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="44" selection-start="133" selection-end="133" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/conf/routes">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/SirisController.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="43" selection-start="431" selection-end="431" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/parseMtlFile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="56" selection-start="122" selection-end="122" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="34" selection-start="3850" selection-end="3850" vertical-scroll-proportion="0.0">
+        <state line="6" column="17" selection-start="83" selection-end="83" vertical-scroll-proportion="0.111317255">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="3" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
+        <state line="28" column="41" selection-start="885" selection-end="885" vertical-scroll-proportion="0.89053804">
           <folding>
             <element signature="e#0#64#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="39" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.25501433">
+        <state line="42" column="28" selection-start="1245" selection-end="1245" vertical-scroll-proportion="0.66790354">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/transformModelNode.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="48" selection-start="1318" selection-end="1318" vertical-scroll-proportion="0.53488374">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="38" selection-start="1525" selection-end="1525" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#64#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/contracts/messaging.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="9" selection-start="243" selection-end="243" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#64#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="286" selection-end="286" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/view/mainViewModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="34" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="63" selection-start="490" selection-end="490" vertical-scroll-proportion="0.0">
+        <state line="17" column="24" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/buildShaderProgram.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="42" selection-start="610" selection-end="610" vertical-scroll-proportion="0.0">
+        <state line="17" column="44" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/osiris.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="59" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+        <state line="36" column="32" selection-start="1177" selection-end="1177" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="31" selection-start="1270" selection-end="1270" vertical-scroll-proportion="0.0">
+        <state line="9" column="12" selection-start="166" selection-end="166" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/rendering/setupWebGlContext.js">
+    <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="40" selection-start="273" selection-end="273" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadSceneFromServer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="26" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="68" selection-start="413" selection-end="413" vertical-scroll-proportion="0.0">
+        <state line="6" column="15" selection-start="143" selection-end="143" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/views/mainViewModel.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="9" selection-start="2375" selection-end="2375" vertical-scroll-proportion="0.389049">
+        <state line="18" column="36" selection-start="507" selection-end="507" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="58" selection-start="459" selection-end="459" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="31" selection-start="2125" selection-end="2125" vertical-scroll-proportion="0.9140401">
           <folding />
         </state>
       </provider>

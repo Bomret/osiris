@@ -4,23 +4,20 @@
  * Time: 13:51
  */
 
-define(["utils", "webgl", "amplify"], function (utils, webgl, amplify) {
+define(["utils", "webgl"], function (utils, webgl) {
     "use strict";
 
     return {
-        execute:function (canvas) {
-            var context;
+        execute:function (canvas, callbacks) {
+            var glContext;
 
             utils.log("Canvas", canvas);
 
-            canvas.width = Math.floor(window.innerWidth * 0.9);
-            canvas.height = Math.floor(window.innerHeight * 0.9);
-
             try {
-                context = webgl.setupWebGL(canvas);
-                amplify.publish("osiris-context-ready", context);
+                glContext = webgl.setupWebGL(canvas);
+                callbacks.onSuccess(glContext);
             } catch (error) {
-                amplify.publish("osiris-error", error);
+                callbacks.onError(error);
             }
         }
     };

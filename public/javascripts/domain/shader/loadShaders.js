@@ -4,44 +4,41 @@
  * Time: 21:09
  */
 
-define(["utils", "amplify", "loadShaderConfig", "buildShaderProgram"], function (utils, amplify, loadShaderConfig, buildShaderProgram) {
+define(["utils", "loadShaderConfig", "buildShaderProgram"], function (utils, loadShaderConfig, buildShaderProgram) {
     "use strict";
 
-    var _context,
-        _shaderProgramCache = {};
+    var _gl,
+        _shaderCache = {},
+        _successCallback,
+        _errorCallback;
 
-    function _wire() {
-        amplify.subscribe("osiris-shader-load", function (shaderConfig) {
-            utils.log("Shader config", shaderConfig);
-
-            buildShaderProgram.execute(shaderConfig, _context);
-        });
-
-        amplify.subscribe("osiris-shader-built", function (shaderProgram) {
-            utils.log("Shader program", shaderProgram);
-
-            amplify.publish("osiris-shader-ready", shaderProgram);
+    function _onShaderConfigLoad(shaderConfig) {
+        buildShaderProgram.execute(shaderConfig, _gl, {
+            onSuccess:_successCallback,
+            onError:_errorCallback
         });
     }
 
     return {
-        execute:function (shaderInformation, context) {
+        execute:function (shaderInformation, glContext, callbacks) {
             var name = shaderInformation.name;
-            _context = context;
-
-            utils.log("Shader to load", shaderInformation);
-
-            if (_shaderProgramCache[name]) {
-                amplify.publish("osiris-shader-ready", _shaderProgramCache[name]);
-            }
+            _gl = glContext;
+            _successCallback = callbacks.onSuccess;
+            _errorCallback = callbacks.onError;
 
             try {
-                _wire();
-                loadShaderConfig.execute(shaderInformation);
+                if (_shaderCache[name]) {
+                    utils.log("Shader in here");
+                    _successCallback(_shaderCache[name]);
+                }
+
+                loadShaderConfig.execute(shaderInformation, {
+                    onSuccess:_onShaderConfigLoad,
+                    onError:_errorCallback
+                });
             } catch (error) {
-                amplify.publish("osiris-error", error);
+                _errorCallback(error);
             }
         }
     };
-})
-;
+});

@@ -4,34 +4,48 @@
  * Time: 16:21
  */
 
-define(["utils", "amplify", "loadSceneFromServer"], function (utils, amplify, loadSceneFromServer) {
+define(["utils", "loadSceneFromServer", "prepareSceneForRendering"], function (utils, loadSceneFromServer, prepareSceneForRendering) {
     "use strict";
 
     var _name,
+        _gl,
+        _successCallback,
+        _errorCallback,
         _sceneCache = {};
 
-    function _wire() {
-        amplify.subscribe("osiris-scene-load", function (loadedScene) {
-            utils.log("Loaded scene", loadedScene);
-            _sceneCache[_name] = loadedScene;
-            amplify.publish("osiris-scene-ready", loadedScene);
+    function _onSceneLoad(loadedScene) {
+        utils.log("Loaded scene", loadedScene);
+        prepareSceneForRendering.execute(loadedScene, _gl, {
+            onSuccess:_onScenePrepare,
+            onError:_errorCallback
         });
     }
 
-    return {
-        execute:function (sceneInformation) {
-            _name = sceneInformation.name;
-            utils.log("Scene to load", sceneInformation);
+    function _onScenePrepare(preparedScene) {
+        utils.log("Prepared scene", preparedScene);
+        _sceneCache[_name] = preparedScene;
+        _successCallback(preparedScene);
+    }
 
-            if (_sceneCache[_name]) {
-                amplify.publish("osiris-scene-ready", _sceneCache[_name]);
-            }
+    return {
+        execute:function (sceneInformation, glContext, callbacks) {
+            _name = sceneInformation.name;
+            _gl = glContext;
+            _successCallback = callbacks.onSuccess;
+            _errorCallback = callbacks.onError;
 
             try {
-                _wire();
-                loadSceneFromServer.execute(sceneInformation);
+                if (_sceneCache[_name]) {
+                    utils.log("Scene in here", _sceneCache[_name]);
+                    _successCallback(_sceneCache[_name]);
+                }
+
+                loadSceneFromServer.execute(sceneInformation, {
+                    onSuccess:_onSceneLoad,
+                    onError:_errorCallback
+                });
             } catch (error) {
-                amplify.publish("osiris-error", error);
+                _errorCallback(error);
             }
         }
     };

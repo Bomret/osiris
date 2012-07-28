@@ -4,30 +4,30 @@
  * Time: 13:18
  */
 
-define(["utils", "amplify"], function (utils, amplify) {
+define(["utils", "jquery"], function (utils, $) {
     "use strict";
 
     var _pathToSceneController = "http://localhost:9000/scenes";
 
-    amplify.request.define("getSceneByInformation", "ajax", {
-        url:_pathToSceneController,
-        type:"POST",
-        dataType:"json",
-        contentType:"application/json"
-    });
-
     return {
-        execute:function (sceneInformation) {
-            amplify.request({
-                resourceId:"getSceneByInformation",
-                data:JSON.stringify(sceneInformation),
-                success:function (loadedScene) {
-                    amplify.publish("osiris-scene-ready", loadedScene);
-                },
-                error:function (error) {
-                    amplify.publish("osiris-error", error);
-                }
-            });
+        execute:function (sceneInformation, callbacks) {
+            try {
+                $.ajax({
+                    url:_pathToSceneController,
+                    type:"POST",
+                    dataType:"json",
+                    contentType:"application/json",
+                    data:JSON.stringify(sceneInformation),
+                    success:function (loadedScene) {
+                        callbacks.onSuccess(loadedScene);
+                    },
+                    error:function (error) {
+                        callbacks.onError(error);
+                    }
+                });
+            } catch (error) {
+                callbacks.onError(error);
+            }
         }
     };
 });
