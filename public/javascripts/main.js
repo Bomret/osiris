@@ -7,9 +7,8 @@
 require.config({
     // legacy non AMD scripts that add themselves to the global object
     shim:{
-        "amplify":{
-            deps:["jquery"],
-            exports:"amplify"
+        "async":{
+            exports:"async"
         }
     },
 
@@ -19,7 +18,7 @@ require.config({
 
         // libraries
         jquery:"lib/jquery",
-        amplify:"lib/amplify.min",
+        async:"lib/async",
         glmatrix:"lib/glmatrix",
         webgl:"lib/webgl-utils",
         utils:"lib/utils",

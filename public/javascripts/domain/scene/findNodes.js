@@ -8,7 +8,7 @@ define(["utils", "traverseScene"], function (utils, traverseScene) {
     "use strict";
 
     return {
-        byType:function (traversableScene, nodeType, callbacks) {
+        byType:function (traversableScene, nodeType, callback) {
             var foundNodes = [];
             try {
                 traverseScene.execute(traversableScene, function (node) {
@@ -17,21 +17,21 @@ define(["utils", "traverseScene"], function (utils, traverseScene) {
                     }
                 });
 
-                callbacks.onSuccess(foundNodes);
+                callback(null, foundNodes);
             } catch (error) {
-                callbacks.onError(error);
+                callback(error);
             }
         },
 
-        byId:function (traversableScene, nodeId, callbacks) {
+        byId:function (traversableScene, nodeId, callback) {
             try {
                 traverseScene.execute(traversableScene, function (node) {
                     if (node.id === nodeId) {
-                        callbacks.onSuccess(node);
+                        callback(null, node);
                     }
                 });
             } catch (error) {
-                callbacks.onError(error);
+                callback(error);
             }
         }
     };

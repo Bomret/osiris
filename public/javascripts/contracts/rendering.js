@@ -170,11 +170,11 @@ define(["glmatrix"], function (glmatrix) {
 
             return Object.seal({
                 numIndices:indices.length,
-                verts:verticesBuffer,
-                numVerts:vertices.length,
-                norms:normalsBuffer,
-                tex:texCoordsBuffer,
-                inds:indicesBuffer
+                vertices:verticesBuffer,
+                numVertices:vertices.length,
+                normals:normalsBuffer,
+                texCoords:texCoordsBuffer,
+                indices:indicesBuffer
             });
         }
     };

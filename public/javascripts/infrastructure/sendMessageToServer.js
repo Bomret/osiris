@@ -10,13 +10,13 @@ define(function () {
     var _socket = new WebSocket("ws://localhost:9000/socket");
 
     return {
-        execute:function (message, callbacks) {
+        execute:function (message, callback) {
             _socket.onmessage = function (message) {
-                callbacks.onSuccess(message);
+                callback(null, message);
             };
 
             _socket.onerror = function (error) {
-                callbacks.onError(error);
+                callback(error, null);
             };
 
             if (_socket.readyState === 1) {

@@ -4,13 +4,13 @@
  * Time: 12:23
  */
 
-define(["utils", "amplify", "jquery"], function (utils, amplify, $) {
+define(["utils", "jquery"], function (utils, $) {
     "use strict";
 
     var _pathToShaderController = "http://localhost:9000/shaders";
 
     return {
-        execute:function (shaderInformation, callbacks) {
+        execute:function (shaderInformation, glContext, callback) {
             try {
                 $.ajax({
                     url:_pathToShaderController,
@@ -18,8 +18,12 @@ define(["utils", "amplify", "jquery"], function (utils, amplify, $) {
                     contentType:"application/json",
                     dataType:"json",
                     data:JSON.stringify(shaderInformation),
-                    success:callbacks.onSuccess,
-                    error:callbacks.onError
+                    success:function (shaderConfig) {
+                        callback(null, shaderConfig, glContext);
+                    },
+                    error:function (error) {
+                        callback(error, null);
+                    }
                 });
             } catch (error) {
                 callbacks.onError(error);

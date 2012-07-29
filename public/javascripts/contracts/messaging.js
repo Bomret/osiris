@@ -7,10 +7,22 @@
 define(function () {
     "use strict";
 
+    function OsirisMessage(request, data) {
+        this.request = request;
+    }
+
     return {
-        OsirisMessage:function (request, data) {
-            this.request = request;
+        SetupRequest:function (data) {
+            OsirisMessage.call(this, "setup");
             this.data = data;
+        },
+
+        ShutDownRequest:function () {
+            OsirisMessage.call(this, "shutdown");
+        },
+
+        RenderStartRequest:function () {
+            OsirisMessage.call(this, "start");
         }
     };
 });

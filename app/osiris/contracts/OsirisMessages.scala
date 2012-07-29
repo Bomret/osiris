@@ -1,6 +1,6 @@
 package osiris.contracts
 
-import play.api.libs.json.JsValue
+import play.api.libs.json.{JsObject, JsValue}
 
 /**
  * User: Stefan Reichel
@@ -10,11 +10,17 @@ import play.api.libs.json.JsValue
 
 sealed trait OsirisMessages
 
-case class MessageFromClient(message: String)
+case class MessageFromClient(message: JsValue)
 
-case class JsonMessage(json: JsValue)
+case class SetupRequest(nodes: Array[JsObject])
 
-case class SceneDescription(sceneDescription: JsValue)
+case class SetupComplete()
+
+case class TransformRequest(transform: JsValue)
+
+case class RenderStartRequest()
+
+case class ShutdownRequest()
 
 case class OsirisError(error: Exception)
 

@@ -3,7 +3,7 @@
     "type":"scene",
     "rootNode":{
         "id":"renderInfo",
-        "type":"renderinformation",
+        "type":"renderInformation",
         "clearColor":{
             "r":0.3,
             "g":0.3,
@@ -23,7 +23,7 @@
                 "id":"cam",
                 "type":"camera",
                 "position":{
-                    "eye":[1, 1, 1],
+                    "eye":[1, 2, 2],
                     "target":[0, 0, 0],
                     "up":[0, 1, 0]
                 },
@@ -37,13 +37,13 @@
                 "children":[
                     {
                         "id":"ambientLight",
-                        "type":"ambientlight",
+                        "type":"ambientLight",
                         "color":[0.2, 0.2, 0.2],
                         "children":[]
                     },
                     {
                         "id":"pointLight",
-                        "type":"pointlight",
+                        "type":"pointLight",
                         "position":[-2.0, 1.0, 1.0],
                         "diffusecolor":[0.9, 0.9, 0.8],
                         "specularcolor":[1.0, 1.0, 1.0],

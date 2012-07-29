@@ -8,16 +8,16 @@ define(["utils", "webgl"], function (utils, webgl) {
     "use strict";
 
     return {
-        execute:function (canvas, callbacks) {
+        execute:function (canvas, callback) {
             var glContext;
 
             utils.log("Canvas", canvas);
 
             try {
                 glContext = webgl.setupWebGL(canvas);
-                callbacks.onSuccess(glContext);
+                callback(null, glContext);
             } catch (error) {
-                callbacks.onError(error);
+                callback(error, null);
             }
         }
     };

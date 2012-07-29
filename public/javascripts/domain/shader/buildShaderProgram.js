@@ -29,7 +29,7 @@ define(["utils", "shader"], function (utils, shader) {
     }
 
     return {
-        execute:function (config, glContext, callbacks) {
+        execute:function (config, glContext, callback) {
             var vertexShader,
                 fragmentShader,
                 compiledProgram;
@@ -41,9 +41,9 @@ define(["utils", "shader"], function (utils, shader) {
                 fragmentShader = _createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
                 compiledProgram = _createShaderProgram(vertexShader, fragmentShader);
 
-                callbacks.onSuccess(new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
+                callback(null, new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
             } catch (error) {
-                callbacks.onError(error);
+                callback(error, null);
             }
         }
     };

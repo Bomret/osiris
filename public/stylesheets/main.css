@@ -4,9 +4,16 @@ body {
 }
 
 fieldset {
-    margin:0.3em;
-    padding:0.5em;
+    margin: 0.3em;
+    padding: 0.5em;
     border: 1px solid #888;
+}
+
+#statusOutput {
+    padding: 0.4em 0.2em 0.4em 0.2em;
+    border: 1px solid #CCC;
+    background-color: #EEFFFF;
+    color: #2299FF;
 }
 
 #settings {

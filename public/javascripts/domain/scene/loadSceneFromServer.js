@@ -10,7 +10,7 @@ define(["utils", "jquery"], function (utils, $) {
     var _pathToSceneController = "http://localhost:9000/scenes";
 
     return {
-        execute:function (sceneInformation, callbacks) {
+        execute:function (sceneInformation, glContext, callback) {
             try {
                 $.ajax({
                     url:_pathToSceneController,
@@ -19,14 +19,14 @@ define(["utils", "jquery"], function (utils, $) {
                     contentType:"application/json",
                     data:JSON.stringify(sceneInformation),
                     success:function (loadedScene) {
-                        callbacks.onSuccess(loadedScene);
+                        callback(null, loadedScene, glContext);
                     },
                     error:function (error) {
-                        callbacks.onError(error);
+                        callback(error, null);
                     }
                 });
             } catch (error) {
-                callbacks.onError(error);
+                callback(error, null);
             }
         }
     };

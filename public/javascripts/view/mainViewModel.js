@@ -12,7 +12,8 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
             _availableShaders,
             _currentScene,
             _currentShader,
-            _renderCanvas;
+            _renderCanvas,
+            _statusOutput;
 
         function _setupAvailableShaders() {
             _availableShaders = [];
@@ -59,10 +60,11 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
         }
 
         function _setupRenderCanvas() {
-            _renderCanvas = $("#renderCanvas")
-                .width(Math.floor(window.innerWidth * 0.9))
-                .height(Math.floor(window.innerHeight * 0.9))
-                .get(0);
+            _renderCanvas = $("#renderCanvas").get(0);
+        }
+
+        function _setupStatusOutput() {
+            _statusOutput = $("#statusOutput");
         }
 
         return {
@@ -70,6 +72,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
             init:function (resetCallback) {
                 _resetCallback = resetCallback;
                 _setupRenderCanvas();
+                _setupStatusOutput();
                 _setupAvailableShaders();
                 _setupAvailableScenes();
                 _setupRenderButton();
@@ -85,6 +88,18 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
 
             getRenderCanvas:function () {
                 return _renderCanvas;
+            },
+
+            updateStatus:function (type, message) {
+                if (type === "info") {
+                    _statusOutput.html("<p><strong>Info:</strong> " + message + "</p>")
+                        .css("background-color", "#EEFFFF")
+                        .css("color", "#2299FF");
+                } else if (type === "error") {
+                    _statusOutput.html("<p><strong>Error:</strong> " + message + "</p>")
+                        .css("background-color", "#FFFF33")
+                        .css("color", "#FFFF00");
+                }
             }
         };
     }

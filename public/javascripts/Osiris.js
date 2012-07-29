@@ -3,56 +3,50 @@
  * Date: 13.06.12
  */
 
-define(["utils", "webgl", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene", "sendMessage"],
-    function (utils, webgl, ui, setupWebGlContext, loadShaders, loadScene, renderScene, sendMessage) {
+define(["utils", "webgl", "async", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene", "sendMessage"],
+    function (utils, webgl, async, ui, setupWebGlContext, loadShaders, loadScene, renderScene, sendMessage) {
         "use strict";
 
-        var _gl,
-            _shaderProgram;
-
-        function _onGlContextCreate(glContext) {
-            _gl = glContext;
-            utils.log("WebGl context", _gl);
-
-            loadShaders.execute(ui.getCurrentShader(), _gl, {
-                onSuccess:_onShaderProgramBuilt,
-                onError:_onError
-            });
-
-            loadScene.execute(ui.getCurrentScene(), _gl, {
-                onSuccess:_onSceneLoad,
-                onError:_onError
-            });
-        }
-
-        function _onShaderProgramBuilt(shaderProgram) {
-            _shaderProgram = shaderProgram;
-            utils.log("Shader program", _shaderProgram);
-        }
-
-        function _onSceneLoad(loadedScene) {
-            utils.log("Scene", loadedScene);
-            renderScene.execute(loadedScene, _gl, _shaderProgram, {
-                onSuccess:undefined,
-                onError:_onError
-            });
-        }
-
-        function _onError(error) {
+        function _handleError(error) {
+            ui.updateStatus("error", "An error occured: " + error.message + " See console for details.");
             utils.log("ERROR", error.stack);
+        }
+
+        function _onGlContextCreate(error, glContext) {
+            if (error) {
+                _handleError(error);
+            } else {
+                utils.log("WebGl context", glContext);
+
+                async.parallel({
+                    shaderProgram:function (callback) {
+                        loadShaders.execute(ui.getCurrentShader(), glContext, callback);
+                    },
+                    loadedScene:function (callback) {
+                        loadScene.execute(ui.getCurrentScene(), glContext, callback);
+                    }
+                }, function (error, results) {
+                    if (error) {
+                        _handleError(error);
+                    } else {
+                        ui.updateStatus("info", "Loaded selected shader program and scene.");
+                        utils.log("Loaded scene and shaders", results);
+                        //renderScene.execute(results.loadedScene, glContext, results.shaderProgram, );
+                    }
+                });
+            }
         }
 
         return {
             execute:function () {
                 ui.init(function () {
                     utils.log("Reset!");
+                    ui.updateStatus("info", "Resetting...");
                     this.execute();
                 }.bind(this));
 
-                setupWebGlContext.execute(ui.getRenderCanvas(), {
-                    onSuccess:_onGlContextCreate,
-                    onError:_onError
-                });
+                ui.updateStatus("info", "Setting up WebGL context...");
+                setupWebGlContext.execute(ui.getRenderCanvas(), _onGlContextCreate);
             }
         };
     });

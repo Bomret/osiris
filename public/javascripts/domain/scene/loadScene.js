@@ -4,48 +4,35 @@
  * Time: 16:21
  */
 
-define(["utils", "loadSceneFromServer", "prepareSceneForRendering"], function (utils, loadSceneFromServer, prepareSceneForRendering) {
+define(["utils", "async", "loadSceneFromServer", "prepareSceneForRendering"], function (utils, async, loadSceneFromServer, prepareSceneForRendering) {
     "use strict";
 
-    var _name,
-        _gl,
-        _successCallback,
-        _errorCallback,
-        _sceneCache = {};
-
-    function _onSceneLoad(loadedScene) {
-        utils.log("Loaded scene", loadedScene);
-        prepareSceneForRendering.execute(loadedScene, _gl, {
-            onSuccess:_onScenePrepare,
-            onError:_errorCallback
-        });
-    }
-
-    function _onScenePrepare(preparedScene) {
-        utils.log("Prepared scene", preparedScene);
-        _sceneCache[_name] = preparedScene;
-        _successCallback(preparedScene);
-    }
+    var _sceneCache = {};
 
     return {
-        execute:function (sceneInformation, glContext, callbacks) {
-            _name = sceneInformation.name;
-            _gl = glContext;
-            _successCallback = callbacks.onSuccess;
-            _errorCallback = callbacks.onError;
+        execute:function (sceneInformation, glContext, callback) {
+            var name = sceneInformation.name;
 
-            try {
-                if (_sceneCache[_name]) {
-                    utils.log("Scene in here", _sceneCache[_name]);
-                    _successCallback(_sceneCache[_name]);
-                }
-
-                loadSceneFromServer.execute(sceneInformation, {
-                    onSuccess:_onSceneLoad,
-                    onError:_errorCallback
+            if (_sceneCache[name]) {
+                utils.log("Scene '" + name + "' found in cache", _sceneCache[name]);
+                callback(null, _sceneCache[name]);
+            } else {
+                async.waterfall([
+                    function (asyncCallback) {
+                        utils.log("Exec loadSceneFromServer");
+                        loadSceneFromServer.execute(sceneInformation, glContext, callback);
+                    },
+                    function (loadedScene, glContext, asyncCallback) {
+                        utils.log("Exec prepareSceneForRendering");
+                        prepareSceneForRendering.execute(loadedScene, glContext, callback);
+                    }
+                ], function (error, results) {
+                    if (error) {
+                        callback(error);
+                    }
+                    utils.log("LoadScene results", results);
+                    callback(null, results[0]);
                 });
-            } catch (error) {
-                _errorCallback(error);
             }
         }
     };
