@@ -16,7 +16,7 @@ define(function () {
             };
 
             _socket.onerror = function (error) {
-                callback(error, null);
+                callback(error);
             };
 
             if (_socket.readyState === 1) {

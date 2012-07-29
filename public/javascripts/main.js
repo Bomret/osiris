@@ -39,12 +39,11 @@ require.config({
         buildShaderProgram:"domain/shader/buildShaderProgram",
 
         // -- model
-        parseObjFile:"domain/model/parseObjFile",
         transformModelNode:"domain/model/transformModelNode",
 
         // -- scene
         loadScene:"domain/scene/loadScene",
-        loadSceneFromServer:"domain/scene/loadSceneFromServer",
+        downloadSceneFromServer:"domain/scene/downloadSceneFromServer",
         prepareSceneForRendering:"domain/scene/prepareSceneForRendering",
         traverseScene:"domain/scene/traverseScene",
         findNodes:"domain/scene/findNodes",

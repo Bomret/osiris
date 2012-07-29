@@ -17,7 +17,7 @@ define(["utils", "webgl"], function (utils, webgl) {
                 glContext = webgl.setupWebGL(canvas);
                 callback(null, glContext);
             } catch (error) {
-                callback(error, null);
+                callback(error);
             }
         }
     };

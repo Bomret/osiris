@@ -29,7 +29,7 @@ define(["utils", "traverseScene"], function (utils, traverseScene) {
                     if (node.id === nodeId) {
                         callback(null, node);
                     }
-                });
+                }, callback);
             } catch (error) {
                 callback(error);
             }

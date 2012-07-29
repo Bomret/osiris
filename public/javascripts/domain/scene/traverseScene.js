@@ -23,6 +23,7 @@ define(["utils", "jquery"], function (utils, $) {
          */
         execute:function (traversableScene, executor) {
             var root = traversableScene.rootNode;
+
             _visit(root, executor);
         }
     };

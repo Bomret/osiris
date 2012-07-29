@@ -11,8 +11,7 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
         _gl,
         _shaderProgram,
         _bindables,
-        _successCallback,
-        _errorCallback,
+        _callback,
         _scene,
         _vertexPositionAttributeLocation,
         _vertexNormalAttributeLocation,
@@ -114,14 +113,13 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
     }
 
     return {
-        execute:function (renderableScene, glContext, shaderProgram, callbacks) {
+        execute:function (renderableScene, glContext, shaderProgram, callback) {
             _gl = glContext;
             _shaderProgram = shaderProgram;
             _bindables = _shaderProgram.bindables;
             _canvas = ui.getRenderCanvas();
             _scene = renderableScene;
-            _successCallback = callbacks.onSuccess;
-            _errorCallback = callbacks.onError;
+            _callback = callback;
 
             try {
                 _vertexPositionAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexPosition);
@@ -141,10 +139,11 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
                 //_normalMatrixUniformLocation = _gl.getUniformLocation(_shaderProgram.program, _bindables.uniforms.normalMatrix);
                 //utils.log("nMatrix uniform location", _normalMatrixUniformLocation);
 
+                _callback(null, "done");
                 _drawScene();
             } catch (error) {
                 _stopDrawing();
-                _errorCallback(error);
+                _callback(error);
             }
         }
     };

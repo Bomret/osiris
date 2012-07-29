@@ -8,39 +8,38 @@ define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function (u
     "use strict";
 
     var _callback,
-        _name,
         _shaderCache = {};
 
-    function _onShaderProgramBuilt(error, shaderProgram) {
+    function _onCompleted(error, builtShaderProgram) {
         if (error) {
             _callback(error);
-            return;
         }
 
-        _shaderCache[_name] = shaderProgram;
-        _callback(null, shaderProgram);
+        _shaderCache[builtShaderProgram.name] = builtShaderProgram;
+
+        utils.log("Built shader program", builtShaderProgram);
+        _callback(null, builtShaderProgram);
     }
 
     return {
         execute:function (shaderInformation, glContext, callback) {
-            _name = shaderInformation.name;
+            var name = shaderInformation.name;
             _callback = callback;
 
-            if (_shaderCache[_name]) {
-                utils.log("Found shader '" + _name + "' in cache");
-                callback(null, _shaderCache[_name]);
+            if (_shaderCache[name]) {
+                utils.log("Found shader '" + name + "' in cache");
+                callback(null, _shaderCache[name]);
                 return;
             }
 
             async.waterfall([
                 function (callback) {
-                    loadShaderConfig.execute(shaderInformation, glContext, callback);
+                    loadShaderConfig.execute(shaderInformation, callback);
                 },
-
-                function (shaderConfig, glContext, callback) {
-                    buildShaderProgram.execute(shaderConfig, glContext, callback);
+                function (downloadedShaderConfig, callback) {
+                    buildShaderProgram.execute(downloadedShaderConfig, glContext, callback);
                 }
-            ], _onShaderProgramBuilt);
+            ], _onCompleted);
         }
     };
 });

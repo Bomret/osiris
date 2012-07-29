@@ -4,42 +4,42 @@
  * Time: 16:21
  */
 
-define(["utils", "async", "loadSceneFromServer", "prepareSceneForRendering"], function (utils, async, loadSceneFromServer, prepareSceneForRendering) {
+define(["utils", "async", "downloadSceneFromServer", "prepareSceneForRendering"], function (utils, async, downloadSceneFromServer, prepareSceneForRendering) {
     "use strict";
 
-    var _callback,
-        _name,
-        _sceneCache = {};
+    var _sceneCache = {},
+        _callback;
 
-    function _onScenePrepared(error, preparedScene) {
+    function _onComplete(error, preparedScene) {
         if (error) {
             _callback(error);
-            return;
         }
 
-        _sceneCache[_name] = preparedScene;
+        _sceneCache[preparedScene.name] = preparedScene;
+
+        utils.log("Prepared scene", preparedScene);
         _callback(null, preparedScene);
     }
 
     return {
         execute:function (sceneInformation, glContext, callback) {
-            _name = sceneInformation.name;
+            var name = sceneInformation.name;
             _callback = callback;
 
-            if (_sceneCache[_name]) {
-                utils.log("Scene '" + _name + "' found in cache", _sceneCache[_name]);
-                callback(null, _sceneCache[_name]);
+            if (_sceneCache[name]) {
+                utils.log("Scene '" + name + "' found in cache");
+                callback(null, _sceneCache[name]);
                 return;
             }
 
             async.waterfall([
                 function (callback) {
-                    loadSceneFromServer.execute(sceneInformation, glContext, callback);
+                    downloadSceneFromServer.execute(sceneInformation, callback);
                 },
-                function (loadedScene, glContext, callback) {
-                    prepareSceneForRendering.execute(loadedScene, glContext, callback);
+                function (downloadedScene, callback) {
+                    prepareSceneForRendering.execute(downloadedScene, glContext, callback);
                 }
-            ], _onScenePrepared);
+            ], _onComplete);
         }
     };
 });
