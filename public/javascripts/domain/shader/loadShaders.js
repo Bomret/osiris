@@ -4,54 +4,43 @@
  * Time: 21:09
  */
 
-define(["utils", "loadFile", "buildShaderProgram", "rendering"], function(utils, loadFile, buildShaderProgram, rendering) {
+define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function (utils, async, loadShaderConfig, buildShaderProgram) {
     "use strict";
 
-    var _shaderProgramCache = {};
+    var _callback,
+        _name,
+        _shaderCache = {};
 
-    /**
-     *
-     * @param pathToShaderConfig
-     * @return {ShaderConfig}
-     */
-    var loadConfig = function(pathToShaderConfig) {
-        var configFile;
+    function _onShaderProgramBuilt(error, shaderProgram) {
+        if (error) {
+            _callback(error);
+            return;
+        }
 
-        configFile = loadFile.execute(pathToShaderConfig);
-        return JSON.parse(configFile);
-    };
-
-    var loadShaderCode = function(pathToShaderFile) {
-        var shaderCode;
-
-        shaderCode = loadFile.execute(pathToShaderFile);
-        return shaderCode;
-    };
+        _shaderCache[_name] = shaderProgram;
+        _callback(null, shaderProgram);
+    }
 
     return {
-        execute: function(pathToShaderConfig, context) {
-            var config,
-                pathElements,
-                shaderProgram;
+        execute:function (shaderInformation, glContext, callback) {
+            _name = shaderInformation.name;
+            _callback = callback;
 
-            config = loadConfig(pathToShaderConfig);
-
-            utils.log("Shader config", config);
-
-            if(_shaderProgramCache[config.name]) {
-                return _shaderProgramCache[config.name];
+            if (_shaderCache[_name]) {
+                utils.log("Found shader '" + _name + "' in cache");
+                callback(null, _shaderCache[_name]);
+                return;
             }
 
-            pathElements = utils.breakPathIntoElements(pathToShaderConfig);
+            async.waterfall([
+                function (callback) {
+                    loadShaderConfig.execute(shaderInformation, glContext, callback);
+                },
 
-            // augment the config object with the loaded shader code
-            config.vertexShader.code = loadShaderCode(pathElements.dir + "/" + config.vertexShader.file);
-            config.fragmentShader.code = loadShaderCode(pathElements.dir + "/" + config.fragmentShader.file);
-
-            shaderProgram = buildShaderProgram.execute(config, context);
-            _shaderProgramCache[config.name] = shaderProgram;
-
-            return shaderProgram;
+                function (shaderConfig, glContext, callback) {
+                    buildShaderProgram.execute(shaderConfig, glContext, callback);
+                }
+            ], _onShaderProgramBuilt);
         }
     };
 });

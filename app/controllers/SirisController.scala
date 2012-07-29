@@ -3,7 +3,11 @@ package controllers
 import play.api.mvc.{WebSocket, Controller}
 import play.api.libs.iteratee.{Iteratee, Enumerator}
 import osiris.contracts.MessageFromClient
-import osiris.OsirisMissionControl
+import osiris.domain.OsirisMissionControl
+import actors.Actor
+import collection.mutable
+import java.util
+import play.api.libs.json.JsValue
 
 /**
  * User: Stefan Reichel
@@ -12,16 +16,21 @@ import osiris.OsirisMissionControl
  */
 
 object SirisController extends Controller {
-  val out = Enumerator.imperative[String]()
-  val actor = new OsirisMissionControl((msg: String) => {
-    out.push(msg)
-  })
+  val users = new mutable.HashMap[String, Actor]
+  val out = Enumerator.imperative[JsValue]()
+  val osirisMissionControl = new OsirisMissionControl((msg) => out.push(msg))
 
-  actor.start()
+  osirisMissionControl.start()
 
-  def socket = WebSocket.using[String] {
+  def socket = WebSocket.using[JsValue] {
     request =>
-      val in = Iteratee.foreach[String](content => actor ! MessageFromClient(content))
+    //      val id = request.session.get("connected").getOrElse(util.UUID.randomUUID().toString)
+    //      if (!users.contains(id)) {
+    //        val osirisMissionControl = new OsirisMissionControl((msg) => out.push(msg))
+    //        users.put(id, osirisMissionControl)
+    //        osirisMissionControl.start()
+    //      }
+      val in = Iteratee.foreach[JsValue](content => osirisMissionControl ! MessageFromClient(content))
 
       (in, out)
   }

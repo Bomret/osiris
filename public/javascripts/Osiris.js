@@ -3,55 +3,67 @@
  * Date: 13.06.12
  */
 
-define(["utils", "webgl", "glmatrix", "loadObjModel", "loadShaders", "renderScene", "rendering", "scene"],
-    function (utils, webgl, glmatrix, loadObjModel, loadShaders, renderScene, rendering, scene) {
+define(["utils", "webgl", "async", "mainViewModel", "setupWebGlContext", "loadShaders", "loadScene", "renderScene"],
+    function (utils, webgl, async, ui, setupWebGlContext, loadShaders, loadScene, renderScene) {
         "use strict";
 
-        var _gl,
-            _canvas,
-            _shaderProgram,
-            _cubeScene;
+        var _gl;
 
-        var setupWebGlContext = function (spec) {
-            _canvas = document.getElementById(spec.canvasId);
-            _canvas.width = spec.width || Math.floor(window.innerWidth * 0.9);
-            _canvas.height = spec.height || Math.floor(window.innerHeight * 0.9);
-            _gl = webgl.setupWebGL(_canvas);
-        };
+        function _onGlContextCreate(error, glContext) {
+            if (error) {
+                _handleError(error);
+                return;
+            }
+
+            ui.updateStatus("info", "Created WebGL context.");
+            utils.log("WebGL context", glContext);
+
+            _gl = glContext;
+            _loadSelectedShaderProgramAndScene(glContext);
+        }
+
+        function _loadSelectedShaderProgramAndScene(glContext) {
+            ui.updateStatus("info", "Loading selected shader program and scene...");
+
+            async.parallel({
+                shaderProgram:function (callback) {
+                    loadShaders.execute(ui.getCurrentShader(), glContext, callback);
+                },
+                loadedScene:function (callback) {
+                    loadScene.execute(ui.getCurrentScene(), glContext, callback);
+                }
+            }, _onSelectedShaderProgramAndSceneLoaded);
+        }
+
+        function _onSelectedShaderProgramAndSceneLoaded(error, results) {
+            if (error) {
+                _handleError(error);
+                return;
+            }
+
+            ui.updateStatus("info", "Loaded selected shader program and scene.");
+            utils.log("Loaded scene and shaders", results);
+
+            renderScene.execute(results.loadedScene, _gl, results.shaderProgram, _handleError);
+        }
+
+        function _handleError(error) {
+            ui.updateStatus("error", "An error occured: '" + error.message + "' See console log for details.");
+            utils.log("ERROR", error.stack);
+        }
 
         return {
-            init:function (specification) {
-                setupWebGlContext(specification);
-                utils.log("WebGl context", _gl);
+            execute:function () {
+                ui.init(function () {
+                    ui.updateStatus("info", "Reloading...");
+                    utils.log("Reset!");
 
-                _shaderProgram = loadShaders.execute("assets/shaders/flat/flat.config", _gl);
-                utils.log("ShaderProgram", _shaderProgram);
+                    this.execute();
+                }.bind(this));
 
-                var cameraNode = scene.makeCameraNode("cam", {
-                    optics:{
-                        type:"perspective",
-                        focalDistance:60,
-                        aspectRatio:_canvas.width / _canvas.height,
-                        near:0.1,
-                        far:100
-                    }
-                });
-                var rendererNode = scene.makeRendererNode("renderer", {
-                    glContext:_gl,
-                    shaderProgram:_shaderProgram
-                });
-
-                //var cube = loadObjModel.execute("models/cube/cube.obj", context);
-                var cube = rendering.makeCube(0.5, _gl);
-                var cubeNode = scene.makeModelNode("cube", cube, glmatrix.mat4.identity());
-
-                rendererNode.addChild(cameraNode);
-                cameraNode.addChild(cubeNode);
-
-                _cubeScene = scene.makeSceneDescription("Simple cube", rendererNode);
-                utils.log("Scene", _cubeScene);
-
-                renderScene.execute(_cubeScene);
+                ui.updateStatus("info", "Setting up WebGL context...");
+                setupWebGlContext.execute(ui.getRenderCanvas(), _onGlContextCreate);
             }
         };
-    });
+    }
+);

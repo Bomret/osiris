@@ -6,52 +6,61 @@
 
 require.config({
     // legacy non AMD scripts that add themselves to the global object
-    shim: {
-        "amplify": {
-            exports: "amplify"
+    shim:{
+        "async":{
+            exports:"async"
         }
     },
 
-    paths: {
+    paths:{
+        // app
+        osiris:"osiris",
+
         // libraries
-        glmatrix: "lib/glmatrix",
-        amplify: "lib/amplify.core",
-        webgl: "lib/webgl-utils",
-        utils: "lib/utils",
+        jquery:"lib/jquery",
+        async:"lib/async",
+        glmatrix:"lib/glmatrix",
+        webgl:"lib/webgl-utils",
+        utils:"lib/utils",
 
         // infrastructure
-        loadFile: "infrastructure/loadFileFromLocalServer",
+        sendMessage:"infrastructure/sendMessageToServer",
+
+        // view
+        mainViewModel:"view/mainViewModel",
 
         // domain
-        loadShaders: "domain/shader/loadShaders",
-        buildShaderProgram: "domain/shader/buildShaderProgram",
-        loadObjModel: "domain/model/loadObjModel",
-        parseObjFile: "domain/model/parseObjFile",
-        parseMtlFile: "domain/model/parseMtlFile",
-        transformObjModel: "domain/model/transformObjModel",
-        loadScene: "domain/scene/loadScene",
-        renderScene: "domain/scene/renderScene",
+        // -- rendering
+        setupWebGlContext:"domain/rendering/setupWebGlContext",
+
+        // -- shader
+        loadShaders:"domain/shader/loadShaders",
+        loadShaderConfig:"domain/shader/loadShaderConfig",
+        buildShaderProgram:"domain/shader/buildShaderProgram",
+
+        // -- model
+        parseObjFile:"domain/model/parseObjFile",
+        transformModelNode:"domain/model/transformModelNode",
+
+        // -- scene
+        loadScene:"domain/scene/loadScene",
+        loadSceneFromServer:"domain/scene/loadSceneFromServer",
+        prepareSceneForRendering:"domain/scene/prepareSceneForRendering",
+        traverseScene:"domain/scene/traverseScene",
+        findNodes:"domain/scene/findNodes",
+        renderScene:"domain/scene/renderScene",
 
         // contracts
-        obj: "contracts/obj",
-        shader: "contracts/shader",
-        rendering: "contracts/rendering",
-        scene: "contracts/scene"
+        messaging:"contracts/messaging",
+        obj:"contracts/obj",
+        shader:"contracts/shader",
+        rendering:"contracts/rendering",
+        scene:"contracts/scene"
     }
 });
 
-require(['osiris'], function(Osiris) {
+require(["osiris"], function (Osiris) {
     "use strict";
 
-    Osiris.init({
-        canvasId: "renderCanvas",
-        canvasWidth: 600,
-        canvasHeight: 600,
-        clearColor: {
-            r: 0.3,
-            g: 0.3,
-            b: 0.6,
-            a: 1.0
-        }
-    });
+    Osiris.execute();
 });

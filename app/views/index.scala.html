@@ -1,6 +1,37 @@
-@(message: String)
+@(sceneInformation: Array[SceneInformation],shaderInformation: Array[ShaderConfiguration])
 
 @main("Osiris") {
-    <p>The canvas is below<p>
-    <canvas id="renderCanvas"></canvas>
+
+<h1>Osiris Renderer</h1>
+<div id="statusOutput"></div>
+<canvas id="renderCanvas">
+    Your browser does not support HTML5
+</canvas>
+<div id="settings">
+    <div class="columnleft">
+        <fieldset id="scenes">
+            <legend>
+                Scenes settings
+            </legend>
+            <p>
+                Scene
+            </p>
+            <select id="availableScenes">
+                @for(info <- sceneInformation) {
+                <option value="@info.file">@info.name</option>
+                }
+            </select>
+
+            <p>
+                Shader
+            </p>
+            <select id="availableShaders">
+                @for(info <- shaderInformation) {
+                <option value="@info.config">@info.name</option>
+                }
+            </select>
+            <input id="startRender" type="button" value="Start"/>
+        </fieldset>
+    </div>
+</div>
 }
