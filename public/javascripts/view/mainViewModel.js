@@ -68,7 +68,6 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
         }
 
         return {
-
             init:function (resetCallback) {
                 _resetCallback = resetCallback;
                 _setupRenderCanvas();
@@ -93,12 +92,12 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
             updateStatus:function (type, message) {
                 if (type === "info") {
                     _statusOutput.html("<p><strong>Info:</strong> " + message + "</p>")
-                        .css("background-color", "#EEFFFF")
-                        .css("color", "#2299FF");
+                        .css("background-color", "#DDDDFF")
+                        .css("color", "#2222FF");
                 } else if (type === "error") {
                     _statusOutput.html("<p><strong>Error:</strong> " + message + "</p>")
-                        .css("background-color", "#FFFF33")
-                        .css("color", "#FFFF00");
+                        .css("background-color", "#FFDDDD")
+                        .css("color", "#FF2222");
                 }
             }
         };

@@ -7,33 +7,39 @@
 define(["utils", "async", "loadSceneFromServer", "prepareSceneForRendering"], function (utils, async, loadSceneFromServer, prepareSceneForRendering) {
     "use strict";
 
-    var _sceneCache = {};
+    var _callback,
+        _name,
+        _sceneCache = {};
+
+    function _onScenePrepared(error, preparedScene) {
+        if (error) {
+            _callback(error);
+            return;
+        }
+
+        _sceneCache[_name] = preparedScene;
+        _callback(null, preparedScene);
+    }
 
     return {
         execute:function (sceneInformation, glContext, callback) {
-            var name = sceneInformation.name;
+            _name = sceneInformation.name;
+            _callback = callback;
 
-            if (_sceneCache[name]) {
-                utils.log("Scene '" + name + "' found in cache", _sceneCache[name]);
-                callback(null, _sceneCache[name]);
-            } else {
-                async.waterfall([
-                    function (asyncCallback) {
-                        utils.log("Exec loadSceneFromServer");
-                        loadSceneFromServer.execute(sceneInformation, glContext, callback);
-                    },
-                    function (loadedScene, glContext, asyncCallback) {
-                        utils.log("Exec prepareSceneForRendering");
-                        prepareSceneForRendering.execute(loadedScene, glContext, callback);
-                    }
-                ], function (error, results) {
-                    if (error) {
-                        callback(error);
-                    }
-                    utils.log("LoadScene results", results);
-                    callback(null, results[0]);
-                });
+            if (_sceneCache[_name]) {
+                utils.log("Scene '" + _name + "' found in cache", _sceneCache[_name]);
+                callback(null, _sceneCache[_name]);
+                return;
             }
+
+            async.waterfall([
+                function (callback) {
+                    loadSceneFromServer.execute(sceneInformation, glContext, callback);
+                },
+                function (loadedScene, glContext, callback) {
+                    prepareSceneForRendering.execute(loadedScene, glContext, callback);
+                }
+            ], _onScenePrepared);
         }
     };
 });
