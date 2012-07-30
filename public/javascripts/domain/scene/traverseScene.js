@@ -4,27 +4,27 @@
  * Time: 15:11
  */
 
-define(["utils", "jquery"], function (utils, $) {
-    "use strict";
+define(["utils", "jquery"], function(utils, $) {
+  "use strict";
 
-    function _visit(node, executor) {
-        executor(node);
+  function _visit(node, executor) {
+    executor(node);
 
-        $.each(node.children, function (index, child) {
-            _visit(child, executor);
-        });
+    $.each(node.children, function(index, child) {
+      _visit(child, executor);
+    });
+  }
+
+  return {
+    /**
+     *
+     * @param {Object} traversableScene
+     * @param {Function} executor
+     */
+    execute: function(traversableScene, executor) {
+      var root = traversableScene.rootNode;
+
+      _visit(root, executor);
     }
-
-    return {
-        /**
-         *
-         * @param {Object} traversableScene
-         * @param {Function} executor
-         */
-        execute:function (traversableScene, executor) {
-            var root = traversableScene.rootNode;
-
-            _visit(root, executor);
-        }
-    };
+  };
 });

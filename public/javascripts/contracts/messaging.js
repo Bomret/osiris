@@ -4,25 +4,25 @@
  * Time: 19:01
  */
 
-define(function () {
-    "use strict";
+define(function() {
+  "use strict";
 
-    function OsirisMessage(request, data) {
-        this.request = request;
+  function OsirisMessage(request, data) {
+    this.request = request;
+  }
+
+  return {
+    SetupRequest: function(data) {
+      OsirisMessage.call(this, "setup");
+      this.data = data;
+    },
+
+    ShutDownRequest: function() {
+      OsirisMessage.call(this, "shutdown");
+    },
+
+    RenderStartRequest: function() {
+      OsirisMessage.call(this, "start");
     }
-
-    return {
-        SetupRequest:function (data) {
-            OsirisMessage.call(this, "setup");
-            this.data = data;
-        },
-
-        ShutDownRequest:function () {
-            OsirisMessage.call(this, "shutdown");
-        },
-
-        RenderStartRequest:function () {
-            OsirisMessage.call(this, "start");
-        }
-    };
+  };
 });
