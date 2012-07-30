@@ -48,7 +48,7 @@ define(["glmatrix"], function (glmatrix) {
                 mesh.numIndices = mesh.indices.length;
                 mesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(mesh.indices);
 
-                callback(null, mesh);
+                callback(null, node);
             } catch (error) {
                 callback(error);
             }

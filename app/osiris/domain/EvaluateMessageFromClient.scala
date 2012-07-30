@@ -5,7 +5,7 @@ import osiris.contracts._
 import osiris.contracts.ShutdownRequest
 import osiris.contracts.SetupRequest
 import osiris.contracts.MessageFromClient
-import play.api.libs.json.JsObject
+import play.api.libs.json.{Json, JsObject}
 
 /**
  * User: Stefan Reichel
@@ -18,8 +18,9 @@ class EvaluateMessageFromClient extends Actor {
   def act() {
     while (true) {
       receive {
-        case MessageFromClient(json) => {
+        case MessageFromClient(msg) => {
           try {
+            val json = Json.toJson(msg)
             (json \ "request").as[String]
             match {
               case "setup" => {

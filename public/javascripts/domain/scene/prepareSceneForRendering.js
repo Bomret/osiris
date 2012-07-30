@@ -7,51 +7,39 @@
 define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "messaging"], function (utils, async, findNodes, transformModelNode, sendMessage, msg) {
     "use strict";
 
-    var _gl,
-        _preparedScene,
+    var _preparedScene,
         _callback;
 
-    function _onModelNodesSearchResult(error, foundNodes) {
+    function _onComplete(error, results) {
         if (error) {
-            _handleError(error);
+            _callback(error);
+        } else {
+            utils.log("PrepareSceneForRendering", results);
+            _callback(null, _preparedScene);
         }
-
-        _notifyServerAndTransformNodes(foundNodes);
-    }
-
-    function _notifyServerAndTransformNodes(foundNodes) {
-        async.parallel([
-            function (callback) {
-                sendMessage.execute(new msg.SetupRequest(foundNodes), callback);
-            },
-
-            function (callback) {
-                async.forEach(foundNodes, function (node) {
-                    transformModelNode.execute(node, _gl, callback);
-                });
-            }
-        ], _onNodesTransformed);
-    }
-
-    function _onNodesTransformed(error) {
-        if (error) {
-            _handleError(error);
-        }
-
-        _callback(null, _preparedScene);
-    }
-
-    function _handleError(error) {
-        _callback(error);
     }
 
     return {
         execute:function (loadedScene, glContext, callback) {
-            _gl = glContext;
             _preparedScene = loadedScene;
             _callback = callback;
 
-            findNodes.byType(loadedScene, "model", _onModelNodesSearchResult);
+            async.auto({
+                foundModelNodes:function (callback) {
+                    utils.log("Exec findNodes");
+                    findNodes.byType(loadedScene, "model", callback);
+                },
+                serverResponse:["foundModelNodes", function (callback, results) {
+                    utils.log("Exec sendMessage");
+                    sendMessage.execute(new msg.SetupRequest(results.foundModelNodes), callback);
+                }],
+                transformedNodes:["foundModelNodes", "serverResponse", function (callback, results) {
+                    async.forEach(results.foundModelNodes, function (node) {
+                        utils.log("Exec transformModelNode", node);
+                        transformModelNode.execute(node, glContext, callback);
+                    }, callback);
+                }]
+            }, _onComplete);
         }
     };
 });

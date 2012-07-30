@@ -39,17 +39,15 @@ class SetupSirisComponents extends SVarActorHW with EntityCreationHandling with 
             val restitution = (physics \ "restitution").as[Float]
             val mass = (physics \ "mass").as[Float]
 
-            val trans: ConstMat4 = ConstMat4(
-              transformation(0), transformation(1), transformation(2), transformation(3),
-              transformation(4), transformation(5), transformation(6), transformation(7),
-              transformation(8), transformation(9), transformation(10), transformation(11),
-              transformation(12), transformation(13), transformation(14), transformation(15)
-            )
-
             realize(
               EntityDescription(
                 PhysBox(
-                  transform = Left(trans),
+                  transform = Left(ConstMat4(
+                    transformation(0), transformation(1), transformation(2), transformation(3),
+                    transformation(4), transformation(5), transformation(6), transformation(7),
+                    transformation(8), transformation(9), transformation(10), transformation(11),
+                    transformation(12), transformation(13), transformation(14), transformation(15)
+                  )),
                   halfExtends = ConstVec3f(halfExtends),
                   restitution = restitution,
                   mass = mass

@@ -383,3 +383,358 @@ completed box
 completed box
 completed box
 completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [type mismatch;
+ found   : java.lang.String
+ required: (?, ?)]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\osiris\domain\OsirisMissionControl.scala - PlayException: Compilation error [No Json deserializer found for type scala.collection.immutable.Map[java.lang.String,java.lang.Object]. Try to implement an implicit Writes or Format for this type.]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+
+
+! Internal server error, for request [GET /] ->
+
+in C:\Users\Stefan Reichel\git\osiris-play\app\controllers\SirisController.scala - PlayException: Compilation error [type mismatch;
+ found   : play.api.libs.json.JsValue
+ required: String]
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12$$anonfun$apply$13.apply(PlayReloader.scala:229)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:229)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4$$anonfun$apply$12.apply(PlayReloader.scala:226)
+	at scala.Option.map(Option.scala:133)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:226)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3$$anonfun$4.apply(PlayReloader.scala:224)
+	at scala.Either$LeftProjection.map(Either.scala:183)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:224)
+	at sbt.PlayReloader$$anon$2$$anonfun$reload$3.apply(PlayReloader.scala:219)
+	at scala.Option.getOrElse(Option.scala:108)
+	at sbt.PlayReloader$$anon$2.reload(PlayReloader.scala:219)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at play.core.ReloadableApplication$$anonfun$get$1.apply(ApplicationProvider.scala:110)
+	at akka.dispatch.Future$$anon$3.liftedTree1$1(Future.scala:195)
+	at akka.dispatch.Future$$anon$3.run(Future.scala:194)
+	at akka.dispatch.TaskInvocation.run(AbstractDispatcher.scala:94)
+	at akka.jsr166y.ForkJoinTask$AdaptedRunnableAction.exec(ForkJoinTask.java:1381)
+	at akka.jsr166y.ForkJoinTask.doExec(ForkJoinTask.java:259)
+	at akka.jsr166y.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:975)
+	at akka.jsr166y.ForkJoinPool.runWorker(ForkJoinPool.java:1479)
+	at akka.jsr166y.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:104)
+Shutdown application default Akka system.
+Application started (Dev)
+Starting application default Akka system.
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+completed box
+Slf4jEventHandler started
+Listening for HTTP on port 9000...
+Application started (Dev)
+Starting application default Akka system.
+completed box
+completed box
+completed box
+completed box

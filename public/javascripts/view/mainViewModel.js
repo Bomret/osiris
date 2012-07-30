@@ -24,7 +24,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
 
                 _availableShaders.push(new shader.ShaderConfigurationInformation(name, config));
             });
-            _currentShader = _availableShaders[0];
+            _currentShader = _availableShaders[$("#availableShaders option:selected").index()];
 
             utils.log("Available shaders", _availableShaders);
             utils.log("Current shader", _currentShader);
@@ -42,7 +42,7 @@ define(["utils", "jquery", "scene", "shader"], function (utils, $, scene, shader
                 _availableScenes.push(new scene.SceneInformation(element.text, element.value));
             });
 
-            _currentScene = _availableScenes[0];
+            _currentScene = _availableScenes[$("#availableScenes option:selected").index()];
 
             utils.log("Available scenes", _availableScenes);
             utils.log("Current scene", _currentScene);

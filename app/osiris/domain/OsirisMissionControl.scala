@@ -38,8 +38,13 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
         case OsirisError(error) => {
           val errorJson = Json.toJson(
             Map(
-              "status" -> "error",
-              "data" -> error.getMessage
+              "status" -> Json.toJson("error"),
+              "data" -> Json.toJson(
+                Map(
+                  "message" -> Json.toJson(error.getMessage),
+                  "stack" -> Json.toJson(error.getStackTraceString)
+                )
+              )
             )
           )
           out(errorJson)
