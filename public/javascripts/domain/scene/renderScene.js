@@ -139,11 +139,10 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
                 //_normalMatrixUniformLocation = _gl.getUniformLocation(_shaderProgram.program, _bindables.uniforms.normalMatrix);
                 //utils.log("nMatrix uniform location", _normalMatrixUniformLocation);
 
-                _callback(null, "done");
                 _drawScene();
             } catch (error) {
+                callback(error);
                 _stopDrawing();
-                _callback(error);
             }
         }
     };

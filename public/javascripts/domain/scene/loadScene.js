@@ -13,12 +13,12 @@ define(["utils", "async", "downloadSceneFromServer", "prepareSceneForRendering"]
     function _onComplete(error, preparedScene) {
         if (error) {
             _callback(error);
+        } else {
+            _sceneCache[preparedScene.name] = preparedScene;
+
+            utils.log("Prepared scene", preparedScene);
+            _callback(null, preparedScene);
         }
-
-        _sceneCache[preparedScene.name] = preparedScene;
-
-        utils.log("Prepared scene", preparedScene);
-        _callback(null, preparedScene);
     }
 
     return {

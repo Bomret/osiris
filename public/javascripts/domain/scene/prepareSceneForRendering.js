@@ -13,10 +13,10 @@ define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "mes
     function _onComplete(error, results) {
         if (error) {
             _callback(error);
+        } else {
+            utils.log("PrepareSceneForRendering", results);
+            _callback(null, _preparedScene);
         }
-
-        utils.log("PrepareSceneForRendering", results);
-        _callback(null, _preparedScene);
     }
 
     return {
@@ -33,7 +33,7 @@ define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "mes
                     utils.log("Exec sendMessage");
                     sendMessage.execute(new msg.SetupRequest(results.foundModelNodes), callback);
                 }],
-                transformedNodes:["foundModelNodes", function (callback, results) {
+                transformedNodes:["foundModelNodes", "serverResponse", function (callback, results) {
                     async.forEach(results.foundModelNodes, function (node) {
                         utils.log("Exec transformModelNode", node);
                         transformModelNode.execute(node, glContext, callback);

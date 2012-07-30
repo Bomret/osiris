@@ -10,15 +10,15 @@ define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function (u
     var _callback,
         _shaderCache = {};
 
-    function _onCompleted(error, builtShaderProgram) {
+    function _onComplete(error, builtShaderProgram) {
         if (error) {
             _callback(error);
+        } else {
+            _shaderCache[builtShaderProgram.name] = builtShaderProgram;
+
+            utils.log("Built shader program", builtShaderProgram);
+            _callback(null, builtShaderProgram);
         }
-
-        _shaderCache[builtShaderProgram.name] = builtShaderProgram;
-
-        utils.log("Built shader program", builtShaderProgram);
-        _callback(null, builtShaderProgram);
     }
 
     return {
@@ -34,12 +34,14 @@ define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function (u
 
             async.waterfall([
                 function (callback) {
+                    utils.log("Exec loadShaderConfig");
                     loadShaderConfig.execute(shaderInformation, callback);
                 },
                 function (downloadedShaderConfig, callback) {
+                    utils.log("Exec buildShaderProgram", downloadedShaderConfig);
                     buildShaderProgram.execute(downloadedShaderConfig, glContext, callback);
                 }
-            ], _onCompleted);
+            ], _onComplete);
         }
     };
 });
