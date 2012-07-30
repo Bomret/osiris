@@ -4,26 +4,26 @@
  * Time: 12:23
  */
 
-define(["utils", "jquery"], function (utils, $) {
-    "use strict";
+define(["utils", "jquery"], function(utils, $) {
+  "use strict";
 
-    var _pathToShaderController = "http://localhost:9000/shaders";
+  var _pathToShaderController = "http://localhost:9000/shaders";
 
-    return {
-        execute:function (shaderInformation, callback) {
-            $.ajax({
-                url:_pathToShaderController,
-                type:"POST",
-                contentType:"application/json",
-                dataType:"json",
-                data:JSON.stringify(shaderInformation),
-                success:function (shaderConfig) {
-                    callback(null, shaderConfig);
-                },
-                error:function (error) {
-                    callback(error, null);
-                }
-            });
+  return {
+    execute: function(shaderInformation, callback) {
+      $.ajax({
+        url: _pathToShaderController,
+        type: "POST",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify(shaderInformation),
+        success: function(shaderConfig) {
+          callback(null, shaderConfig);
+        },
+        error: function(error) {
+          callback(error, null);
         }
-    };
+      });
+    }
+  };
 });
