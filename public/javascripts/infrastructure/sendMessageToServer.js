@@ -21,7 +21,7 @@ define(["utils"], function (utils) {
                 var msg = JSON.parse(event.data);
                 if (msg.status === "error") {
                     callback({
-                        message:msg.data.message,
+                        message:"OSIRIS: " + msg.data.message,
                         stack:msg.data.stack
                     });
                 }
