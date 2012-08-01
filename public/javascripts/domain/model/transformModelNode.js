@@ -4,7 +4,7 @@
  * Time: 02:58
  */
 
-define(["glmatrix"], function(glmatrix) {
+define(["GlMatrix"], function(GlMatrix) {
   "use strict";
 
   var _gl;
@@ -33,7 +33,7 @@ define(["glmatrix"], function(glmatrix) {
       _gl = glContext;
 
       try {
-        node.transformation = glmatrix.mat4.create(node.transformation);
+        node.transformation = GlMatrix.mat4.create(node.transformation);
 
         mesh = node.mesh;
         mesh.numVertices = mesh.vertices.length;

@@ -4,7 +4,7 @@
  * Time: 12:23
  */
 
-define(["utils", "jquery"], function(utils, $) {
+define(["jquery"], function($) {
   "use strict";
 
   var _pathToShaderController = "http://localhost:9000/shaders";

@@ -4,7 +4,7 @@
  * Time: 03:09
  */
 
-define(["obj", "utils", "parseMtlFile"], function(obj, utils, parseMtlFile) {
+define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
   "use strict";
 
   var _model,
@@ -31,7 +31,7 @@ define(["obj", "utils", "parseMtlFile"], function(obj, utils, parseMtlFile) {
   }
 
   function processFace(elements) {
-    var face = obj.makeFace(),
+    var face = Obj.makeFace(),
       faceElements,
       value;
 
@@ -69,16 +69,16 @@ define(["obj", "utils", "parseMtlFile"], function(obj, utils, parseMtlFile) {
 
     if (elements.length === 1) {
       name = "default";
-      group = obj.makeGroup(name);
+      group = Obj.makeGroup(name);
       _currentGroups.push(group);
 
-      if (!utils.containsObject(_model.groups, group)) {
+      if (!Utils.containsObject(_model.groups, group)) {
         _model.groups.push(group);
       }
     } else {
       for (var i = 1; i < elements.length; i++) {
         name = elements[i];
-        group = obj.makeGroup(name);
+        group = Obj.makeGroup(name);
         _currentGroups.push(group);
 
         if (!_model.groups[name]) {
@@ -94,24 +94,24 @@ define(["obj", "utils", "parseMtlFile"], function(obj, utils, parseMtlFile) {
         line,
         elements;
 
-      _model = obj.makeModel();
+      _model = Obj.makeModel();
       lines = modelFile.split("\n");
 
       for (var i = 0; i < lines.length; i++) {
         line = lines[i];
         elements = line.split(/ +/);
 
-        if (utils.stringStartsWith(line, "vn")) {
+        if (Utils.stringStartsWith(line, "vn")) {
           processVertex(elements, "normals");
-        } else if (utils.stringStartsWith(line, "vt")) {
+        } else if (Utils.stringStartsWith(line, "vt")) {
           processVertex(elements, "texCoords");
-        } else if (utils.stringStartsWith(line, "v")) {
+        } else if (Utils.stringStartsWith(line, "v")) {
           processVertex(elements, "vertices");
-        } else if (utils.stringStartsWith(line, "f")) {
+        } else if (Utils.stringStartsWith(line, "f")) {
           processFace(elements);
-        } else if (utils.stringStartsWith(line, "g")) {
+        } else if (Utils.stringStartsWith(line, "g")) {
           processGroups(elements);
-        } else if (utils.stringStartsWith(line, "mtllib")) {
+        } else if (Utils.stringStartsWith(line, "mtllib")) {
 
         }
       }

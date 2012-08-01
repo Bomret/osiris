@@ -4,7 +4,7 @@
  * Time: 21:09
  */
 
-define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function(utils, async, loadShaderConfig, buildShaderProgram) {
+define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Utils, Async, LoadShaderConfig, BuildShaderProgram) {
   "use strict";
 
   var _callback,
@@ -16,7 +16,7 @@ define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function(ut
     } else {
       _shaderCache[builtShaderProgram.name] = builtShaderProgram;
 
-      utils.log("Built shader program", builtShaderProgram);
+      Utils.log("Built shader program", builtShaderProgram);
       _callback(null, builtShaderProgram);
     }
   }
@@ -27,19 +27,19 @@ define(["utils", "async", "loadShaderConfig", "buildShaderProgram"], function(ut
       _callback = callback;
 
       if (_shaderCache[name]) {
-        utils.log("Found shader '" + name + "' in cache");
+        Utils.log("Found shader '" + name + "' in cache");
         callback(null, _shaderCache[name]);
         return;
       }
 
-      async.waterfall([
+      Async.waterfall([
         function(callback) {
-          utils.log("Exec loadShaderConfig");
-          loadShaderConfig.execute(shaderInformation, callback);
+          Utils.log("Exec LoadShaderConfig");
+          LoadShaderConfig.execute(shaderInformation, callback);
         },
         function(downloadedShaderConfig, callback) {
-          utils.log("Exec buildShaderProgram", downloadedShaderConfig);
-          buildShaderProgram.execute(downloadedShaderConfig, glContext, callback);
+          Utils.log("Exec BuildShaderProgram", downloadedShaderConfig);
+          BuildShaderProgram.execute(downloadedShaderConfig, glContext, callback);
         }
       ], _onComplete);
     }

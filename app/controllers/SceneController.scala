@@ -25,12 +25,12 @@ object SceneController extends Controller {
         Ok(response)
       } catch {
         case fnfEx: FileNotFoundException => {
-          Logger.error("The specified scene was not found", fnfEx)
+          Logger.error("The specified Scene was not found", fnfEx)
           NotFound("The specified scen was not found")
         }
         case ex: Exception => {
-          Logger.error("Exception loading the specified scene", ex)
-          InternalServerError("There was a problem loading the specified scene")
+          Logger.error("Exception loading the specified Scene", ex)
+          InternalServerError("There was a problem loading the specified Scene")
         }
       }
   }

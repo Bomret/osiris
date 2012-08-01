@@ -4,7 +4,7 @@
  * Time: 16:21
  */
 
-define(["utils", "async", "downloadSceneFromServer", "prepareSceneForRendering"], function(utils, async, downloadSceneFromServer, prepareSceneForRendering) {
+define(["Utils", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"], function(Utils, Async, DownloadSceneFromServer, PrepareSceneForRendering) {
   "use strict";
 
   var _sceneCache = {},
@@ -16,7 +16,7 @@ define(["utils", "async", "downloadSceneFromServer", "prepareSceneForRendering"]
     } else {
       _sceneCache[preparedScene.name] = preparedScene;
 
-      utils.log("Prepared scene", preparedScene);
+      Utils.log("Prepared scene", preparedScene);
       _callback(null, preparedScene);
     }
   }
@@ -27,17 +27,17 @@ define(["utils", "async", "downloadSceneFromServer", "prepareSceneForRendering"]
       _callback = callback;
 
       if (_sceneCache[name]) {
-        utils.log("Scene '" + name + "' found in cache");
+        Utils.log("Scene '" + name + "' found in cache");
         callback(null, _sceneCache[name]);
         return;
       }
 
-      async.waterfall([
+      Async.waterfall([
         function(callback) {
-          downloadSceneFromServer.execute(sceneInformation, callback);
+          DownloadSceneFromServer.execute(sceneInformation, callback);
         },
         function(downloadedScene, callback) {
-          prepareSceneForRendering.execute(downloadedScene, glContext, callback);
+          PrepareSceneForRendering.execute(downloadedScene, glContext, callback);
         }
       ], _onComplete);
     }

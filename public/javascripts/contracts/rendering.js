@@ -79,5 +79,5 @@ define(function() {
         inds: indicesBuffer
       });
     }
-  }
+  };
 });

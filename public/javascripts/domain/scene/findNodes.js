@@ -4,14 +4,14 @@
  * Time: 14:36
  */
 
-define(["utils", "traverseScene"], function(utils, traverseScene) {
+define(["Utils", "TraverseScene"], function(Utils, TraverseScene) {
   "use strict";
 
   return {
     byType: function(traversableScene, nodeType, callback) {
       var foundNodes = [];
       try {
-        traverseScene.execute(traversableScene, function(node) {
+        TraverseScene.execute(traversableScene, function(node) {
           if (node.type === nodeType) {
             foundNodes.push(node);
           }
@@ -25,7 +25,7 @@ define(["utils", "traverseScene"], function(utils, traverseScene) {
 
     byId: function(traversableScene, nodeId, callback) {
       try {
-        traverseScene.execute(traversableScene, function(node) {
+        TraverseScene.execute(traversableScene, function(node) {
           if (node.id === nodeId) {
             callback(null, node);
           }

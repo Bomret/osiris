@@ -4,17 +4,17 @@
  * Time: 13:51
  */
 
-define(["utils", "webgl"], function(utils, webgl) {
+define(["Utils", "WebGl"], function(Utils, WebGl) {
   "use strict";
 
   return {
     execute: function(canvas, callback) {
       var glContext;
 
-      utils.log("Canvas", canvas);
+      Utils.log("Canvas", canvas);
 
       try {
-        glContext = webgl.setupWebGL(canvas);
+        glContext = WebGl.setupWebGL(canvas);
         callback(null, glContext);
       } catch (error) {
         callback(error);
