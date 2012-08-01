@@ -9,8 +9,10 @@ import siris.core.ontology.types.Transformation
 import siris.core.svaractor.SVarActorHW
 import simplex3d.math.floatm.renamed.{ConstMat4, Mat4x4}
 import simplex3d.math.floatm.ConstVec3f
-import osiris.contracts.{SetupComplete, TransformRequest, SetupRequest, OsirisError}
-import play.api.libs.json.{Json, JsObject}
+import osiris.contracts._
+import scala.Left
+import play.api.libs.json.JsObject
+import scala.Some
 
 /**
  * User: Stefan Reichel
@@ -18,10 +20,21 @@ import play.api.libs.json.{Json, JsObject}
  * Time: 15:09
  */
 
-class SetupSirisComponents extends SVarActorHW with EntityCreationHandling with IORegistryHandling {
-  createActor[JBulletComponent]()(physics => {
-    physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
-  })(error => sender ! OsirisError(error))
+class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegistryHandling {
+
+  override def startUp() {
+    createComponents()
+  }
+
+  protected def createComponents() {
+    createActor[JBulletComponent]()(physics => {
+      physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
+
+      createActor[EntityManipulator](physics)(manipulationActor => {
+        registerActor('manipulator, manipulationActor)
+      })(error => sender ! OsirisError(error))
+    })(error => sender ! OsirisError(error))
+  }
 
   override def shutdown() {
     super.shutdown()
@@ -32,6 +45,7 @@ class SetupSirisComponents extends SVarActorHW with EntityCreationHandling with 
       msg.nodes map {
         node => {
           try {
+            val id = (node \ "id").as[String]
             val transformation = (node \ "transformation").as[Array[Float]]
             val physics = (node \ "physics").as[JsObject]
             val shape = (physics \ "shape").as[String]
@@ -54,19 +68,27 @@ class SetupSirisComponents extends SVarActorHW with EntityCreationHandling with 
                 )
               ),
               ((e: Entity) => {
+                registerEntity(Symbol(id), e)
                 e.get(Transformation) match {
                   case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                    sender ! TransformRequest(Json.toJson(mat.toString()))
+                    sender ! TransformRequest(mat)
                   })
                 }
               })
             )
-
-            sender ! SetupComplete()
           } catch {
             case ex: Exception => sender ! OsirisError(ex)
           }
         }
       }
+
+      sender ! NodesSetupComplete()
+  }
+
+  addHandler[ManipulationRequest] {
+    request =>
+      handleActor('manipulator)(
+        actor => actor.get ! request
+      )
   }
 }

@@ -1,10 +1,8 @@
 package osiris.domain
 
 import play.api.libs.json.{JsValue, Json}
-import actors.Actor
-import akka.actor.SupervisorStrategy.Stop
+import actors.{Exit, Actor}
 import osiris.contracts._
-import osiris.contracts.ShutdownRequest
 import osiris.contracts.SetupRequest
 import osiris.contracts.MessageFromClient
 
@@ -15,50 +13,40 @@ import osiris.contracts.MessageFromClient
  */
 
 class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
-  val evaluateOsirisMessage = new EvaluateMessageFromClient
-  val setupSirisComponents = new SetupSirisComponents
-
-  evaluateOsirisMessage.start()
-  setupSirisComponents.start()
+  val sirisOverlord = new SirisOverlord
+  sirisOverlord start()
 
   def act() {
     while (true) {
       receive {
-        case msg: MessageFromClient => evaluateOsirisMessage ! msg
-        case msg: SetupRequest => setupSirisComponents ! msg
-        case TransformRequest(data) => {
-          val transformJson = Json.toJson(
-            Map(
-              "status" -> "transform",
-              "data" -> Json.stringify(data)
-            )
-          )
-          out(transformJson)
+        case msg: MessageFromClient => {
+          try {
+            val json = Json toJson msg.message
+            (json \ "request").as[String]
+            match {
+              case "setup" => {
+                sirisOverlord ! SetupRequest(json)
+              }
+
+              case "manipulate" => {
+                sirisOverlord ! ManipulationRequest(json)
+              }
+
+              case "shutdown" => {
+                sirisOverlord ! Exit
+                exit()
+              }
+            }
+          } catch {
+            case ex: Exception => out(OsirisError(ex) getJson)
+          }
         }
-        case OsirisError(error) => {
-          val errorJson = Json.toJson(
-            Map(
-              "status" -> Json.toJson("error"),
-              "data" -> Json.toJson(
-                Map(
-                  "message" -> Json.toJson(error.getMessage),
-                  "stack" -> Json.toJson(error.getStackTraceString)
-                )
-              )
-            )
-          )
-          out(errorJson)
-        }
-        case msg: SetupComplete => {
-          val responseJson = Json.toJson(
-            Map(
-              "status" -> "done",
-              "data" -> "NodeSetup"
-            )
-          )
-          out(responseJson)
-        }
-        case msg: ShutdownRequest => exit()
+
+        case msg: NodesSetupComplete => out(msg getJson)
+
+        case msg: TransformRequest => out(msg getJson)
+
+        case msg: OsirisError => out(msg getJson)
       }
     }
   }

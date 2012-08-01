@@ -1,12 +1,12 @@
 package controllers
 
 import play.api.mvc._
-import models.{ShaderConfiguration, SceneAndShaderInfos, SceneInformation}
 import play.api.libs.json.{JsObject, Json}
 import play.api.Logger
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
 import osiris.infrastructure.ReadTextFile
+import osiris.contracts.{SceneAndShaderInfos, ShaderConfiguration, SceneInformation}
 
 object Application extends Controller {
   private def _readSceneInformation: Array[SceneInformation] = {
