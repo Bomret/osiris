@@ -36,7 +36,7 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
         }.bind(this));
 
         $(document).keydown(function(event) {
-          SendMessage.execute(new Msg.ManipulationRequest("cube", "applyImpulse", [0, 1, 0]), function(error, response) {
+          SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 1, 0]), function(error, response) {
             if (error) {
               _handleError(error);
             }
@@ -68,6 +68,10 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
             loadedShaderProgram: ["glContext", function(callback, results) {
               Ui.updateStatus("info", "Loading selected shader program...");
               LoadShaders.execute(Ui.getCurrentShader(), results.glContext, callback);
+            }],
+            renderStartResponse:["loadedScene", "loadedShaderProgram", function(callback) {
+              Ui.updateStatus("info", "Notifying server to start rendering...");
+              SendMessage.execute(new Msg.RenderStartRequest(), callback);
             }]
           },
           _onSetupComplete);

@@ -28,9 +28,9 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
                 sirisOverlord ! SetupRequest(json)
               }
 
-              case "manipulate" => {
-                sirisOverlord ! ManipulationRequest(json)
-              }
+              case "manipulate" => sirisOverlord ! ManipulationRequest(json)
+
+              case "start" => out(RenderStartResponse().getJson)
 
               case "shutdown" => {
                 sirisOverlord ! Exit

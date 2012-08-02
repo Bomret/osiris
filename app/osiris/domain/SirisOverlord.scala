@@ -84,7 +84,9 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
   }
 
   addHandler[SetupRequest] {
-    msg =>
+    msg => {
+      val origin = sender
+
       msg.nodes foreach {
         node => {
           try {
@@ -98,45 +100,41 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
               ),
               (e: Entity) => {
                 registerEntity(Symbol(id), e)
-                sender ! OsirisDebug("Registered entity: " + id)
-
                 e.get(Transformation) match {
                   case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                    sender ! TransformRequest(mat)
+                    origin ! TransformRequest(id,mat)
                   })
-                  case None => sender ! OsirisError(new Exception("FUUU!"))
+                  case None => origin ! OsirisError(new Exception("FUUU!"))
                 }
               }
             )
 
-            sender ! OsirisDebug("After realize")
+            origin ! OsirisDebug("After realize")
           } catch {
-            case ex: Exception => sender ! OsirisError(ex)
+            case ex: Exception => origin ! OsirisError(ex)
           }
         }
       }
 
-      sender ! NodesSetupComplete()
+      origin ! NodesSetupComplete()
+    }
   }
 
   addHandler[ManipulationRequest] {
     request => {
+      val origin = sender
+
       try {
-        sender ! OsirisDebug("Got ManipulationRequest: id(" + request.nodeSymbol + "), type(" + request.manipulationType + ")")
+        origin ! OsirisDebug("Got ManipulationRequest: id(" + request.nodeSymbol + "), type(" + request.manipulationType + ")")
 
         handleEntity(request.nodeSymbol)(node => {
-          sender ! OsirisDebug("Inside handleEntity")
-
-          if (request.manipulationType == "applyImpulse") {
+          if (request.manipulationType == "ApplyImpulse") {
             val data = request.manipulationData
-            sender ! OsirisDebug("Is applyImpulse: " + data.toString())
             physicsActor ! ApplyImpulse(node.get, data)
-          } else {
-            sender ! OsirisDebug("Was: " + request.manipulationType)
           }
         })
       } catch {
-        case ex: Exception => sender ! OsirisError(ex)
+        case ex: Exception => origin ! OsirisError(ex)
       }
     }
   }

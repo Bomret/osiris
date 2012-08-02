@@ -4,9 +4,7 @@ import siris.components.physics.ApplyImpulse
 import siris.core.svaractor.SVarActorLW
 import osiris.contracts.ManipulationRequest
 import siris.core.worldinterface.WorldInterfaceHandling
-import osiris.contracts.types.ManipulationType
 import actors.Actor
-import simplex3d.math.floatm.ConstVec3f
 
 /**
  * User: Stefan Reichel
@@ -19,7 +17,7 @@ class EntityManipulator(physics: Actor) extends SVarActorLW with WorldInterfaceH
   addHandler[ManipulationRequest] {
     request => {
       handleEntity(request.nodeSymbol)(node => {
-        if (request.manipulationType == ManipulationType.ApplyImpulse) {
+        if (request.manipulationType == "ApplyImpulse") {
           val data = request.manipulationData
           physics ! ApplyImpulse(node.get, data)
         }

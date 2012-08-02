@@ -25,17 +25,26 @@ case class OsirisDebug(msg: String) extends OsirisResponseMessage {
 case class NodesSetupComplete() extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
-      "status" -> "done",
+      "status" -> "ok",
       "data" -> "NodeSetup"
     )
   )
 }
 
-case class TransformRequest(private val transform: ConstMat4) extends OsirisResponseMessage {
+case class TransformRequest(private val nodeId: String, private val transform: ConstMat4) extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
-      "status" -> "transform",
-      "data" -> transform.toString()
+      "status" -> Json.toJson("transform"),
+      "data" -> Json.toJson(
+        Map(
+          "nodeId" -> Json.toJson(nodeId),
+          "transformation" -> Json.toJson(
+            Seq(
+              transform.m00, transform.m01, transform.m02, transform.m03, transform.m10, transform.m11, transform.m12, transform.m13, transform.m20, transform.m21, transform.m22, transform.m23, transform.m30, transform.m31, transform.m32, transform.m33
+            )
+          )
+        )
+      )
     )
   )
 }
@@ -50,6 +59,15 @@ case class OsirisError(private val error: Exception) extends OsirisResponseMessa
           "stack" -> Json.toJson(error.getStackTraceString)
         )
       )
+    )
+  )
+}
+
+case class RenderStartResponse() extends OsirisResponseMessage {
+  def getJson = Json.toJson(
+    Map(
+      "status" -> "ok",
+      "data" -> "StartRender"
     )
   )
 }
