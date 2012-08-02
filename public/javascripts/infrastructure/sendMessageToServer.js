@@ -17,7 +17,7 @@ define(["Utils"], function(Utils) {
   return {
     execute: function(message, callback) {
       _socket.onmessage = function(event) {
-        Utils.log("Server message", event.data);
+        //Utils.log("Server message", event.data);
         var msg = JSON.parse(event.data);
         if (msg.status === "error") {
           callback({

@@ -3,11 +3,12 @@
  * Date: 13.06.12
  */
 
-define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "RenderScene", "Messaging"],
-  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, RenderScene, Msg) {
+define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "FindNodes", "RenderScene", "Messaging", "GlMatrix"],
+  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, FindNodes, RenderScene, Msg, GlMatrix) {
     "use strict";
 
-    var _scene;
+    var _scene,
+      _cube = {};
 
     function _onSetupComplete(error, results) {
       if (error) {
@@ -15,6 +16,21 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
       } else {
         Utils.log("RESULTS", results);
         _scene = results.loadedScene;
+
+        SendMessage.execute(new Msg.RenderStartRequest(), function(error, response) {
+          if (error) {
+            _handleError(error);
+          } else if (response.status === "transform") {
+            //Utils.log("TRANSFORM", response);
+            //_cube.transformation = response.data.transformation;
+            GlMatrix.mat4.rotateY(_cube.transformation, Utils.degreesToRadians(5), _cube.transformation);
+          }
+        });
+
+        FindNodes.byId(_scene, "cube", function(error, node) {
+          if (error) _handleError(error);
+          _cube = node;
+        });
 
         Ui.updateStatus("info", "Rendering...");
         RenderScene.execute(results.loadedScene, results.glContext, results.loadedShaderProgram, _handleError);
@@ -35,27 +51,6 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
           this.execute();
         }.bind(this));
 
-        $(document).keydown(function(event) {
-          SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 1, 0]), function(error, response) {
-            if (error) {
-              _handleError(error);
-            }
-            Utils.log("TRANSFORM", response);
-          });
-        });
-
-//        LoadModelFromColladaFile.execute(null, function(data) {
-//          var collada = $.parseXML(data);
-//
-//          var geometry = collada.getElementsByTagName("geometry")[0];
-//          Utils.log("GEOMETRY", geometry);
-//
-//          var tech_common = geometry.getElementsByTagName("technique_common")[0];
-//          var accessor = tech_common.getElementsByTagName("accessor")[0];
-//
-//          Utils.log("ACCESSOR", accessor);
-//        });
-
         Async.auto({
             glContext: function(callback) {
               Ui.updateStatus("info", "Setting up WebGL context...");
@@ -68,10 +63,6 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
             loadedShaderProgram: ["glContext", function(callback, results) {
               Ui.updateStatus("info", "Loading selected shader program...");
               LoadShaders.execute(Ui.getCurrentShader(), results.glContext, callback);
-            }],
-            renderStartResponse:["loadedScene", "loadedShaderProgram", function(callback) {
-              Ui.updateStatus("info", "Notifying server to start rendering...");
-              SendMessage.execute(new Msg.RenderStartRequest(), callback);
             }]
           },
           _onSetupComplete);
