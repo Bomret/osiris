@@ -2,7 +2,6 @@ package osiris.contracts
 
 import play.api.libs.json.JsObject
 import simplex3d.math.floatm.renamed.ConstMat4
-import osiris.contracts.types.ManipulationType._
 import simplex3d.math.floatm.ConstVec3f
 
 /**
@@ -22,5 +21,3 @@ case class SceneAndShaderInfos(scenes: Array[SceneInformation], shaders: Array[S
 case class Shader(shaderType: String, code: String) extends OsirisDataModel
 
 case class ShaderProgramConfiguration(name: String, vertexShader: Shader, fragmentShader: Shader, bindables: JsObject) extends OsirisDataModel
-
-case class ManipulationInfo(manipulationType: ManipulationType, data: ConstVec3f) extends OsirisDataModel

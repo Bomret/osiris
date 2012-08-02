@@ -1,7 +1,6 @@
 package osiris.contracts
 
 import play.api.libs.json.{JsValue, JsObject}
-import types.ManipulationType
 import simplex3d.math.floatm.ConstVec3f
 
 /**
@@ -15,11 +14,11 @@ sealed trait OsirisInternalMessage
 case class MessageFromClient(message: JsValue) extends OsirisInternalMessage
 
 case class ManipulationRequest(private val json: JsValue) extends OsirisInternalMessage {
-  def nodeSymbol = Symbol((json \ "nodeId").as[String])
+  def nodeSymbol = Symbol((json \ "data" \ "nodeId").as[String])
 
-  def manipulationType = ManipulationType.withName((json \ "data" \ "type").as[String])
+  def manipulationType = (json \ "data" \ "type").as[String]
 
-  val data = (json \ "data" \ "data").as[Seq[Float]]
+  val data = (json \ "data" \ "manipulationData").as[Array[Float]]
 
   def manipulationData = ConstVec3f(data(0), data(1), data(2))
 }

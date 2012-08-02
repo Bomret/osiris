@@ -28,6 +28,7 @@ define(function() {
     ManipulationRequest: function(nodeId, manipulationType, manipulationData) {
       OsirisMessage.call(this, "manipulate");
       this.data = {
+        nodeId: nodeId,
         type: manipulationType,
         manipulationData: manipulationData
       };

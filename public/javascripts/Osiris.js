@@ -3,8 +3,8 @@
  * Date: 13.06.12
  */
 
-define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "RenderScene"],
-  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, RenderScene) {
+define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "RenderScene", "Messaging"],
+  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, RenderScene, Msg) {
     "use strict";
 
     var _scene;
@@ -34,6 +34,15 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
 
           this.execute();
         }.bind(this));
+
+        $(document).keydown(function(event) {
+          SendMessage.execute(new Msg.ManipulationRequest("cube", "applyImpulse", [0, 1, 0]), function(error, response) {
+            if (error) {
+              _handleError(error);
+            }
+            Utils.log("TRANSFORM", response);
+          });
+        });
 
 //        LoadModelFromColladaFile.execute(null, function(data) {
 //          var collada = $.parseXML(data);

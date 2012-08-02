@@ -2,7 +2,7 @@ package osiris.domain
 
 import siris.components.io.IORegistryHandling
 import siris.components.physics.jbullet.JBulletComponent
-import siris.components.physics.{PhysPlane, PhysBox, PhysicsConfiguration}
+import siris.components.physics.{ApplyImpulse, PhysPlane, PhysBox, PhysicsConfiguration}
 import siris.core.entity.description.AspectBase
 import siris.core.entity.{Entity, EntityCreationHandling}
 import siris.core.ontology.EntityDescription
@@ -14,6 +14,7 @@ import osiris.contracts._
 import scala.Left
 import play.api.libs.json.{JsValue, JsObject}
 import scala.Some
+import actors.{OutputChannel, AbstractActor}
 
 /**
  * User: Stefan Reichel
@@ -22,6 +23,7 @@ import scala.Some
  */
 
 class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegistryHandling {
+  var physicsActor: AbstractActor = null
 
   override def startUp() {
     createComponents()
@@ -31,9 +33,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
     createActor[JBulletComponent]()(physics => {
       physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
 
-      createActor[EntityManipulator](physics)(manipulationActor => {
-        registerActor('manipulator, manipulationActor)
-      })(error => sender ! OsirisError(error))
+      physicsActor = physics
     })(error => sender ! OsirisError(error))
   }
 
@@ -79,28 +79,37 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       )
     }
 
+    sender ! OsirisDebug("Made PhysShape: " + physShape)
     physShape
   }
 
   addHandler[SetupRequest] {
     msg =>
-      msg.nodes map {
+      msg.nodes foreach {
         node => {
           try {
             val id = (node \ "id").as[String]
+
+            sender ! OsirisDebug("Will setup node id: " + id)
+
             realize(
               EntityDescription(
                 _makePhysicShape(node)
               ),
-              ((e: Entity) => {
+              (e: Entity) => {
                 registerEntity(Symbol(id), e)
+                sender ! OsirisDebug("Registered entity: " + id)
+
                 e.get(Transformation) match {
                   case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
                     sender ! TransformRequest(mat)
                   })
+                  case None => sender ! OsirisError(new Exception("FUUU!"))
                 }
-              })
+              }
             )
+
+            sender ! OsirisDebug("After realize")
           } catch {
             case ex: Exception => sender ! OsirisError(ex)
           }
@@ -111,9 +120,24 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
   }
 
   addHandler[ManipulationRequest] {
-    request =>
-      handleActor('manipulator)(
-        actor => actor.get ! request
-      )
+    request => {
+      try {
+        sender ! OsirisDebug("Got ManipulationRequest: id(" + request.nodeSymbol + "), type(" + request.manipulationType + ")")
+
+        handleEntity(request.nodeSymbol)(node => {
+          sender ! OsirisDebug("Inside handleEntity")
+
+          if (request.manipulationType == "applyImpulse") {
+            val data = request.manipulationData
+            sender ! OsirisDebug("Is applyImpulse: " + data.toString())
+            physicsActor ! ApplyImpulse(node.get, data)
+          } else {
+            sender ! OsirisDebug("Was: " + request.manipulationType)
+          }
+        })
+      } catch {
+        case ex: Exception => sender ! OsirisError(ex)
+      }
+    }
   }
 }

@@ -13,6 +13,15 @@ sealed trait OsirisResponseMessage {
   def getJson: JsValue
 }
 
+case class OsirisDebug(msg: String) extends OsirisResponseMessage {
+  def getJson = Json.toJson(
+    Map(
+      "status" -> "debug",
+      "data" -> msg
+    )
+  )
+}
+
 case class NodesSetupComplete() extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
@@ -25,8 +34,8 @@ case class NodesSetupComplete() extends OsirisResponseMessage {
 case class TransformRequest(private val transform: ConstMat4) extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
-      "status" -> Json.toJson("transform"),
-      "data" -> Json.toJson(transform.toString())
+      "status" -> "transform",
+      "data" -> transform.toString()
     )
   )
 }
