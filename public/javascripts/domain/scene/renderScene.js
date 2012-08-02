@@ -14,6 +14,7 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
     _callback,
     _scene,
     _vertexPositionAttributeLocation,
+    _vertexColorAttributeLocation,
     _vertexNormalAttributeLocation,
     _modelViewMatrix = GlMatrix.mat4.create(),
     _modelViewMatrixUniformLocation,
@@ -36,8 +37,11 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
 
   function _renderModel(modelNode) {
     GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
+
     _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
     _gl.vertexAttribPointer(_vertexPositionAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
+
+    _gl.vertexAttrib4fv(_vertexColorAttributeLocation, modelNode.material.diffuseColor);
 
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
     _updateRenderMatrices();
@@ -124,7 +128,10 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
       try {
         _vertexPositionAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexPosition);
         _gl.enableVertexAttribArray(_vertexPositionAttributeLocation);
-        Utils.log("VertexPosition uniform location", _vertexPositionAttributeLocation);
+        Utils.log("VertexPosition attribute location", _vertexPositionAttributeLocation);
+
+        _vertexColorAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexColor);
+        Utils.log("VertexColor attribute location", _vertexColorAttributeLocation);
 
         //_vertexNormalAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexNormal);
         //_gl.enableVertexAttribArray(_vertexNormalAttributeLocation);
