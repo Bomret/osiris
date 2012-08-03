@@ -1,14 +1,14 @@
 package controllers
 
 import play.api.mvc.{Request, Action, Controller}
-import play.api.libs.json.{JsValue, JsObject, Json}
+import play.api.libs.json.{JsValue, Json}
 import osiris.infrastructure.{OsirisConfiguration, ReadTextFile}
 import play.api.Logger
 import java.io.FileNotFoundException
-import models.ShaderType
-import models.ShaderType._
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
+import osiris.contracts.types.ShaderType
+import osiris.contracts.types.ShaderType._
 
 /**
  * User: Stefan Reichel

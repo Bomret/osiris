@@ -4,7 +4,7 @@
  * Time: 16:38
  */
 
-define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "messaging"], function(utils, async, findNodes, transformModelNode, sendMessage, msg) {
+define(["Utils", "jquery", "async", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function(Utils, $, Async, FindNodes, TransformModelNode, SendMessage, Messaging) {
   "use strict";
 
   var _preparedScene,
@@ -14,7 +14,7 @@ define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "mes
     if (error) {
       _callback(error);
     } else {
-      utils.log("PrepareSceneForRendering", results);
+      Utils.log("PrepareSceneForRendering", results);
       _callback(null, _preparedScene);
     }
   }
@@ -24,20 +24,26 @@ define(["utils", "async", "findNodes", "transformModelNode", "sendMessage", "mes
       _preparedScene = loadedScene;
       _callback = callback;
 
-      async.auto({
+      Async.auto({
         foundModelNodes: function(callback) {
-          utils.log("Exec findNodes");
-          findNodes.byType(loadedScene, "model", callback);
+          Utils.log("Exec FindNodes");
+          FindNodes.byType(loadedScene, "model", callback);
         },
         serverResponse: ["foundModelNodes", function(callback, results) {
-          utils.log("Exec sendMessage");
-          sendMessage.execute(new msg.SetupRequest(results.foundModelNodes), callback);
+          Utils.log("Exec SendMessage");
+          SendMessage.execute(new Messaging.SetupRequest(results.foundModelNodes), callback);
         }],
         transformedNodes: ["foundModelNodes", "serverResponse", function(callback, results) {
-          async.forEach(results.foundModelNodes, function(node) {
-            utils.log("Exec transformModelNode", node);
-            transformModelNode.execute(node, glContext, callback);
-          }, callback);
+          var nodes = [];
+          Async.forEachSeries(results.foundModelNodes, function(node, callback) {
+            Utils.log("Exec TransformModelNode", node);
+            TransformModelNode.execute(node, glContext, function(error, trans) {
+              nodes.push(trans);
+              callback(error);
+            });
+          }, function(error) {
+            callback(error, nodes);
+          });
         }]
       }, _onComplete);
     }

@@ -4,7 +4,7 @@
  * Time: 13:18
  */
 
-define(["utils", "jquery"], function(utils, $) {
+define(["jquery"], function($) {
   "use strict";
 
   var _pathToSceneController = "http://localhost:9000/scenes";

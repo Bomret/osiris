@@ -14,51 +14,53 @@ require.config({
 
   paths: {
     // app
-    osiris: "osiris",
+    Osiris: "Osiris",
 
     // libraries
     jquery: "lib/jquery",
     async: "lib/async",
-    glmatrix: "lib/glmatrix",
-    webgl: "lib/webgl-utils",
-    utils: "lib/utils",
+    GlMatrix: "lib/glmatrix",
+    WebGl: "lib/webgl-utils",
+    Utils: "lib/Utils",
 
     // infrastructure
-    sendMessage: "infrastructure/sendMessageToServer",
+    SendMessage: "infrastructure/SendMessageToServer",
 
     // view
-    mainViewModel: "view/mainViewModel",
+    MainViewModel: "view/MainViewModel",
 
     // domain
-    // -- rendering
-    setupWebGlContext: "domain/rendering/setupWebGlContext",
+    // -- Rendering
+    SetupWebGlContext: "domain/rendering/SetupWebGlContext",
 
     // -- shader
-    loadShaders: "domain/shader/loadShaders",
-    loadShaderConfig: "domain/shader/loadShaderConfig",
-    buildShaderProgram: "domain/shader/buildShaderProgram",
+    LoadShaders: "domain/shader/LoadShaders",
+    LoadShaderConfig: "domain/shader/LoadShaderConfig",
+    BuildShaderProgram: "domain/shader/BuildShaderProgram",
 
     // -- model
-    transformModelNode: "domain/model/transformModelNode",
+    TransformModelNode: "domain/model/TransformModelNode",
+    LoadModelFromColladaFile:"domain/model/LoadModelFromColladaFile",
 
-    // -- scene
-    loadScene: "domain/scene/loadScene",
-    downloadSceneFromServer: "domain/scene/downloadSceneFromServer",
-    prepareSceneForRendering: "domain/scene/prepareSceneForRendering",
-    traverseScene: "domain/scene/traverseScene",
-    findNodes: "domain/scene/findNodes",
-    renderScene: "domain/scene/renderScene",
+    // -- Scene
+    LoadScene: "domain/scene/LoadScene",
+    DownloadSceneFromServer: "domain/scene/DownloadSceneFromServer",
+    PrepareSceneForRendering: "domain/scene/PrepareSceneForRendering",
+    TraverseScene: "domain/scene/TraverseScene",
+    FindNodes: "domain/scene/FindNodes",
+    RenderScene: "domain/scene/RenderScene",
 
     // contracts
-    messaging: "contracts/messaging",
-    obj: "contracts/obj",
-    shader: "contracts/shader",
-    rendering: "contracts/rendering",
-    scene: "contracts/scene"
+    Messaging: "contracts/Messaging",
+    //obj: "contracts/obj",
+    Collada:"contracts/Collada",
+    Shader: "contracts/Shader",
+    Rendering: "contracts/Rendering",
+    Scene: "contracts/Scene"
   }
 });
 
-require(["osiris"], function(Osiris) {
+require(["Osiris"], function(Osiris) {
   "use strict";
 
   Osiris.execute();

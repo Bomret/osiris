@@ -23,8 +23,8 @@ define(function() {
 
     Material: function(name, options) {
       this.name = name;
-      this.ambientColor = options.ambientColor || [0.5, 0.5, 0.5]; // Grey
-      this.diffuseColor = options.diffuseColor || [1.0, 0.0, 1.0]; // Fuchsia
+      this.ambientColor = options.ambientColor || [0.5, 0.5, 0.5, 1.0]; // Grey
+      this.diffuseColor = options.diffuseColor || [1.0, 0.0, 1.0, 1.0]; // Fuchsia
       this.specularity = options.specularity || 1.0;
       this.diffuseMap = options.diffuseMap || undefined;
       this.normalMap = options.normalMap || undefined;
@@ -79,5 +79,5 @@ define(function() {
         inds: indicesBuffer
       });
     }
-  }
+  };
 });

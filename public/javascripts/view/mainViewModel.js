@@ -4,7 +4,7 @@
  * Time: 01:47
  */
 
-define(["utils", "jquery", "scene", "shader"], function(utils, $, scene, shader) {
+define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader) {
     "use strict";
 
     var _resetCallback,
@@ -22,16 +22,16 @@ define(["utils", "jquery", "scene", "shader"], function(utils, $, scene, shader)
         var name = element.text,
           config = JSON.parse(element.value);
 
-        _availableShaders.push(new shader.ShaderConfigurationInformation(name, config));
+        _availableShaders.push(new Shader.ShaderConfigurationInformation(name, config));
       });
       _currentShader = _availableShaders[$("#availableShaders option:selected").index()];
 
-      utils.log("Available shaders", _availableShaders);
-      utils.log("Current shader", _currentShader);
+      Utils.log("Available shaders", _availableShaders);
+      Utils.log("Current Shader", _currentShader);
 
       $("#availableShaders").change(function() {
         _currentShader = _availableShaders[this.selectedIndex];
-        utils.log("Current shader changed", _currentShader);
+        Utils.log("Current Shader changed", _currentShader);
       });
     }
 
@@ -39,17 +39,17 @@ define(["utils", "jquery", "scene", "shader"], function(utils, $, scene, shader)
       _availableScenes = [];
 
       $("#availableScenes option").each(function(index, element) {
-        _availableScenes.push(new scene.SceneInformation(element.text, element.value));
+        _availableScenes.push(new Scene.SceneInformation(element.text, element.value));
       });
 
       _currentScene = _availableScenes[$("#availableScenes option:selected").index()];
 
-      utils.log("Available scenes", _availableScenes);
-      utils.log("Current scene", _currentScene);
+      Utils.log("Available scenes", _availableScenes);
+      Utils.log("Current Scene", _currentScene);
 
       $("#availableScenes").change(function() {
         _currentShader = _availableScenes[this.selectedIndex];
-        utils.log("Current scene changed", _currentScene);
+        Utils.log("Current Scene changed", _currentScene);
       });
     }
 
@@ -60,6 +60,7 @@ define(["utils", "jquery", "scene", "shader"], function(utils, $, scene, shader)
     }
 
     function _setupRenderCanvas() {
+      Utils.log("Setting up canvas");
       _renderCanvas = $("#renderCanvas").get(0);
     }
 

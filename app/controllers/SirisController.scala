@@ -16,11 +16,11 @@ import play.api.libs.json.JsValue
  */
 
 object SirisController extends Controller {
-  val users = new mutable.HashMap[String, Actor]
+  val users = mutable.HashMap[String, Actor]()
   val out = Enumerator.imperative[JsValue]()
-  val osirisMissionControl = new OsirisMissionControl((msg) => out.push(msg))
+  val osirisMissionControl = new OsirisMissionControl(msg => out push msg)
 
-  osirisMissionControl.start()
+  osirisMissionControl start()
 
   def socket = WebSocket.using[JsValue] {
     request =>

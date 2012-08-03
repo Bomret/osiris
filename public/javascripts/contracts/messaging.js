@@ -7,7 +7,7 @@
 define(function() {
   "use strict";
 
-  function OsirisMessage(request, data) {
+  function OsirisMessage(request) {
     this.request = request;
   }
 
@@ -23,6 +23,15 @@ define(function() {
 
     RenderStartRequest: function() {
       OsirisMessage.call(this, "start");
+    },
+
+    ManipulationRequest: function(nodeId, manipulationType, manipulationData) {
+      OsirisMessage.call(this, "manipulate");
+      this.data = {
+        nodeId: nodeId,
+        type: manipulationType,
+        manipulationData: manipulationData
+      };
     }
   };
 });

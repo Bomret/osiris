@@ -1,9 +1,9 @@
-package models
+package osiris.contracts.types
 
 /**
  * User: Stefan Reichel
- * Date: 26.07.12
- * Time: 16:31
+ * Date: 01.08.12
+ * Time: 15:08
  */
 
 object ShaderType extends Enumeration {

@@ -4,25 +4,42 @@
  * Time: 21:08
  */
 
-define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "findNodes", "traverseScene"], function(utils, $, ui, webgl, glmatrix, rendering, findNodes, traverseScene) {
+define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "FindNodes", "TraverseScene"], function(Utils, $, Ui, WebGl, GlMatrix, Rendering, FindNodes, TraverseScene) {
   "use strict";
 
   var _canvas,
+    _rendersteps = 55,
     _gl,
     _shaderProgram,
     _bindables,
     _callback,
     _scene,
     _vertexPositionAttributeLocation,
+    _vertexColorAttributeLocation,
     _vertexNormalAttributeLocation,
-    _modelViewMatrix = glmatrix.mat4.create(),
+    _modelViewMatrix = GlMatrix.mat4.create(),
     _modelViewMatrixUniformLocation,
-    _projectionMatrix = glmatrix.mat4.create(),
+    _projectionMatrix = GlMatrix.mat4.create(),
     _projectionMatrixUniformLocation,
     _normalMatrixUniformLocation,
     _isStopped = false,
     _hasChanged = true,
-    _requestAnimationFrame = webgl.requestAnimFrame;
+    _requestAnimationFrame = WebGl.requestAnimFrame;
+
+
+  var _stack = [];
+
+  function pushMatrix() {
+    var copy = GlMatrix.mat4.create(_modelViewMatrix);
+    _stack.push(copy);
+  }
+
+  function popMatrix() {
+    if (_stack.length === 0) {
+      throw "Invalid popMatrix!";
+    }
+    _modelViewMatrix = _stack.pop();
+  }
 
   function _process(node) {
     if (node.type === "renderInformation") {
@@ -35,13 +52,22 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
   }
 
   function _renderModel(modelNode) {
-    glmatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
+    //pushMatrix();
+
+//    Utils.log("TRANSFORMATION", modelNode.transformation);
+//    Utils.log("MVMATRIX", _modelViewMatrix);
+    GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
+
     _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
     _gl.vertexAttribPointer(_vertexPositionAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
+
+    _gl.vertexAttrib4fv(_vertexColorAttributeLocation, modelNode.material.diffuseColor);
 
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
     _updateRenderMatrices();
     _gl.drawElements(_gl.TRIANGLES, modelNode.mesh.numIndices, _gl.UNSIGNED_SHORT, 0);
+
+    //popMatrix();
   }
 
   function _updateRenderer(renderer) {
@@ -80,36 +106,37 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
     _gl.viewport(0, 0, _canvas.width, _canvas.height);
 
     if (optics.type === "perspective") {
-      glmatrix.mat4.perspective(optics.focalDistance, aspectRatio, optics.near, optics.far, _projectionMatrix);
+      GlMatrix.mat4.perspective(optics.focalDistance, aspectRatio, optics.near, optics.far, _projectionMatrix);
     } else { // orthographic projection
-      glmatrix.mat4.ortho(optics.left, optics.right, optics.bottom, optics.top, optics.near, optics.far, _projectionMatrix);
+      GlMatrix.mat4.ortho(optics.left, optics.right, optics.bottom, optics.top, optics.near, optics.far, _projectionMatrix);
     }
 
-    glmatrix.mat4.identity(_modelViewMatrix);
-    glmatrix.mat4.lookAt(position.eye, position.target, position.up, _modelViewMatrix);
+    GlMatrix.mat4.identity(_modelViewMatrix);
+    GlMatrix.mat4.lookAt(position.eye, position.target, position.up, _modelViewMatrix);
   }
 
   function _updateRenderMatrices() {
     _gl.uniformMatrix4fv(_modelViewMatrixUniformLocation, false, _modelViewMatrix);
     _gl.uniformMatrix4fv(_projectionMatrixUniformLocation, false, _projectionMatrix);
 
-    var normalMatrix = glmatrix.mat3.create();
-    glmatrix.mat4.toInverseMat3(_modelViewMatrix, normalMatrix);
-    glmatrix.mat3.transpose(normalMatrix);
+    var normalMatrix = GlMatrix.mat3.create();
+    GlMatrix.mat4.toInverseMat3(_modelViewMatrix, normalMatrix);
+    GlMatrix.mat3.transpose(normalMatrix);
     _gl.uniformMatrix3fv(_normalMatrixUniformLocation, false, normalMatrix);
   }
 
   function _drawScene() {
     if (!_isStopped) {
       _requestAnimationFrame(_drawScene);
-      traverseScene.execute(_scene, _process);
+      TraverseScene.execute(_scene, _process);
       _hasChanged = false;
+      _rendersteps--;
     }
   }
 
   function _stopDrawing() {
     _isStopped = true;
-    utils.log("Rendering stopped");
+    Utils.log("Rendering stopped");
   }
 
   return {
@@ -117,27 +144,30 @@ define(["utils", "jquery", "mainViewModel", "webgl", "glmatrix", "rendering", "f
       _gl = glContext;
       _shaderProgram = shaderProgram;
       _bindables = _shaderProgram.bindables;
-      _canvas = ui.getRenderCanvas();
+      _canvas = Ui.getRenderCanvas();
       _scene = renderableScene;
       _callback = callback;
 
       try {
         _vertexPositionAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexPosition);
         _gl.enableVertexAttribArray(_vertexPositionAttributeLocation);
-        utils.log("VertexPosition uniform location", _vertexPositionAttributeLocation);
+        Utils.log("VertexPosition attribute location", _vertexPositionAttributeLocation);
+
+        _vertexColorAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexColor);
+        Utils.log("VertexColor attribute location", _vertexColorAttributeLocation);
 
         //_vertexNormalAttributeLocation = _gl.getAttribLocation(_shaderProgram.program, _bindables.attributes.vertexNormal);
         //_gl.enableVertexAttribArray(_vertexNormalAttributeLocation);
 
-        utils.log("Matrices", _modelViewMatrix, _projectionMatrix);
+        Utils.log("Matrices", _modelViewMatrix, _projectionMatrix);
         _modelViewMatrixUniformLocation = _gl.getUniformLocation(_shaderProgram.program, _bindables.uniforms.modelViewMatrix);
-        utils.log("mvMatrix uniform location", _modelViewMatrixUniformLocation);
+        Utils.log("mvMatrix uniform location", _modelViewMatrixUniformLocation);
 
         _projectionMatrixUniformLocation = _gl.getUniformLocation(_shaderProgram.program, _bindables.uniforms.projectionMatrix);
-        utils.log("pMatrix uniform location", _projectionMatrixUniformLocation);
+        Utils.log("pMatrix uniform location", _projectionMatrixUniformLocation);
 
         //_normalMatrixUniformLocation = _gl.getUniformLocation(_shaderProgram.program, _bindables.uniforms.normalMatrix);
-        //utils.log("nMatrix uniform location", _normalMatrixUniformLocation);
+        //Utils.log("nMatrix uniform location", _normalMatrixUniformLocation);
 
         _drawScene();
       } catch (error) {

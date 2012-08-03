@@ -11,7 +11,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
   )
 
-  // Siris is its own root project. It is also assumed that osiris and siris share the same parent directory
+  // Siris is its own root project. It is also assumed that Osiris and siris share the same parent directory
   lazy val siris = RootProject(file("../siris"))
 
   val main = PlayProject(appName, appVersion, appDependencies, mainLang = SCALA).settings(

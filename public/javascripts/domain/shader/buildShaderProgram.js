@@ -4,7 +4,7 @@
  * Time: 16:16
  */
 
-define(["utils", "shader"], function(utils, shader) {
+define(["Utils", "Shader"], function(Utils, Shader) {
   "use strict";
 
   var _gl;
@@ -41,7 +41,7 @@ define(["utils", "shader"], function(utils, shader) {
         fragmentShader = _createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
         compiledProgram = _createShaderProgram(vertexShader, fragmentShader);
 
-        callback(null, new shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
+        callback(null, new Shader.ShaderProgram(config.name, compiledProgram, vertexShader, fragmentShader, config.bindables));
       } catch (error) {
         callback(error, null);
       }

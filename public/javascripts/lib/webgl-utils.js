@@ -40,19 +40,19 @@
  *       gl = WebGLUtils.setupWebGL(canvas);
  *
  * For animated WebGL apps use of setTimeout or setInterval are
- * discouraged. It is recommended you structure your rendering
+ * discouraged. It is recommended you structure your Rendering
  * loop like this.
  *
  *       function render() {
  *         window.requestAnimFrame(render, canvas);
  *
- *         // do rendering
+ *         // do Rendering
  *         ...
  *       }
  *       render();
  *
- * This will call your rendering function up to the refresh rate
- * of your display but will stop rendering if your app is not
+ * This will call your Rendering function up to the refresh rate
+ * of your display but will stop Rendering if your app is not
  * visible.
  */
 
