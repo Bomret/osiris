@@ -17,13 +17,20 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
         Utils.log("RESULTS", results);
         _scene = results.loadedScene;
 
+//        $(document).keydown(function(event) {
+//          GlMatrix.mat4.translate(_cube.transformation, [1, 2, 3], _cube.transformation);
+//          GlMatrix.mat4.transpose(_cube.transformation, _cube.transformation);
+//          Utils.log("TRANSFORM", _cube.transformation);
+//        });
+
         SendMessage.execute(new Msg.RenderStartRequest(), function(error, response) {
           if (error) {
             _handleError(error);
           } else if (response.status === "transform") {
             //Utils.log("TRANSFORM", response);
-            //_cube.transformation = response.data.transformation;
-            GlMatrix.mat4.rotateY(_cube.transformation, Utils.degreesToRadians(5), _cube.transformation);
+            GlMatrix.mat4.transpose(response.data.transformation, response.data.transformation);
+            _cube.transformation = response.data.transformation;
+            //GlMatrix.mat4.rotateY(_cube.transformation, Utils.degreesToRadians(5), _cube.transformation);
           }
         });
 

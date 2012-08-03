@@ -8,6 +8,7 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
   "use strict";
 
   var _canvas,
+    _rendersteps = 55,
     _gl,
     _shaderProgram,
     _bindables,
@@ -25,6 +26,21 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
     _hasChanged = true,
     _requestAnimationFrame = WebGl.requestAnimFrame;
 
+
+  var _stack = [];
+
+  function pushMatrix() {
+    var copy = GlMatrix.mat4.create(_modelViewMatrix);
+    _stack.push(copy);
+  }
+
+  function popMatrix() {
+    if (_stack.length === 0) {
+      throw "Invalid popMatrix!";
+    }
+    _modelViewMatrix = _stack.pop();
+  }
+
   function _process(node) {
     if (node.type === "renderInformation") {
       _updateRenderer(node);
@@ -36,6 +52,10 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
   }
 
   function _renderModel(modelNode) {
+    //pushMatrix();
+
+//    Utils.log("TRANSFORMATION", modelNode.transformation);
+//    Utils.log("MVMATRIX", _modelViewMatrix);
     GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
 
     _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
@@ -46,6 +66,8 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
     _updateRenderMatrices();
     _gl.drawElements(_gl.TRIANGLES, modelNode.mesh.numIndices, _gl.UNSIGNED_SHORT, 0);
+
+    //popMatrix();
   }
 
   function _updateRenderer(renderer) {
@@ -108,6 +130,7 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
       _requestAnimationFrame(_drawScene);
       TraverseScene.execute(_scene, _process);
       _hasChanged = false;
+      _rendersteps--;
     }
   }
 

@@ -50,7 +50,7 @@ define(["Utils", "async", "GlMatrix"], function(Utils, async, GlMatrix) {
       _gl = glContext;
 
       try {
-        node.transformation = GlMatrix.mat4.create(node.transformation);
+        //node.transformation = GlMatrix.mat4.create(node.transformation);
 
         _transformMesh(node.mesh);
         //_transformMaterial(node.material);
