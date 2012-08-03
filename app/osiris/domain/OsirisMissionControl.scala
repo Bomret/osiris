@@ -20,25 +20,21 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
     while (true) {
       receive {
         case msg: MessageFromClient => {
-          try {
-            val json = Json toJson msg.message
-            (json \ "request").as[String]
-            match {
-              case "setup" => {
-                sirisOverlord ! SetupRequest(json)
-              }
-
-              case "manipulate" => sirisOverlord ! ManipulationRequest(json)
-
-              case "start" => out(RenderStartResponse().getJson)
-
-              case "shutdown" => {
-                sirisOverlord ! Exit
-                exit()
-              }
+          val json = Json toJson msg.message
+          (json \ "request").as[String]
+          match {
+            case "setup" => {
+              sirisOverlord ! SetupRequest(json)
             }
-          } catch {
-            case ex: Exception => out(OsirisError(ex) getJson)
+
+            case "manipulate" => sirisOverlord ! ManipulationRequest(json)
+
+            case "start" => out(RenderStartResponse().getJson)
+
+            case "shutdown" => {
+              sirisOverlord ! Exit
+              exit()
+            }
           }
         }
 

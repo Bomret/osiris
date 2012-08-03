@@ -3,8 +3,8 @@
  * Date: 13.06.12
  */
 
-define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "FindNodes", "RenderScene", "Messaging", "GlMatrix"],
-  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, FindNodes, RenderScene, Msg, GlMatrix) {
+define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "SendMessage", "FindNodes", "RenderScene", "Messaging", "GlMatrix"],
+  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, SendMessage, FindNodes, RenderScene, Msg, GlMatrix) {
     "use strict";
 
     var _scene,
@@ -17,7 +17,7 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
         Utils.log("RESULTS", results);
         _scene = results.loadedScene;
 
-        $(document).keydown(function(event) {
+        $(document).keydown(function() {
           SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 10, 0]), function(error, response) {
             if (error) {
               _handleError(error);

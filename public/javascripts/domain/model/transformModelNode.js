@@ -56,8 +56,8 @@ define(["Utils", "async", "GlMatrix"], function(Utils, async, GlMatrix) {
         //_transformMaterial(node.material);
 
         var mat = GlMatrix.mat4.identity();
-        var a = GlMatrix.mat4.translate(mat, [0,0.5,0]);
-        Utils.log("MAT",a);
+        var a = GlMatrix.mat4.translate(mat, [0, 0.5, 0]);
+        Utils.log("MAT", a);
 
         Utils.log("Transformed Node", node);
         callback(null, node);

@@ -40,20 +40,20 @@ require.config({
 
     // -- model
     TransformModelNode: "domain/model/TransformModelNode",
-    LoadModelFromColladaFile:"domain/model/LoadModelFromColladaFile",
+    ParseObjFile: "domain/model/ParseObjFile",
 
     // -- Scene
     LoadScene: "domain/scene/LoadScene",
     DownloadSceneFromServer: "domain/scene/DownloadSceneFromServer",
     PrepareSceneForRendering: "domain/scene/PrepareSceneForRendering",
     TraverseScene: "domain/scene/TraverseScene",
+    TraverseAndRender: "domain/scene/TraverseAndRender",
     FindNodes: "domain/scene/FindNodes",
     RenderScene: "domain/scene/RenderScene",
 
     // contracts
     Messaging: "contracts/Messaging",
-    //obj: "contracts/obj",
-    Collada:"contracts/Collada",
+    Obj: "contracts/Obj",
     Shader: "contracts/Shader",
     Rendering: "contracts/Rendering",
     Scene: "contracts/Scene"
@@ -63,5 +63,9 @@ require.config({
 require(["Osiris"], function(Osiris) {
   "use strict";
 
-  Osiris.execute();
+  try {
+    Osiris.execute();
+  } catch (error) {
+    window.alert(error.message);
+  }
 });
