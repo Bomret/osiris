@@ -4,7 +4,7 @@
  * Time: 14:13
  */
 
-define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, GlMatrix) {
+define(["jquery", "MainViewModel", "GlMatrix"], function($, Ui, GlMatrix) {
   "use strict";
 
   var _stack = [],
@@ -80,8 +80,8 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, 
       aspectRatio = optics.aspectRatio;
 
     if (aspectRatio === "compute") {
-      _canvas.width = window.innerWidth;
-      _canvas.height = window.innerHeight;
+      _canvas.width = Math.floor(window.innerWidth * 0.9);
+      _canvas.height = Math.floor(window.innerHeight * 0.9);
       aspectRatio = _canvas.width / _canvas.height;
     }
 
@@ -119,10 +119,6 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, 
   }
 
   return {
-    /**
-     *
-     * @param {Object} traversableScene
-     */
     execute: function(traversableScene, glContext, locations) {
       var root = traversableScene.rootNode;
 

@@ -4,13 +4,13 @@
  * Time: 21:08
  */
 
-define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "FindNodes", "TraverseAndRender"], function(Utils, $, Ui, WebGl, GlMatrix, Rendering, FindNodes, TraverseAndRender) {
+define(["Utils", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], function(Utils, WebGl, TraverseAndRender, SetupShaderBindableLocations) {
   "use strict";
 
   var _gl,
     _callback,
     _scene,
-    _locations = {},
+    _locations,
     _isStopped = false,
     _requestAnimationFrame = WebGl.requestAnimFrame;
 
@@ -28,29 +28,18 @@ define(["Utils", "jquery", "MainViewModel", "WebGl", "GlMatrix", "Rendering", "F
 
   return {
     execute: function(renderableScene, glContext, shaderProgram, callback) {
-      var bindables = shaderProgram.bindables,
-        vertexPositionAttributeLocation,
-        vertexColorAttributeLocation,
-        modelViewMatrixUniformLocation,
-        projectionMatrixUniformLocation;
-
       _gl = glContext;
       _scene = renderableScene;
       _callback = callback;
 
       try {
-        vertexPositionAttributeLocation = glContext.getAttribLocation(shaderProgram.program, bindables.attributes.vertexPosition);
-        glContext.enableVertexAttribArray(vertexPositionAttributeLocation);
-        _locations.vertexPositionAttributeLocation = vertexPositionAttributeLocation;
-
-        vertexColorAttributeLocation = glContext.getAttribLocation(shaderProgram.program, bindables.attributes.vertexColor);
-        _locations.vertexColorAttributeLocation = vertexColorAttributeLocation;
-
-        modelViewMatrixUniformLocation = glContext.getUniformLocation(shaderProgram.program, bindables.uniforms.modelViewMatrix);
-        _locations.modelViewMatrixUniformLocation = modelViewMatrixUniformLocation;
-
-        projectionMatrixUniformLocation = glContext.getUniformLocation(shaderProgram.program, bindables.uniforms.projectionMatrix);
-        _locations.projectionMatrixUniformLocation = projectionMatrixUniformLocation;
+        SetupShaderBindableLocations.execute(glContext, shaderProgram, function(error, locations) {
+          if (error) {
+            callback(error);
+          } else {
+            _locations = locations;
+          }
+        });
 
         _drawScene();
       } catch (error) {

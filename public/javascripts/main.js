@@ -32,6 +32,7 @@ require.config({
     // domain
     // -- Rendering
     SetupWebGlContext: "domain/rendering/SetupWebGlContext",
+    SetupShaderBindableLocations: "domain/rendering/SetupShaderBindableLocations",
 
     // -- shader
     LoadShaders: "domain/shader/LoadShaders",
