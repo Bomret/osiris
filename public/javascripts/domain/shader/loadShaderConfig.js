@@ -7,7 +7,7 @@
 define(["jquery"], function($) {
   "use strict";
 
-  var _pathToShaderController = "http://localhost:9000/shaders";
+  var _pathToShaderController = "/shaders";
 
   return {
     execute: function(shaderInformation, callback) {

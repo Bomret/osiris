@@ -7,7 +7,7 @@
 define(["Utils"], function(Utils) {
   "use strict";
 
-  var _socket = new WebSocket("ws://localhost:9000/socket");
+  var _socket = new WebSocket("ws://" + window.location.hostname + ":" + window.location.port + "/socket");
 
   function _send(message) {
     _socket.send(JSON.stringify(message));
