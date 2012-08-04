@@ -8,8 +8,6 @@ define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
   "use strict";
 
   var _model,
-    _currentGroups,
-    _currentMaterial,
     _geometry = {
       vertices: [],
       normals: [],
@@ -55,37 +53,6 @@ define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
     }
 
     _model.faces.push(face);
-
-    for (var j = 0; j < _currentGroups.length; j++) {
-      _currentGroups[j].faces.push(face);
-    }
-  }
-
-  function processGroups(elements) {
-    var name,
-      group;
-
-    _currentGroups = [];
-
-    if (elements.length === 1) {
-      name = "default";
-      group = Obj.makeGroup(name);
-      _currentGroups.push(group);
-
-      if (!Utils.containsObject(_model.groups, group)) {
-        _model.groups.push(group);
-      }
-    } else {
-      for (var i = 1; i < elements.length; i++) {
-        name = elements[i];
-        group = Obj.makeGroup(name);
-        _currentGroups.push(group);
-
-        if (!_model.groups[name]) {
-          _model.groups.push(group);
-        }
-      }
-    }
   }
 
   return {
@@ -109,10 +76,6 @@ define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
           processVertex(elements, "vertices");
         } else if (Utils.stringStartsWith(line, "f")) {
           processFace(elements);
-        } else if (Utils.stringStartsWith(line, "g")) {
-          processGroups(elements);
-        } else if (Utils.stringStartsWith(line, "mtllib")) {
-
         }
       }
 

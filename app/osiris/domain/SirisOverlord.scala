@@ -26,10 +26,10 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
   var physicsActor: AbstractActor = null
 
   override def startUp() {
-    createComponents()
+    _createComponents()
   }
 
-  protected def createComponents() {
+  protected def _createComponents() {
     createActor[JBulletComponent]()(physics => {
       physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
 
@@ -43,6 +43,12 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
 
   private def _makePhysicShape(node: JsValue): AspectBase = {
     val transformation = (node \ "transformation").as[Array[Float]]
+    val trans = Left(ConstMat4(
+      transformation(0), transformation(1), transformation(2), transformation(3),
+      transformation(4), transformation(5), transformation(6), transformation(7),
+      transformation(8), transformation(9), transformation(10), transformation(11),
+      transformation(12), transformation(13), transformation(14), transformation(15)
+    ))
     val physics = (node \ "physics").as[JsObject]
     val shape = (physics \ "shape").as[String]
 
@@ -54,12 +60,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       val mass = (physics \ "mass").as[Float]
 
       physShape = PhysBox(
-        transform = Left(ConstMat4(
-          transformation(0), transformation(1), transformation(2), transformation(3),
-          transformation(4), transformation(5), transformation(6), transformation(7),
-          transformation(8), transformation(9), transformation(10), transformation(11),
-          transformation(12), transformation(13), transformation(14), transformation(15)
-        )),
+        transform = trans,
         halfExtends = ConstVec3f(halfExtends),
         restitution = restitution,
         mass = mass
@@ -68,18 +69,12 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       val normal = (physics \ "normal").as[Array[Float]]
       val mass = (physics \ "mass").as[Float]
       physShape = PhysPlane(
-        transform = Left(ConstMat4(
-          transformation(0), transformation(1), transformation(2), transformation(3),
-          transformation(4), transformation(5), transformation(6), transformation(7),
-          transformation(8), transformation(9), transformation(10), transformation(11),
-          transformation(12), transformation(13), transformation(14), transformation(15)
-        )),
+        transform = trans,
         normal = ConstVec3f(normal(0), normal(1), normal(2)),
         mass = mass
       )
     }
 
-    sender ! OsirisDebug("Made PhysShape: " + physShape)
     physShape
   }
 
@@ -92,24 +87,20 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
           try {
             val id = (node \ "id").as[String]
 
-            sender ! OsirisDebug("Will setup node id: " + id)
-
             realize(
               EntityDescription(
                 _makePhysicShape(node)
               ),
               (e: Entity) => {
                 registerEntity(Symbol(id), e)
+
                 e.get(Transformation) match {
                   case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                    origin ! TransformRequest(id,mat)
+                    origin ! TransformRequest(id, mat)
                   })
-                  case None => origin ! OsirisError(new Exception("FUUU!"))
                 }
               }
             )
-
-            origin ! OsirisDebug("After realize")
           } catch {
             case ex: Exception => origin ! OsirisError(ex)
           }
@@ -125,8 +116,6 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       val origin = sender
 
       try {
-        origin ! OsirisDebug("Got ManipulationRequest: id(" + request.nodeSymbol + "), type(" + request.manipulationType + ")")
-
         handleEntity(request.nodeSymbol)(node => {
           if (request.manipulationType == "ApplyImpulse") {
             val data = request.manipulationData

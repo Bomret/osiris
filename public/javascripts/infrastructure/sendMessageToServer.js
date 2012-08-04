@@ -10,14 +10,12 @@ define(["Utils"], function(Utils) {
   var _socket = new WebSocket("ws://localhost:9000/socket");
 
   function _send(message) {
-    Utils.log("Socket sends", message);
     _socket.send(JSON.stringify(message));
   }
 
   return {
     execute: function(message, callback) {
       _socket.onmessage = function(event) {
-        //Utils.log("Server message", event.data);
         var msg = JSON.parse(event.data);
         if (msg.status === "error") {
           callback({
@@ -29,7 +27,6 @@ define(["Utils"], function(Utils) {
       };
 
       _socket.onerror = function(error) {
-        Utils.log("Server error", error);
         callback(error);
       };
 

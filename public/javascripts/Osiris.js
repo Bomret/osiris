@@ -3,47 +3,41 @@
  * Date: 13.06.12
  */
 
-define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "LoadModelFromColladaFile", "SendMessage", "FindNodes", "RenderScene", "Messaging", "GlMatrix"],
-  function(Utils, $, WebGl, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, LoadModelFromColladaFile, SendMessage, FindNodes, RenderScene, Msg, GlMatrix) {
+define(["Utils", "jquery", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "SendMessage", "FindNodes", "RenderScene", "Messaging", "GlMatrix"],
+  function(Utils, $, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, SendMessage, FindNodes, RenderScene, Msg, GlMatrix) {
     "use strict";
 
     var _scene,
-      _cube = {};
+      _cube;
 
     function _onSetupComplete(error, results) {
       if (error) {
         _handleError(error);
       } else {
-        Utils.log("RESULTS", results);
         _scene = results.loadedScene;
 
-        $(document).keydown(function(event) {
-          SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 10, 0]), function(error, response) {
-            if (error) {
-              _handleError(error);
-            } else if (response.status === "transform") {
-              //Utils.log("TRANSFORM", response);
-              GlMatrix.mat4.transpose(response.data.transformation, response.data.transformation);
-              _cube.transformation = response.data.transformation;
-              //GlMatrix.mat4.rotateY(_cube.transformation, Utils.degreesToRadians(5), _cube.transformation);
-            }
-          });
-        });
-
-        SendMessage.execute(new Msg.RenderStartRequest(), function(error, response) {
+        FindNodes.byId(_scene, "cube", function(error, node) {
           if (error) {
             _handleError(error);
-          } else if (response.status === "transform") {
-            //Utils.log("TRANSFORM", response);
-            GlMatrix.mat4.transpose(response.data.transformation, response.data.transformation);
-            _cube.transformation = response.data.transformation;
-            //GlMatrix.mat4.rotateY(_cube.transformation, Utils.degreesToRadians(5), _cube.transformation);
+          } else {
+            _cube = node;
           }
         });
 
-        FindNodes.byId(_scene, "cube", function(error, node) {
-          if (error) _handleError(error);
-          _cube = node;
+        $(document).keydown(function(event) {
+          if (event.which === 87) {  // w
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 5, 0]), _onServerResponse);
+          } else if (event.which === 83) {  // s
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, -5, 0]), _onServerResponse);
+          } else if (event.which === 68) { // d
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [5, 0, 0]), _onServerResponse);
+          } else if (event.which === 65) { // a
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [-5, 0, 0]), _onServerResponse);
+          } else if (event.which === 74) { // j
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 0, 5]), _onServerResponse);
+          } else if (event.which === 73) { // i
+            SendMessage.execute(new Msg.ManipulationRequest("cube", "ApplyImpulse", [0, 0, -5]), _onServerResponse);
+          }
         });
 
         Ui.updateStatus("info", "Rendering...");
@@ -54,6 +48,17 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
     function _handleError(error) {
       Ui.updateStatus("error", "An error occured: '" + error.message + "' See console log for details.");
       Utils.log("ERROR", error.stack);
+    }
+
+    function _onServerResponse(error, response) {
+      var transformedResponse = GlMatrix.mat4.create();
+
+      if (error) {
+        _handleError(error);
+      } else if (response.status === "transform") {
+        GlMatrix.mat4.transpose(response.data.transformation, transformedResponse);
+        _cube.transformation = transformedResponse;
+      }
     }
 
     return {
@@ -83,4 +88,6 @@ define(["Utils", "jquery", "WebGl", "async", "MainViewModel", "SetupWebGlContext
       }
     };
   }
-);
+
+)
+;

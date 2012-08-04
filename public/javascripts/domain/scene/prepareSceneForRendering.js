@@ -4,17 +4,16 @@
  * Time: 16:38
  */
 
-define(["Utils", "jquery", "async", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function(Utils, $, Async, FindNodes, TransformModelNode, SendMessage, Messaging) {
+define(["async", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function(Async, FindNodes, TransformModelNode, SendMessage, Messaging) {
   "use strict";
 
   var _preparedScene,
     _callback;
 
-  function _onComplete(error, results) {
+  function _onComplete(error) {
     if (error) {
       _callback(error);
     } else {
-      Utils.log("PrepareSceneForRendering", results);
       _callback(null, _preparedScene);
     }
   }
@@ -26,17 +25,14 @@ define(["Utils", "jquery", "async", "FindNodes", "TransformModelNode", "SendMess
 
       Async.auto({
         foundModelNodes: function(callback) {
-          Utils.log("Exec FindNodes");
           FindNodes.byType(loadedScene, "model", callback);
         },
         serverResponse: ["foundModelNodes", function(callback, results) {
-          Utils.log("Exec SendMessage");
           SendMessage.execute(new Messaging.SetupRequest(results.foundModelNodes), callback);
         }],
         transformedNodes: ["foundModelNodes", "serverResponse", function(callback, results) {
           var nodes = [];
           Async.forEachSeries(results.foundModelNodes, function(node, callback) {
-            Utils.log("Exec TransformModelNode", node);
             TransformModelNode.execute(node, glContext, function(error, trans) {
               nodes.push(trans);
               callback(error);
