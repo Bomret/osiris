@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/public/javascripts/domain/scene/RenderScene.js" line="171" mnemonic="7" />
+    <bookmark url="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" line="171" mnemonic="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c2017300-8f93-48db-994a-b47091ace73c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/javascripts/domain/rendering/SetupShaderBindableLocations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/Osiris.js" afterPath="$PROJECT_DIR$/public/javascripts/Osiris.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/main.js" afterPath="$PROJECT_DIR$/public/javascripts/main.js" />
-    </list>
+    <list default="true" id="c2017300-8f93-48db-994a-b47091ace73c" name="Default" comment="" />
     <ignored path="Osiris.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -74,8 +68,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="field_breakpoints_viewId" value="TABLE" />
+      <property name="exception_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -96,7 +90,7 @@
       <file leaf-file-name="simple_cube.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="115" column="40" selection-start="5426" selection-end="5426" vertical-scroll-proportion="8.013029">
+            <state line="101" column="13" selection-start="4755" selection-end="4755" vertical-scroll-proportion="0.29695886">
               <folding />
             </state>
           </provider>
@@ -228,16 +222,6 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Osiris" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -536,6 +520,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -556,8 +550,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -584,6 +578,19 @@
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="scalaCoverage" />
@@ -601,19 +608,6 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
@@ -658,18 +652,6 @@
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -693,6 +675,18 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
@@ -778,12 +772,13 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5462329" sideWeight="0.4969697" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.59075344" sideWeight="0.49772727" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22424242" sideWeight="0.5684931" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.43150684" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22348484" sideWeight="0.6712329" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.43021345" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -896,79 +891,55 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="49" selection-start="446" selection-end="1164" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="46" column="49" selection-start="446" selection-end="1164" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseScene.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="52" selection-start="487" selection-end="487" vertical-scroll-proportion="0.23344947">
-          <folding />
-        </state>
+        <state line="24" column="52" selection-start="487" selection-end="487" vertical-scroll-proportion="0.23344947" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/LoadScene.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="63" selection-start="679" selection-end="679" vertical-scroll-proportion="0.4042934">
-          <folding />
-        </state>
+        <state line="27" column="63" selection-start="679" selection-end="679" vertical-scroll-proportion="0.4042934" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/TransformMesh.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="4" selection-start="135" selection-end="135" vertical-scroll-proportion="0.2504472">
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="11" column="4" selection-start="135" selection-end="135" vertical-scroll-proportion="0.2504472" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/ParseObjFile.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/parseObjFile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="32" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.60644007">
-          <folding />
-        </state>
+        <state line="77" column="32" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.60644007" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="43" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.39087948">
-          <folding />
-        </state>
+        <state line="32" column="43" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.39087948" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/TransformModelNode.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/transformModelNode.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="16" selection-start="82" selection-end="82" vertical-scroll-proportion="0.41811848">
-          <folding />
-        </state>
+        <state line="6" column="16" selection-start="82" selection-end="82" vertical-scroll-proportion="0.41811848" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="80" selection-start="716" selection-end="716" vertical-scroll-proportion="2.2149837">
-          <folding />
-        </state>
+        <state line="34" column="80" selection-start="716" selection-end="716" vertical-scroll-proportion="2.2149837" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/rendering/SetupShaderBindableLocations.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="16" selection-start="82" selection-end="82" vertical-scroll-proportion="-1.5407166">
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="6" column="16" selection-start="82" selection-end="82" vertical-scroll-proportion="-1.5407166" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/PrepareSceneForRendering.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="147" selection-start="213" selection-end="213" vertical-scroll-proportion="0.45602605">
-          <folding />
-        </state>
+        <state line="6" column="147" selection-start="213" selection-end="213" vertical-scroll-proportion="0.45602605" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/RenderScene.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="142" selection-start="208" selection-end="208" vertical-scroll-proportion="0.45602605">
           <folding />
@@ -977,37 +948,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/siris-log4j.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="42" selection-start="265" selection-end="265" vertical-scroll-proportion="-48.576546">
-          <folding />
-        </state>
+        <state line="8" column="42" selection-start="265" selection-end="265" vertical-scroll-proportion="-48.576546" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="83" column="59" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.6122449">
-          <folding>
-            <element signature="e#0#64#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="83" column="59" selection-start="2215" selection-end="2215" vertical-scroll-proportion="0.6122449" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/SendMessageToServer.js">
+    <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="13" selection-start="695" selection-end="695" vertical-scroll-proportion="0.7394137">
-          <folding />
-        </state>
+        <state line="32" column="13" selection-start="695" selection-end="695" vertical-scroll-proportion="0.7394137" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="36" selection-start="2301" selection-end="2301" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="56" column="36" selection-start="2301" selection-end="2301" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="115" column="40" selection-start="5426" selection-end="5426" vertical-scroll-proportion="8.013029">
+        <state line="101" column="13" selection-start="4755" selection-end="4755" vertical-scroll-proportion="0.29695886">
           <folding />
         </state>
       </provider>
