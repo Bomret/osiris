@@ -14,7 +14,7 @@ import osiris.contracts.MessageFromClient
 
 class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
   val sirisOverlord = new SirisOverlord
-  sirisOverlord start()
+  sirisOverlord.start()
 
   def act() {
     while (true) {

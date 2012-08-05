@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2017300-8f93-48db-994a-b47091ace73c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea_modules/Osiris.iml" afterPath="$PROJECT_DIR$/.idea_modules/Osiris.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala" afterPath="$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/Osiris.js" afterPath="$PROJECT_DIR$/public/javascripts/Osiris.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scenes/simple_cube.json" afterPath="$PROJECT_DIR$/public/scenes/simple_cube.json" />
     </list>
     <ignored path="Osiris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,111 +87,7 @@
     <favorites_list name="Osiris" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TraverseAndRender.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="31" selection-start="3828" selection-end="3828" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="traverseScene.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="15" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="renderScene.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="38" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="simple_cube.json" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="170" column="15" selection-start="7365" selection-end="7365" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#143#3062#0" expanded="false" />
-                <element signature="e#236#3048#0" expanded="false" />
-                <element signature="e#258#911#0" expanded="false" />
-                <element signature="e#392#566#0" expanded="false" />
-                <element signature="e#641#889#0" expanded="false" />
-                <element signature="e#680#769#0" expanded="false" />
-                <element signature="e#933#1524#0" expanded="false" />
-                <element signature="e#1047#1211#0" expanded="false" />
-                <element signature="e#1246#1502#0" expanded="false" />
-                <element signature="e#1546#3030#0" expanded="false" />
-                <element signature="e#1665#3008#0" expanded="false" />
-                <element signature="e#1700#1884#0" expanded="false" />
-                <element signature="e#1919#2104#0" expanded="false" />
-                <element signature="e#2139#2323#0" expanded="false" />
-                <element signature="e#2358#2543#0" expanded="false" />
-                <element signature="e#2578#2762#0" expanded="false" />
-                <element signature="e#2797#2982#0" expanded="false" />
-                <element signature="e#3076#3683#0" expanded="false" />
-                <element signature="e#3168#3669#0" expanded="false" />
-                <element signature="e#3190#3353#0" expanded="false" />
-                <element signature="e#3375#3651#0" expanded="false" />
-                <element signature="e#3697#7365#0" expanded="false" />
-                <element signature="e#3789#7351#0" expanded="false" />
-                <element signature="e#3811#5260#0" expanded="false" />
-                <element signature="e#3922#4493#0" expanded="false" />
-                <element signature="e#3963#4065#0" expanded="false" />
-                <element signature="e#4105#4203#0" expanded="false" />
-                <element signature="e#4245#4347#0" expanded="false" />
-                <element signature="e#4387#4467#0" expanded="false" />
-                <element signature="e#4530#4836#0" expanded="false" />
-                <element signature="e#4619#4701#0" expanded="false" />
-                <element signature="e#4872#5093#0" expanded="false" />
-                <element signature="e#4956#5027#0" expanded="false" />
-                <element signature="e#5136#5238#0" expanded="false" />
-                <element signature="e#5282#7333#0" expanded="false" />
-                <element signature="e#5392#6562#0" expanded="false" />
-                <element signature="e#6599#6840#0" expanded="false" />
-                <element signature="e#6876#7080#0" expanded="false" />
-                <element signature="e#7123#7311#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Osiris.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="62" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SetupKeyboardHandling.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="36" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="findNodes.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="42" selection-start="983" selection-end="983" vertical-scroll-proportion="1.217484">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -196,7 +100,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/javascripts/infrastructure/SendMessageToServer.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/downloadSceneFromServer.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaderConfig.js" />
         <option value="$PROJECT_DIR$/target/scala-2.9.1/src_managed/main/views/html/index.template.scala" />
@@ -205,13 +108,14 @@
         <option value="$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupInputHandling.js" />
         <option value="$PROJECT_DIR$/public/javascripts/main.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/Osiris.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
-        <option value="$PROJECT_DIR$/public/scenes/simple_cube.json" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/Osiris.js" />
+        <option value="$PROJECT_DIR$/public/scenes/simple_cube.json" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
+        <option value="$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala" />
       </list>
     </option>
   </component>
@@ -223,8 +127,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1696" />
-    <option name="height" value="1026" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -234,24 +138,17 @@
             <id />
           </State>
           <State>
-            <id>Android</id>
-          </State>
-          <State>
-            <id>J2ME Plugin</id>
-          </State>
-          <State>
-            <id>LintAndroid</id>
-          </State>
-          <State>
-            <id>PerformanceLintAndroid</id>
-          </State>
-          <State>
             <id>Plugin DevKit</id>
           </State>
           <State>
             <id>XPath</id>
           </State>
         </expanded-state>
+        <selected-state>
+          <State>
+            <id>Abstraction issues</id>
+          </State>
+        </selected-state>
       </profile-state>
     </entry>
   </component>
@@ -288,16 +185,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -326,91 +213,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scenes" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="osiris-play" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="javascripts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="domain" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="scene" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -425,6 +228,32 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -444,6 +273,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -453,7 +292,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="Errors" />
+    <property name="options.lastSelected" value="preferences.sourceCode.JavaScript" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="JavaScriptLanguageLevel" value="ES5" />
     <property name="DefaultHtmlFileTemplate" value="Html" />
@@ -676,37 +515,37 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="false" />
     <layout>
+      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283237" sideWeight="0.4908953" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="SBT Console" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3270548" sideWeight="0.4908953" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5462329" sideWeight="0.4969697" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42890173" sideWeight="0.50061274" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22181372" sideWeight="0.57109827" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22045454" sideWeight="0.6729452" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42890173" sideWeight="0.49509802" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.4969651" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Kotlin" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -803,16 +642,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/model/parseObjFile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="32" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.60644007" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/target/scala-2.9.1/src_managed/main/views/html/index.template.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="95" selection-start="460" selection-end="460" vertical-scroll-proportion="0.37280703" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/target/scala-2.9.1/src_managed/main/views/html/main.template.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="7" selection-start="302" selection-end="302" vertical-scroll-proportion="0.18640351" />
@@ -838,89 +667,65 @@
         <state line="33" column="60" selection-start="700" selection-end="700" vertical-scroll-proportion="0.036247335" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="26" selection-start="611" selection-end="611" vertical-scroll-proportion="0.9302326" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="43" column="0" selection-start="1234" selection-end="1234" vertical-scroll-proportion="0.33273703" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="62" selection-start="749" selection-end="749" vertical-scroll-proportion="0.0" />
+        <state line="18" column="56" selection-start="706" selection-end="706" vertical-scroll-proportion="0.107334524" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="170" column="15" selection-start="7365" selection-end="7365" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#143#3062#0" expanded="false" />
-            <element signature="e#236#3048#0" expanded="false" />
-            <element signature="e#258#911#0" expanded="false" />
-            <element signature="e#392#566#0" expanded="false" />
-            <element signature="e#641#889#0" expanded="false" />
-            <element signature="e#680#769#0" expanded="false" />
-            <element signature="e#933#1524#0" expanded="false" />
-            <element signature="e#1047#1211#0" expanded="false" />
-            <element signature="e#1246#1502#0" expanded="false" />
-            <element signature="e#1546#3030#0" expanded="false" />
-            <element signature="e#1665#3008#0" expanded="false" />
-            <element signature="e#1700#1884#0" expanded="false" />
-            <element signature="e#1919#2104#0" expanded="false" />
-            <element signature="e#2139#2323#0" expanded="false" />
-            <element signature="e#2358#2543#0" expanded="false" />
-            <element signature="e#2578#2762#0" expanded="false" />
-            <element signature="e#2797#2982#0" expanded="false" />
-            <element signature="e#3076#3683#0" expanded="false" />
-            <element signature="e#3168#3669#0" expanded="false" />
-            <element signature="e#3190#3353#0" expanded="false" />
-            <element signature="e#3375#3651#0" expanded="false" />
-            <element signature="e#3697#7365#0" expanded="false" />
-            <element signature="e#3789#7351#0" expanded="false" />
-            <element signature="e#3811#5260#0" expanded="false" />
-            <element signature="e#3922#4493#0" expanded="false" />
-            <element signature="e#3963#4065#0" expanded="false" />
-            <element signature="e#4105#4203#0" expanded="false" />
-            <element signature="e#4245#4347#0" expanded="false" />
-            <element signature="e#4387#4467#0" expanded="false" />
-            <element signature="e#4530#4836#0" expanded="false" />
-            <element signature="e#4619#4701#0" expanded="false" />
-            <element signature="e#4872#5093#0" expanded="false" />
-            <element signature="e#4956#5027#0" expanded="false" />
-            <element signature="e#5136#5238#0" expanded="false" />
-            <element signature="e#5282#7333#0" expanded="false" />
-            <element signature="e#5392#6562#0" expanded="false" />
-            <element signature="e#6599#6840#0" expanded="false" />
-            <element signature="e#6876#7080#0" expanded="false" />
-            <element signature="e#7123#7311#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="158" column="47" selection-start="7073" selection-end="7073" vertical-scroll-proportion="2.3953488" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="38" selection-start="791" selection-end="791" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="31" selection-start="3828" selection-end="3828" vertical-scroll-proportion="0.0">
+        <state line="40" column="42" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.44007155">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="15" selection-start="351" selection-end="351" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="15" column="9" selection-start="317" selection-end="317" vertical-scroll-proportion="0.21288015" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="117" column="3" selection-start="3462" selection-end="3462" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/Application.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="7" selection-start="310" selection-end="310" vertical-scroll-proportion="0.35778177" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/SceneController.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="7" selection-start="292" selection-end="292" vertical-scroll-proportion="0.49373883" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="26" selection-start="395" selection-end="395" vertical-scroll-proportion="0.17710197">
+          <folding>
+            <element signature="e#23#64#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
+    <entry file="file://$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="36" selection-start="1360" selection-end="1360" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="42" selection-start="983" selection-end="983" vertical-scroll-proportion="1.217484">
+        <state line="28" column="26" selection-start="940" selection-end="940" vertical-scroll-proportion="0.5008944">
           <folding />
         </state>
       </provider>
