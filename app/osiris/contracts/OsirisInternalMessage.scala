@@ -1,6 +1,6 @@
 package osiris.contracts
 
-import play.api.libs.json.{JsValue, JsObject}
+import play.api.libs.json.JsValue
 import simplex3d.math.floatm.ConstVec3f
 
 /**

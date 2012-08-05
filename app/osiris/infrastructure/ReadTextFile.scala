@@ -1,7 +1,6 @@
 package osiris.infrastructure
 
 import io.Source
-import java.io.File
 
 /**
  * This object contains several methods to read the content of text files from specified locations.
