@@ -14,7 +14,7 @@ import osiris.contracts._
 import scala.Left
 import play.api.libs.json.{JsValue, JsObject}
 import scala.Some
-import actors.{OutputChannel, AbstractActor}
+import actors.AbstractActor
 
 /**
  * User: Stefan Reichel

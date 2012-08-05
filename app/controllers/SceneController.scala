@@ -1,9 +1,7 @@
 package controllers
 
 import play.api.mvc.{Action, Controller}
-import io.Source
-import play.api.libs.json.{JsValue, Json}
-import play.api.Play.current
+import play.api.libs.json.Json
 import osiris.infrastructure.{OsirisConfiguration, ReadTextFile}
 import java.io.FileNotFoundException
 import play.api.Logger
