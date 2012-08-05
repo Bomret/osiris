@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define(["jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function ($, FindNodes, SendMessage, GlMatrix, Msg) {
+define(["Utils", "jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function (Utils, $, FindNodes, SendMessage, GlMatrix, Msg) {
     "use strict";
 
     var _nodesToHandle = {},
@@ -29,7 +29,7 @@ define(["jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function
     }
 
     return {
-        execute:function (loadedScene, keyMap, callback) {
+        execute:function (loadedScene, callback) {
             _callback = callback;
 
             FindNodes.byType(loadedScene, "model", function (error, nodes) {
@@ -42,11 +42,17 @@ define(["jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function
                 }
             });
 
-            $(document).keydown(function (event) {
-                var manipulationRequest = keyMap[event.which];
+            FindNodes.byId(loadedScene, "keyboard", function (error, node) {
+                if (error) {
+                    callback(error);
+                } else {
+                    $(document).keydown(function (event) {
+                        var manipulationRequest = node.keyMap[event.which];
 
-                if (manipulationRequest) {
-                    SendMessage.execute(new Msg.ManipulationRequest(manipulationRequest.nodeId, manipulationRequest.type, manipulationRequest.data), _onServerResponse);
+                        if (manipulationRequest) {
+                            SendMessage.execute(new Msg.ManipulationRequest(manipulationRequest.nodeId, manipulationRequest.type, manipulationRequest.data), _onServerResponse);
+                        }
+                    });
                 }
             });
         }

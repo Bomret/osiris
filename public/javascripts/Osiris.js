@@ -16,38 +16,7 @@ define(["Utils", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "
             _handleError(error);
         } else {
             Ui.updateStatus("info", "Setting up keyboard handling...");
-            SetupKeyboardHandling.execute(results.loadedScene, {
-                87:{ // w
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[0, 5, 0]
-                },
-                83:{ // s
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[0, -5, 0]
-                },
-                68:{ // d
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[5, 0, 0]
-                },
-                65:{ // a
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[-5, 0, 0]
-                },
-                74:{ // j
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[0, 0, 5]
-                },
-                73:{ // i
-                    nodeId:"cube",
-                    type:"ApplyImpulse",
-                    data:[0, 0, -5]
-                }
-            }, _handleError);
+            SetupKeyboardHandling.execute(results.loadedScene, _handleError);
 
             Ui.updateStatus("info", "Rendering...");
             RenderScene.execute(results.loadedScene, results.glContext, results.loadedShaderProgram, _handleError);
