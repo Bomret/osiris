@@ -886,6 +886,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="7" selection-start="310" selection-end="310" vertical-scroll-proportion="0.35778177" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/SceneController.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="7" selection-start="292" selection-end="292" vertical-scroll-proportion="0.49373883" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
+      <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="50" selection-start="1750" selection-end="1750" vertical-scroll-proportion="0.0">
           <folding />
         </state>

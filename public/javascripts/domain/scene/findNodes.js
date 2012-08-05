@@ -24,12 +24,15 @@ define(["Utils", "TraverseScene"], function(Utils, TraverseScene) {
     },
 
     byId: function(traversableScene, nodeId, callback) {
+      var foundNode = null;
       try {
         TraverseScene.execute(traversableScene, function(node) {
           if (node.id === nodeId) {
-            callback(null, node);
+            foundNode = node;
           }
-        }, callback);
+        });
+
+        callback(null, foundNode);
       } catch (error) {
         callback(error);
       }
