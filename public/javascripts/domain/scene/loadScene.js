@@ -22,6 +22,14 @@ define(["Utils", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"]
   }
 
   return {
+
+    /**
+     *
+     *
+     * @param {SceneInformation} sceneInformation
+     * @param {WebGLContext} glContext
+     * @param {Function} callback
+     */
     execute: function(sceneInformation, glContext, callback) {
       var name = sceneInformation.name;
       _callback = callback;

@@ -93,8 +93,8 @@ define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader)
       updateStatus: function(type, message) {
         if (type === "info") {
           _statusOutput.html("<p><strong>Info:</strong> " + message + "</p>")
-            .css("background-color", "#DDDDFF")
-            .css("color", "#2222FF");
+            .css("background-color", "#D2E0E6")
+            .css("color", "#568CE0");
         } else if (type === "error") {
           _statusOutput.html("<p><strong>Error:</strong> " + message + "</p>")
             .css("background-color", "#FFDDDD")
