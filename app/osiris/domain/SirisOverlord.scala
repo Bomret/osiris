@@ -8,6 +8,7 @@ import siris.core.entity.{Entity, EntityCreationHandling}
 import siris.core.ontology.EntityDescription
 import siris.core.ontology.types.Transformation
 import siris.core.svaractor.SVarActorHW
+import simplex3d.math.floatm.FloatMath
 import simplex3d.math.floatm.renamed.{ConstMat4, Mat4x4}
 import simplex3d.math.floatm.ConstVec3f
 import osiris.contracts._
@@ -85,22 +86,26 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       msg.nodes foreach {
         node => {
           try {
-            val id = (node \ "id").as[String]
+            val id = Symbol((node \ "id").as[String])
+
+            handleEntity(id)(entity => entity match {
+              case Some(ent) => unregisterEntity(ent)
+              case None => // Do nothing
+            })
 
             realize(
               EntityDescription(
                 _makePhysicShape(node)
               ),
               (e: Entity) => {
-                registerEntity(Symbol(id), e)
+                registerEntity(id, e)
 
                 e.get(Transformation) match {
                   case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                    origin ! TransformRequest(id, mat)
+                    origin ! TransformRequest(id.name, FloatMath.transpose(mat))
                   })
                 }
-              }
-            )
+              })
           } catch {
             case ex: Exception => origin ! OsirisError(ex)
           }

@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c2017300-8f93-48db-994a-b47091ace73c" name="Default" comment="More or less the same state as yesterday but with working event based components via amplify! yay! Separated the functionalities even more and everything is asynchronous now.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala" afterPath="$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/view/mainViewModel.js" afterPath="$PROJECT_DIR$/public/javascripts/view/mainViewModel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/main.css" afterPath="$PROJECT_DIR$/public/stylesheets/main.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" afterPath="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/scenes/simple_cube.json" afterPath="$PROJECT_DIR$/public/scenes/simple_cube.json" />
     </list>
     <ignored path="Osiris.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,8 +77,8 @@
       <property name="field_breakpoints_groupByClasses" value="true" />
       <property name="method_breakpoints_groupByClasses" value="true" />
       <property name="exception_breakpoints_viewId" value="TABLE" />
-      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="exception_breakpoints_groupByClasses" value="true" />
+      <property name="field_breakpoints_viewId" value="TABLE" />
       <property name="method_breakpoints_groupByMethods" value="false" />
     </ui_properties>
   </component>
@@ -84,10 +87,84 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="loadScene.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
+      <file leaf-file-name="OsirisMissionControl.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="6" selection-start="771" selection-end="771" vertical-scroll-proportion="0.78711987">
+            <state line="19" column="18" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SirisOverlord.scala" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="104" column="79" selection-start="3304" selection-end="3304" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="e#23#68#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WorldInterfaceHandling.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../siris/core/target/scala-2.9.1/classes/siris/core/worldinterface/WorldInterfaceHandling.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="24.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Osiris.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="29" column="56" selection-start="1060" selection-end="1060" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="simple_cube.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="191" column="37" selection-start="9362" selection-end="9362" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="prepareSceneForRendering.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="80" selection-start="883" selection-end="883" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="renderScene.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="29" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TraverseAndRender.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="116" column="23" selection-start="3545" selection-end="3545" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SetupKeyboardHandling.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="68" selection-start="735" selection-end="735" vertical-scroll-proportion="0.4463668">
               <folding />
             </state>
           </provider>
@@ -106,22 +183,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/target/scala-2.9.1/src_managed/main/views/html/main.template.scala" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/handling/HandleKeyboard.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupInputHandling.js" />
         <option value="$PROJECT_DIR$/public/javascripts/main.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
         <option value="$PROJECT_DIR$/public/javascripts/Osiris.js" />
-        <option value="$PROJECT_DIR$/public/scenes/simple_cube.json" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
         <option value="$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala" />
         <option value="$PROJECT_DIR$/public/javascripts/view/mainViewModel.js" />
         <option value="$PROJECT_DIR$/public/stylesheets/main.css" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js" />
         <option value="$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js" />
+        <option value="$PROJECT_DIR$/public/scenes/simple_cube.json" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js" />
+        <option value="$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala" />
+        <option value="$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js" />
       </list>
     </option>
   </component>
@@ -191,6 +268,30 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -255,6 +356,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="scenes" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="javascripts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -302,6 +421,10 @@
               <option name="myItemId" value="domain" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="shader" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -339,6 +462,84 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rendering" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="javascripts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="domain" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="handling" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Osiris" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="osiris-play" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -385,30 +586,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Osiris" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,8 +606,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -457,6 +634,19 @@
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
     </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <extension name="scalaCoverage" />
@@ -474,19 +664,6 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
@@ -531,18 +708,6 @@
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
     </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
-      </method>
-    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -566,6 +731,18 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+        <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
         <option name="SBT.BeforeRunTask" enabled="false" runInCurrentModule="false" />
       </method>
@@ -656,7 +833,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32876712" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2189394" sideWeight="0.57191783" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21666667" sideWeight="0.57191783" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4280822" sideWeight="0.49509802" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" x="92" y="92" width="1182" height="544" />
@@ -768,48 +945,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/javascripts/infrastructure/sendMessageToServer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="42" selection-start="995" selection-end="995" vertical-scroll-proportion="0.52878463" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="60" selection-start="700" selection-end="700" vertical-scroll-proportion="0.036247335" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="0" selection-start="1234" selection-end="1234" vertical-scroll-proportion="0.33273703" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="56" selection-start="706" selection-end="706" vertical-scroll-proportion="0.107334524" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="158" column="47" selection-start="7073" selection-end="7073" vertical-scroll-proportion="2.3953488" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="42" selection-start="1023" selection-end="1023" vertical-scroll-proportion="0.44007155">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/traverseScene.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="9" selection-start="317" selection-end="317" vertical-scroll-proportion="0.21288015" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="3" selection-start="3462" selection-end="3462" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/Application.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="7" selection-start="310" selection-end="310" vertical-scroll-proportion="0.35778177" />
@@ -820,40 +955,94 @@
         <state line="14" column="7" selection-start="292" selection-end="292" vertical-scroll-proportion="0.49373883" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="26" selection-start="395" selection-end="395" vertical-scroll-proportion="0.17710197" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="26" selection-start="940" selection-end="940" vertical-scroll-proportion="0.5008944" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="266" selection-end="266" vertical-scroll-proportion="0.5825243">
-          <folding />
-        </state>
+        <state line="12" column="13" selection-start="266" selection-end="266" vertical-scroll-proportion="0.5825243" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/view/mainViewModel.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="96" column="27" selection-start="2706" selection-end="2713" vertical-scroll-proportion="0.6440129">
-          <folding />
-        </state>
+        <state line="96" column="27" selection-start="2706" selection-end="2713" vertical-scroll-proportion="0.6440129" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/findNodes.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="64" selection-start="266" selection-end="266" vertical-scroll-proportion="0.39355993">
+        <state line="11" column="64" selection-start="266" selection-end="266" vertical-scroll-proportion="0.39355993" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/Osiris.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="56" selection-start="1060" selection-end="1060" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/shader/loadShaders.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="63" selection-start="528" selection-end="528" vertical-scroll-proportion="0.22330096">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/loadScene.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="6" selection-start="771" selection-end="771" vertical-scroll-proportion="0.78711987">
+        <state line="29" column="62" selection-start="686" selection-end="686" vertical-scroll-proportion="1.9417475">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/osiris/domain/OsirisMissionControl.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="18" selection-start="429" selection-end="429" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../siris/core/target/scala-2.9.1/classes/siris/core/worldinterface/WorldInterfaceHandling.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="22" selection-start="623" selection-end="623" vertical-scroll-proportion="24.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/scenes/simple_cube.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="37" selection-start="9362" selection-end="9362" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/renderScene.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="29" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/TraverseAndRender.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="116" column="23" selection-start="3545" selection-end="3545" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/scene/prepareSceneForRendering.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="80" selection-start="883" selection-end="883" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/osiris/domain/SirisOverlord.scala">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="104" column="79" selection-start="3304" selection-end="3304" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#23#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/domain/handling/SetupKeyboardHandling.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="68" selection-start="735" selection-end="735" vertical-scroll-proportion="0.4463668">
           <folding />
         </state>
       </provider>

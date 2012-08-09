@@ -4,7 +4,7 @@
  * Time: 14:13
  */
 
-define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, GlMatrix) {
+define(["Utils", "jquery", "MainViewModel", "GlMatrix", "TraverseScene"], function(Utils, $, Ui, GlMatrix, TraverseScene) {
   "use strict";
 
   var _stack = [],
@@ -38,6 +38,7 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, 
   }
 
   function _renderModel(modelNode) {
+    _pushMatrix();
     GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
 
     _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
@@ -49,6 +50,7 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, 
 
     _updateRenderMatrices();
     _gl.drawElements(_gl.TRIANGLES, modelNode.mesh.numIndices, _gl.UNSIGNED_SHORT, 0);
+    _popMatrix();
   }
 
   function _updateRenderer(renderer) {
@@ -107,36 +109,14 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix"], function(Utils, $, Ui, 
 //    _gl.uniformMatrix3fv(_normalMatrixUniformLocation, false, normalMatrix);
   }
 
-  function _visit(node) {
-    _process(node);
-
-    if (node.type === "group") {
-      $.each(node.children, function(index, child) {
-        _visit(child);
-      });
-    }
-  }
-
-  function _visitAndRender(node) {
-    if (node.id === "models") {
-      _pushMatrix();
-      _visit(node);
-      _popMatrix();
-    } else {
-      _visit(node);
-    }
-  }
-
   return {
     execute: function(traversableScene, glContext, locations) {
-      var root = traversableScene.rootNode;
-
       _gl = glContext;
       _locations = locations;
       _canvas = Ui.getRenderCanvas();
       _firstRun = true;
 
-      _visitAndRender(root);
+      TraverseScene.execute(traversableScene, _process);
     }
   };
 });

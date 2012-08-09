@@ -7,15 +7,12 @@
 define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Utils, Async, LoadShaderConfig, BuildShaderProgram) {
   "use strict";
 
-  var _callback,
-    _shaderCache = {};
+  var _callback;
 
   function _onComplete(error, builtShaderProgram) {
     if (error) {
       _callback(error);
     } else {
-      _shaderCache[builtShaderProgram.name] = builtShaderProgram;
-
       Utils.log("Built shader program", builtShaderProgram);
       _callback(null, builtShaderProgram);
     }
@@ -23,14 +20,7 @@ define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Ut
 
   return {
     execute: function(shaderInformation, glContext, callback) {
-      var name = shaderInformation.name;
       _callback = callback;
-
-      if (_shaderCache[name]) {
-        Utils.log("Found shader '" + name + "' in cache");
-        callback(null, _shaderCache[name]);
-        return;
-      }
 
       Async.waterfall([
         function(callback) {

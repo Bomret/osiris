@@ -21,10 +21,7 @@ define(["Utils", "jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"],
       _callback(error);
     } else if (response.status === "transform") {
       nodeToTransform = _nodesToHandle[response.data.nodeId];
-      transformationToApply = response.data.transformation;
-
-      GlMatrix.mat4.transpose(transformationToApply, _transposedTransformation);
-      nodeToTransform.transformation = _transposedTransformation;
+      nodeToTransform.transformation = response.data.transformation;
     }
   }
 
