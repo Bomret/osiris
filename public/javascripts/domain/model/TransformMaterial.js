@@ -4,7 +4,7 @@
  * Time: 23:45
  */
 
-define(["Utils", "async", "jquery"], function(Utils, Async, $) {
+define(["async", "jquery"], function(Async, $) {
   "use strict";
 
   var _gl,
@@ -52,7 +52,6 @@ define(["Utils", "async", "jquery"], function(Utils, Async, $) {
     if (error) {
       _callback(error);
     } else {
-      Utils.log("RESULTS", results);
       _transformedMaterial.colorMap = results.colorMap;
       _transformedMaterial.normalMap = results.normalMap;
       _transformedMaterial.specularMap = results.specularMap;

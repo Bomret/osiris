@@ -4,77 +4,36 @@
  * Time: 15:25
  */
 
-define(["Utils"], function(Utils) {
-  "use strict";
+define(["Utils", "jquery", "async"], function (Utils, $, Async) {
+    "use strict";
 
-  return  {
-    execute: function(glContext, shaderProgram, callback) {
-      var locations = {},
-        program = shaderProgram.program,
-        bindables = shaderProgram.bindables,
-        vertexPositionAttributeLocation,
-        vertexTexCoordAttributeLocation,
-        vertexNormalAttributeLocation,
-        modelViewMatrixUniformLocation,
-        projectionMatrixUniformLocation,
-        normalMatrixUniformLocation,
-        ambientLightColorUniformLocation,
-        pointLightColorUniformLocation,
-        pointLightPositionUniformLocation,
-        pointLightSpecularColorUniformLocation,
-        colorMapUniformLocation,
-        normalMapUniformLocation,
-        specularMapUniformLocation;
+    return  {
+        execute:function (glContext, shaderProgram, callback) {
+            var locations = {},
+                program = shaderProgram.program,
+                bindables = shaderProgram.bindables;
 
-      try {
-        vertexPositionAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexPosition);
-        glContext.enableVertexAttribArray(vertexPositionAttributeLocation);
-        locations.vertexPositionAttributeLocation = vertexPositionAttributeLocation;
+            try {
+                Async.parallel([
+                    function () {
+                        $.each(bindables.attributes, function (key, attribute) {
+                            var attributeLocation = glContext.getAttribLocation(program, attribute);
+                            glContext.enableVertexAttribArray(attributeLocation);
+                            locations[key] = attributeLocation;
+                        });
+                    },
+                    function () {
+                        $.each(bindables.uniforms, function (key, uniform) {
+                            locations[key] = glContext.getUniformLocation(program, uniform);
+                        });
+                    }
+                ]);
 
-        vertexNormalAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexNormal);
-        glContext.enableVertexAttribArray(vertexNormalAttributeLocation);
-        locations.vertexNormalAttributeLocation = vertexNormalAttributeLocation;
-
-        vertexTexCoordAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexTexCoords);
-        glContext.enableVertexAttribArray(vertexTexCoordAttributeLocation);
-        locations.vertexTexCoordAttributeLocation = vertexTexCoordAttributeLocation;
-
-        modelViewMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.modelViewMatrix);
-        locations.modelViewMatrixUniformLocation = modelViewMatrixUniformLocation;
-
-        projectionMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.projectionMatrix);
-        locations.projectionMatrixUniformLocation = projectionMatrixUniformLocation;
-
-        normalMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.normalMatrix);
-        locations.normalMatrixUniformLocation = normalMatrixUniformLocation;
-
-        ambientLightColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.ambientLightColor);
-        locations.ambientLightColorUniformLocation = ambientLightColorUniformLocation;
-
-        pointLightColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightColor);
-        locations.pointLightColorUniformLocation = pointLightColorUniformLocation;
-
-        pointLightPositionUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightPosition);
-        locations.pointLightPositionUniformLocation = pointLightPositionUniformLocation;
-
-        pointLightSpecularColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightSpecularColor);
-        locations.pointLightSpecularColorUniformLocation = pointLightSpecularColorUniformLocation;
-
-        colorMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.colorMap);
-        locations.colorMapUniformLocation = colorMapUniformLocation;
-
-        normalMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.normalMap);
-        locations.normalMapUniformLocation = normalMapUniformLocation;
-
-        specularMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.specularMap);
-        locations.specularMapUniformLocation = specularMapUniformLocation;
-
-        Utils.log("Locations", locations);
-
-        callback(null, locations);
-      } catch (error) {
-        callback(error);
-      }
-    }
-  };
+                Utils.log("Locations", locations);
+                callback(null, locations);
+            } catch (error) {
+                callback(error);
+            }
+        }
+    };
 });

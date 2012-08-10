@@ -42,13 +42,13 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix", "TraverseScene"], functi
     }
 
     function _updateAmbientLight(lightNode) {
-      _gl.uniform3fv(_locations.ambientLightColorUniformLocation, lightNode.color);
+      _gl.uniform3fv(_locations.ambientLightColor, lightNode.color);
     }
 
     function _updatePointLight(lightNode) {
-      _gl.uniform3fv(_locations.pointLightColorUniformLocation, lightNode.diffuseColor);
-      _gl.uniform3fv(_locations.pointLightPositionUniformLocation, lightNode.position);
-      _gl.uniform3fv(_locations.pointLightSpecularColorUniformLocation, lightNode.specularColor);
+      _gl.uniform3fv(_locations.pointLightColor, lightNode.diffuseColor);
+      _gl.uniform3fv(_locations.pointLightPosition, lightNode.position);
+      _gl.uniform3fv(_locations.pointLightSpecularColor, lightNode.specularColor);
     }
 
     function _renderModel(modelNode) {
@@ -56,25 +56,25 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix", "TraverseScene"], functi
       GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
 
       _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
-      _gl.vertexAttribPointer(_locations.vertexPositionAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
+      _gl.vertexAttribPointer(_locations.vertexPosition, 3, _gl.FLOAT, false, 0, 0);
 
       _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.texCoords);
-      _gl.vertexAttribPointer(_locations.vertexTexCoordAttributeLocation, 2, _gl.FLOAT, false, 0, 0);
+      _gl.vertexAttribPointer(_locations.vertexTexCoords, 2, _gl.FLOAT, false, 0, 0);
 
       _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.normals);
-      _gl.vertexAttribPointer(_locations.vertexNormalAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
+      _gl.vertexAttribPointer(_locations.vertexNormal, 3, _gl.FLOAT, false, 0, 0);
 
       _gl.activeTexture(_gl.TEXTURE0);
       _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.colorMap);
-      _gl.uniform1i(_locations.colorMapUniformLocation, 0);
+      _gl.uniform1i(_locations.colorMap, 0);
 
       _gl.activeTexture(_gl.TEXTURE1);
       _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.normalMap);
-      _gl.uniform1i(_locations.normalMapUniformLocation, 1);
+      _gl.uniform1i(_locations.normalMap, 1);
 
       _gl.activeTexture(_gl.TEXTURE2);
       _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.specularMap);
-      _gl.uniform1i(_locations.specularMapUniformLocation, 2);
+      _gl.uniform1i(_locations.specularMap, 2);
 
       _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
 
@@ -130,13 +130,13 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix", "TraverseScene"], functi
     }
 
     function _updateRenderMatrices() {
-      _gl.uniformMatrix4fv(_locations.modelViewMatrixUniformLocation, false, _modelViewMatrix);
-      _gl.uniformMatrix4fv(_locations.projectionMatrixUniformLocation, false, _projectionMatrix);
+      _gl.uniformMatrix4fv(_locations.modelViewMatrix, false, _modelViewMatrix);
+      _gl.uniformMatrix4fv(_locations.projectionMatrix, false, _projectionMatrix);
 
       var normalMatrix = GlMatrix.mat3.create();
       GlMatrix.mat4.toInverseMat3(_modelViewMatrix, normalMatrix);
       GlMatrix.mat3.transpose(normalMatrix);
-      _gl.uniformMatrix3fv(_locations.normalMatrixUniformLocation, false, normalMatrix);
+      _gl.uniformMatrix3fv(_locations.normalMatrix, false, normalMatrix);
     }
 
     return {
