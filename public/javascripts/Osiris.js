@@ -29,7 +29,7 @@ define(["Utils", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "
         Ui.updateStatus("info", "Reloading...");
         Utils.log("Reset!", Ui.getCurrentShader(), Ui.getCurrentScene());
 
-        this.execute();
+        window.location.reload();
       }.bind(this));
 
       Async.auto({
