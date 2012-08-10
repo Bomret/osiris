@@ -39,8 +39,8 @@ define(["Utils", "async", "jquery"], function(Utils, Async, $) {
     _gl.bindTexture(_gl.TEXTURE_2D, texture);
     _gl.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, true);
     _gl.texImage2D(_gl.TEXTURE_2D, 0, _gl.RGBA, _gl.RGBA, _gl.UNSIGNED_BYTE, image);
-    _gl.texParameteri(_gl.TEXTURE_2D, _gl.TEXTURE_MAG_FILTER, _gl.NEAREST);
-    _gl.texParameteri(_gl.TEXTURE_2D, _gl.TEXTURE_MIN_FILTER, _gl.LINEAR_MIPMAP_NEAREST);
+    _gl.texParameteri(_gl.TEXTURE_2D, _gl.TEXTURE_MAG_FILTER, _gl.LINEAR);
+    _gl.texParameteri(_gl.TEXTURE_2D, _gl.TEXTURE_MIN_FILTER, _gl.LINEAR_MIPMAP_LINEAR);
     _gl.generateMipmap(_gl.TEXTURE_2D);
 
     _gl.bindTexture(_gl.TEXTURE_2D, null);

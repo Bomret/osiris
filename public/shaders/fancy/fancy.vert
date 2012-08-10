@@ -6,18 +6,16 @@ uniform mat4 uMVMatrix;
 uniform mat4 uPMatrix;
 uniform mat3 uNMatrix;
 
-uniform vec3 uPointLightPosition;
-
 varying vec3 vVertexNormal;
 varying vec2 vVertexTexCoord;
-varying vec3 vLightDir;
+varying vec3 vVertexPosition;
 
 void main(void) {
     vVertexTexCoord = aVertexTexCoord;	// Send texture coordinates to fragment shader
-	vVertexNormal = aVertexNormal * uNMatrix;	// Convert vertex normal to eye space and send it to fragment shader
+	vVertexNormal = normalize(aVertexNormal * uNMatrix);	// Convert vertex normal to eye space and send it to fragment shader
 
 	vec4 mvPosition = uMVMatrix * vec4(aVertexPosition, 1.0);	// Convert vertex position to eye space
-	vLightDir = normalize(uPointLightPosition - mvPosition.xyz);	// Send calculated light direction to fragment shader
+	vVertexPosition = mvPosition.xyz / mvPosition.z;	// Send calculated vertex position to fragment shader
 
-	gl_Position = uPMatrix * mvPosition;	// Transform geometry
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition, 1.0);	// Transform geometry
 }

@@ -62,7 +62,7 @@ define(["Utils", "jquery", "MainViewModel", "GlMatrix", "TraverseScene"], functi
       _gl.vertexAttribPointer(_locations.vertexTexCoordAttributeLocation, 2, _gl.FLOAT, false, 0, 0);
 
       _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.normals);
-      _gl.vertexAttribPointer(_locations.vertexNormalAttributeLocation, 2, _gl.FLOAT, false, 0, 0);
+      _gl.vertexAttribPointer(_locations.vertexNormalAttributeLocation, 3, _gl.FLOAT, false, 0, 0);
 
       _gl.activeTexture(_gl.TEXTURE0);
       _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.colorMap);
