@@ -7,29 +7,34 @@
 define(["Utils", "async", "TransformMesh", "TransformMaterial"], function(Utils, Async, TransformMesh, TransformMaterial) {
   "use strict";
 
-  var _callback;
+  var _callback,
+    _transformedNode;
 
   function _onComplete(error, results) {
     if (error) {
       _callback(error);
     } else {
       Utils.log("Transformed node", results);
-      _callback(null, results);
+      _transformedNode.mesh = results.transformedMesh;
+      _transformedNode.material = results.transformedMaterial;
+
+      _callback(null, _transformedNode);
     }
   }
 
   return {
     execute: function(node, glContext, callback) {
       _callback = callback;
+      _transformedNode = node;
 
-      Async.parallel([
-        function(callback) {
+      Async.parallel({
+        transformedMesh: function(callback) {
           TransformMesh.execute(node.mesh, glContext, callback);
         },
-        function(callback) {
+        transformedMaterial: function(callback) {
           TransformMaterial.execute(node.material, glContext, callback);
         }
-      ], _onComplete);
+      }, _onComplete);
     }
   };
 });

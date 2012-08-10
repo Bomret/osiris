@@ -4,7 +4,7 @@
  * Time: 15:25
  */
 
-define(["Utils"],function(Utils) {
+define(["Utils"], function(Utils) {
   "use strict";
 
   return  {
@@ -13,23 +13,31 @@ define(["Utils"],function(Utils) {
         program = shaderProgram.program,
         bindables = shaderProgram.bindables,
         vertexPositionAttributeLocation,
-        vertexColorAttributeLocation,
+        vertexTexCoordAttributeLocation,
+        vertexNormalAttributeLocation,
         modelViewMatrixUniformLocation,
         projectionMatrixUniformLocation,
         normalMatrixUniformLocation,
+        ambientLightColorUniformLocation,
+        pointLightColorUniformLocation,
+        pointLightPositionUniformLocation,
+        pointLightSpecularColorUniformLocation,
         colorMapUniformLocation,
         normalMapUniformLocation,
         specularMapUniformLocation;
-
-      Utils.log("BLA", shaderProgram);
 
       try {
         vertexPositionAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexPosition);
         glContext.enableVertexAttribArray(vertexPositionAttributeLocation);
         locations.vertexPositionAttributeLocation = vertexPositionAttributeLocation;
 
-        vertexColorAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexColor);
-        locations.vertexColorAttributeLocation = vertexColorAttributeLocation;
+        vertexNormalAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexNormal);
+        glContext.enableVertexAttribArray(vertexNormalAttributeLocation);
+        locations.vertexNormalAttributeLocation = vertexNormalAttributeLocation;
+
+        vertexTexCoordAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexTexCoords);
+        glContext.enableVertexAttribArray(vertexTexCoordAttributeLocation);
+        locations.vertexTexCoordAttributeLocation = vertexTexCoordAttributeLocation;
 
         modelViewMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.modelViewMatrix);
         locations.modelViewMatrixUniformLocation = modelViewMatrixUniformLocation;
@@ -40,6 +48,18 @@ define(["Utils"],function(Utils) {
         normalMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.normalMatrix);
         locations.normalMatrixUniformLocation = normalMatrixUniformLocation;
 
+        ambientLightColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.ambientLightColor);
+        locations.ambientLightColorUniformLocation = ambientLightColorUniformLocation;
+
+        pointLightColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightColor);
+        locations.pointLightColorUniformLocation = pointLightColorUniformLocation;
+
+        pointLightPositionUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightPosition);
+        locations.pointLightPositionUniformLocation = pointLightPositionUniformLocation;
+
+        pointLightSpecularColorUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.pointLightSpecularColor);
+        locations.pointLightSpecularColorUniformLocation = pointLightSpecularColorUniformLocation;
+
         colorMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.colorMap);
         locations.colorMapUniformLocation = colorMapUniformLocation;
 
@@ -48,6 +68,8 @@ define(["Utils"],function(Utils) {
 
         specularMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.specularMap);
         locations.specularMapUniformLocation = specularMapUniformLocation;
+
+        Utils.log("Locations", locations);
 
         callback(null, locations);
       } catch (error) {
