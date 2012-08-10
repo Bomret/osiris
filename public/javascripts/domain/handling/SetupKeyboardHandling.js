@@ -10,12 +10,10 @@ define(["Utils", "jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"],
   "use strict";
 
   var _nodesToHandle = {},
-    _transposedTransformation = GlMatrix.mat4.create(),
     _callback;
 
   function _onServerResponse(error, response) {
-    var nodeToTransform,
-      transformationToApply;
+    var nodeToTransform;
 
     if (error) {
       _callback(error);

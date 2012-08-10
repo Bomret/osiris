@@ -4,7 +4,7 @@
  * Time: 15:25
  */
 
-define(function() {
+define(["Utils"],function(Utils) {
   "use strict";
 
   return  {
@@ -15,7 +15,13 @@ define(function() {
         vertexPositionAttributeLocation,
         vertexColorAttributeLocation,
         modelViewMatrixUniformLocation,
-        projectionMatrixUniformLocation;
+        projectionMatrixUniformLocation,
+        normalMatrixUniformLocation,
+        colorMapUniformLocation,
+        normalMapUniformLocation,
+        specularMapUniformLocation;
+
+      Utils.log("BLA", shaderProgram);
 
       try {
         vertexPositionAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexPosition);
@@ -30,6 +36,18 @@ define(function() {
 
         projectionMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.projectionMatrix);
         locations.projectionMatrixUniformLocation = projectionMatrixUniformLocation;
+
+        normalMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.normalMatrix);
+        locations.normalMatrixUniformLocation = normalMatrixUniformLocation;
+
+        colorMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.colorMap);
+        locations.colorMapUniformLocation = colorMapUniformLocation;
+
+        normalMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.normalMap);
+        locations.normalMapUniformLocation = normalMapUniformLocation;
+
+        specularMapUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.specularMap);
+        locations.specularMapUniformLocation = specularMapUniformLocation;
 
         callback(null, locations);
       } catch (error) {
