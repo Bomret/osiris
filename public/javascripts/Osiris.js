@@ -24,14 +24,16 @@ define(["Utils", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "
   }
 
   return {
-    execute: function() {
+    init: function() {
       Ui.init(function() {
-        Ui.updateStatus("info", "Reloading...");
-        Utils.log("Reset!", Ui.getCurrentShader(), Ui.getCurrentScene());
+        Ui.updateStatus("info", "Loading resources...");
+        Utils.log("Loading resources...", Ui.getCurrentShader(), Ui.getCurrentScene());
 
-        window.location.reload();
+        this.execute();
       }.bind(this));
+    },
 
+    execute: function() {
       Async.auto({
           glContext: function(callback) {
             Ui.updateStatus("info", "Setting up WebGL context...");

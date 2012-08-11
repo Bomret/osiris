@@ -70,7 +70,7 @@ require(["Osiris"], function(Osiris) {
   "use strict";
 
   try {
-    Osiris.execute();
+    Osiris.init();
   } catch (error) {
     window.alert(error.message);
   }

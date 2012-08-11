@@ -1,5 +1,4 @@
 {
-    "name": "Simple cube",
     "type": "scene",
     "rootNode": {
         "id": "root",
