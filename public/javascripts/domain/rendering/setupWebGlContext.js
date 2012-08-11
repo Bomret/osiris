@@ -4,7 +4,7 @@
  * Time: 13:51
  */
 
-define(["Utils", "WebGl"], function(Utils, WebGl) {
+define(["WebGl"], function(WebGl) {
   "use strict";
 
   return {

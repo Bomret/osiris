@@ -4,7 +4,7 @@
  * Time: 16:21
  */
 
-define(["Utils", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"], function(Utils, Async, DownloadSceneFromServer, PrepareSceneForRendering) {
+define(["Log", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"], function(Log, Async, DownloadSceneFromServer, PrepareSceneForRendering) {
   "use strict";
 
   var _callback;
@@ -13,7 +13,6 @@ define(["Utils", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"]
     if (error) {
       _callback(error);
     } else {
-      Utils.log("Prepared scene", preparedScene);
       _callback(null, preparedScene);
     }
   }
@@ -32,9 +31,11 @@ define(["Utils", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"]
 
       Async.waterfall([
         function(callback) {
+          Log.info("Downloading scene '" + sceneInformation.name + "'...");
           DownloadSceneFromServer.execute(sceneInformation, callback);
         },
         function(downloadedScene, callback) {
+          Log.info("Preparing the scene for rendering");
           PrepareSceneForRendering.execute(downloadedScene, glContext, callback);
         }
       ], _onComplete);

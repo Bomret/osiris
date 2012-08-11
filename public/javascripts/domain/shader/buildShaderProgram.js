@@ -4,7 +4,7 @@
  * Time: 16:16
  */
 
-define(["Utils", "Shader"], function(Utils, Shader) {
+define(["Shader"], function(Shader) {
   "use strict";
 
   var _gl;

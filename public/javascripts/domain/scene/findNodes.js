@@ -6,7 +6,7 @@
  * This module contains methods to find nodes of a specific type or id in a given traversable scene.
  */
 
-define(["Utils", "TraverseScene"], function(Utils, TraverseScene) {
+define(["TraverseScene"], function(TraverseScene) {
   "use strict";
 
   return {

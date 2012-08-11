@@ -6,7 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-define(["Utils", "jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function(Utils, $, FindNodes, SendMessage, GlMatrix, Msg) {
+define(["jquery", "FindNodes", "SendMessage", "GlMatrix", "Messaging"], function($, FindNodes, SendMessage, GlMatrix, Msg) {
   "use strict";
 
   var _nodesToHandle = {},

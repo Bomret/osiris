@@ -21,7 +21,7 @@ require.config({
     async: "lib/async",
     GlMatrix: "lib/glmatrix",
     WebGl: "lib/webgl-utils",
-    Utils: "lib/Utils",
+    Log: "lib/Log",
 
     // infrastructure
     SendMessage: "infrastructure/SendMessageToServer",
@@ -31,7 +31,7 @@ require.config({
 
     // domain
     // -- handling
-    SetupKeyboardHandling: "domain/handling/SetupKeyboardHandling",
+    HandleUserInput: "domain/handling/HandleUserInput",
 
     // -- rendering
     SetupWebGlContext: "domain/rendering/SetupWebGlContext",
@@ -39,7 +39,7 @@ require.config({
 
     // -- shader
     LoadShaders: "domain/shader/LoadShaders",
-    LoadShaderConfig: "domain/shader/LoadShaderConfig",
+    DownloadShaderConfigFromServer: "domain/shader/DownloadShaderConfigFromServer",
     BuildShaderProgram: "domain/shader/BuildShaderProgram",
 
     // -- model
@@ -61,7 +61,6 @@ require.config({
     Messaging: "contracts/Messaging",
     Obj: "contracts/Obj",
     Shader: "contracts/Shader",
-    Rendering: "contracts/Rendering",
     Scene: "contracts/Scene"
   }
 });

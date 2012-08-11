@@ -4,7 +4,7 @@
  * Time: 03:09
  */
 
-define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
+define(["Log", "Obj"], function(Log, Obj) {
   "use strict";
 
   var _model,
@@ -56,7 +56,7 @@ define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
   }
 
   return {
-    execute: function(modelFile) {
+    execute: function(modelFile, callback) {
       var lines,
         line,
         elements;
@@ -68,13 +68,13 @@ define(["Obj", "Utils", "ParseMtlFile"], function(Obj, Utils, ParseMtlFile) {
         line = lines[i];
         elements = line.split(/ +/);
 
-        if (Utils.stringStartsWith(line, "vn")) {
+        if (line.indexOf("vn") === 0) {
           processVertex(elements, "normals");
-        } else if (Utils.stringStartsWith(line, "vt")) {
+        } else if (line.indexOf("vt") === 0) {
           processVertex(elements, "texCoords");
-        } else if (Utils.stringStartsWith(line, "v")) {
+        } else if (line.indexOf("v") === 0) {
           processVertex(elements, "vertices");
-        } else if (Utils.stringStartsWith(line, "f")) {
+        } else if (line.indexOf("f") === 0) {
           processFace(elements);
         }
       }
