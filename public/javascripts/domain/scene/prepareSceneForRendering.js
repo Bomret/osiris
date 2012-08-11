@@ -4,7 +4,7 @@
  * Time: 16:38
  */
 
-define(["async", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function(Async, FindNodes, TransformModelNode, SendMessage, Messaging) {
+define(["Utils", "jquery","async", "GlMatrix", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function(Utils,$,Async, GlMatrix, FindNodes, TransformModelNode, SendMessage, Messaging) {
   "use strict";
 
   var _preparedScene,

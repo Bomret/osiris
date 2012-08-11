@@ -4,37 +4,36 @@
  * Time: 15:25
  */
 
-define(function() {
-  "use strict";
+define(["Utils", "jquery", "async"], function (Utils, $, Async) {
+    "use strict";
 
-  return  {
-    execute: function(glContext, shaderProgram, callback) {
-      var locations = {},
-        program = shaderProgram.program,
-        bindables = shaderProgram.bindables,
-        vertexPositionAttributeLocation,
-        vertexColorAttributeLocation,
-        modelViewMatrixUniformLocation,
-        projectionMatrixUniformLocation;
+    return  {
+        execute:function (glContext, shaderProgram, callback) {
+            var locations = {},
+                program = shaderProgram.program,
+                bindables = shaderProgram.bindables;
 
-      try {
-        vertexPositionAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexPosition);
-        glContext.enableVertexAttribArray(vertexPositionAttributeLocation);
-        locations.vertexPositionAttributeLocation = vertexPositionAttributeLocation;
+            try {
+                Async.parallel([
+                    function () {
+                        $.each(bindables.attributes, function (key, attribute) {
+                            var attributeLocation = glContext.getAttribLocation(program, attribute);
+                            glContext.enableVertexAttribArray(attributeLocation);
+                            locations[key] = attributeLocation;
+                        });
+                    },
+                    function () {
+                        $.each(bindables.uniforms, function (key, uniform) {
+                            locations[key] = glContext.getUniformLocation(program, uniform);
+                        });
+                    }
+                ]);
 
-        vertexColorAttributeLocation = glContext.getAttribLocation(program, bindables.attributes.vertexColor);
-        locations.vertexColorAttributeLocation = vertexColorAttributeLocation;
-
-        modelViewMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.modelViewMatrix);
-        locations.modelViewMatrixUniformLocation = modelViewMatrixUniformLocation;
-
-        projectionMatrixUniformLocation = glContext.getUniformLocation(program, bindables.uniforms.projectionMatrix);
-        locations.projectionMatrixUniformLocation = projectionMatrixUniformLocation;
-
-        callback(null, locations);
-      } catch (error) {
-        callback(error);
-      }
-    }
-  };
+                Utils.log("Locations", locations);
+                callback(null, locations);
+            } catch (error) {
+                callback(error);
+            }
+        }
+    };
 });

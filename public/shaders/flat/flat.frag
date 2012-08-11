@@ -1,8 +1,10 @@
 precision mediump float;
 
-varying vec4 vVertexColor;
+uniform sampler2D uColorMap;
+
+varying vec2 vTexCoords;
 
 void main() {
-    //gl_FragColor = vec4(1.0,1.0,1.0,1.0);
-    gl_FragColor = vVertexColor;
+    gl_FragColor = texture2D(uColorMap, vTexCoords);
+    //gl_FragColor = vVertexColor;
 }

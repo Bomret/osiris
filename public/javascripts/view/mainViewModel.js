@@ -7,7 +7,7 @@
 define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader) {
     "use strict";
 
-    var _resetCallback,
+    var _loadCallback,
       _availableScenes,
       _availableShaders,
       _currentScene,
@@ -55,22 +55,25 @@ define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader)
 
     function _setupRenderButton() {
       $("#startRender").click(function() {
-        _resetCallback();
+        $("#settings").hide();
+        $("#renderCanvas").show();
+        _loadCallback();
       });
     }
 
     function _setupRenderCanvas() {
-      Utils.log("Setting up canvas");
-      _renderCanvas = $("#renderCanvas").get(0);
+      _renderCanvas = $("#renderCanvas").hide().get(0);
     }
 
     function _setupStatusOutput() {
       _statusOutput = $("#statusOutput");
+      _statusOutput.css("width", Math.floor(window.innerWidth * 0.9));
+      _statusOutput.html("<p>Please select the desired scene and shader below.</p>");
     }
 
     return {
       init: function(resetCallback) {
-        _resetCallback = resetCallback;
+        _loadCallback = resetCallback;
         _setupRenderCanvas();
         _setupStatusOutput();
         _setupAvailableShaders();

@@ -11,10 +11,9 @@ define(["Utils", "WebGl"], function(Utils, WebGl) {
     execute: function(canvas, callback) {
       var glContext;
 
-      Utils.log("Canvas", canvas);
-
       try {
         glContext = WebGl.setupWebGL(canvas);
+
         callback(null, glContext);
       } catch (error) {
         callback(error);
