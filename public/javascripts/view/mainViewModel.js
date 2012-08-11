@@ -4,53 +4,34 @@
  * Time: 01:47
  */
 
-define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader) {
+define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
     "use strict";
 
     var _loadCallback,
-      _availableScenes,
-      _availableShaders,
+      _availableScenes = [],
+      _availableShaders = [],
       _currentScene,
       _currentShader,
       _renderCanvas,
       _statusOutput;
 
     function _setupAvailableShaders() {
-      _availableShaders = [];
-
       $("#availableShaders option").each(function(index, element) {
         var name = element.text,
           config = JSON.parse(element.value);
 
         _availableShaders.push(new Shader.ShaderConfigurationInformation(name, config));
       });
+
       _currentShader = _availableShaders[$("#availableShaders option:selected").index()];
-
-      Utils.log("Available shaders", _availableShaders);
-      Utils.log("Current Shader", _currentShader);
-
-      $("#availableShaders").change(function() {
-        _currentShader = _availableShaders[this.selectedIndex];
-        Utils.log("Current Shader changed", _currentShader);
-      });
     }
 
     function _setupAvailableScenes() {
-      _availableScenes = [];
-
       $("#availableScenes option").each(function(index, element) {
         _availableScenes.push(new Scene.SceneInformation(element.text, element.value));
       });
 
       _currentScene = _availableScenes[$("#availableScenes option:selected").index()];
-
-      Utils.log("Available scenes", _availableScenes);
-      Utils.log("Current Scene", _currentScene);
-
-      $("#availableScenes").change(function() {
-        _currentShader = _availableScenes[this.selectedIndex];
-        Utils.log("Current Scene changed", _currentScene);
-      });
     }
 
     function _setupRenderButton() {
@@ -67,7 +48,7 @@ define(["Utils", "jquery", "Scene", "Shader"], function(Utils, $, Scene, Shader)
 
     function _setupStatusOutput() {
       _statusOutput = $("#statusOutput");
-      _statusOutput.css("width", Math.floor(window.innerWidth * 0.9));
+      _statusOutput.css("width", window.innerWidth);
       _statusOutput.html("<p>Please select the desired scene and shader below.</p>");
     }
 

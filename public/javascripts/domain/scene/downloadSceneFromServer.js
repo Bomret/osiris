@@ -21,7 +21,7 @@ define(["jquery"], function($) {
           callback(null, loadedScene);
         },
         error: function(error) {
-          callback(error, null);
+          callback(error);
         }
       });
     }

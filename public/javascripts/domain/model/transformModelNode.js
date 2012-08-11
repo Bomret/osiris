@@ -4,7 +4,7 @@
  * Time: 02:58
  */
 
-define(["Utils", "async", "TransformMesh", "TransformMaterial"], function(Utils, Async, TransformMesh, TransformMaterial) {
+define(["async", "TransformMesh", "TransformMaterial"], function(Async, TransformMesh, TransformMaterial) {
   "use strict";
 
   var _callback,
@@ -14,7 +14,6 @@ define(["Utils", "async", "TransformMesh", "TransformMaterial"], function(Utils,
     if (error) {
       _callback(error);
     } else {
-      Utils.log("Transformed node", results);
       _transformedNode.mesh = results.transformedMesh;
       _transformedNode.material = results.transformedMaterial;
 

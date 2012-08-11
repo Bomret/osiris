@@ -4,7 +4,7 @@
  * Time: 21:09
  */
 
-define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Utils, Async, LoadShaderConfig, BuildShaderProgram) {
+define(["Log", "async", "DownloadShaderConfigFromServer", "BuildShaderProgram"], function(Log, Async, DownloadShaderConfigFromServer, BuildShaderProgram) {
   "use strict";
 
   var _callback;
@@ -13,7 +13,6 @@ define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Ut
     if (error) {
       _callback(error);
     } else {
-      Utils.log("Built shader program", builtShaderProgram);
       _callback(null, builtShaderProgram);
     }
   }
@@ -24,11 +23,11 @@ define(["Utils", "async", "LoadShaderConfig", "BuildShaderProgram"], function(Ut
 
       Async.waterfall([
         function(callback) {
-          Utils.log("Exec LoadShaderConfig");
-          LoadShaderConfig.execute(shaderInformation, callback);
+          Log.info("Downloading shader configuration '" + shaderInformation.name + "'...");
+          DownloadShaderConfigFromServer.execute(shaderInformation, callback);
         },
         function(downloadedShaderConfig, callback) {
-          Utils.log("Exec BuildShaderProgram", downloadedShaderConfig);
+          Log.info("Building shader program...");
           BuildShaderProgram.execute(downloadedShaderConfig, glContext, callback);
         }
       ], _onComplete);

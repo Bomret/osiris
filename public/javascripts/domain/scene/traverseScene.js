@@ -4,7 +4,7 @@
  * Time: 15:11
  */
 
-define(["Utils", "jquery"], function(Utils, $) {
+define(["jquery"], function($) {
   "use strict";
 
   function _visit(node, executor) {

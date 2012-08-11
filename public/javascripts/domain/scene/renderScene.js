@@ -4,7 +4,7 @@
  * Time: 21:08
  */
 
-define(["Utils", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], function(Utils, WebGl, TraverseAndRender, SetupShaderBindableLocations) {
+define(["Log", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], function(Log, WebGl, TraverseAndRender, SetupShaderBindableLocations) {
   "use strict";
 
   var _gl,
@@ -23,7 +23,7 @@ define(["Utils", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], 
 
   function _stopDrawing() {
     _isStopped = true;
-    Utils.log("Rendering stopped");
+    Log.info("Rendering stopped.");
   }
 
   return {

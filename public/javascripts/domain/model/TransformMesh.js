@@ -4,7 +4,7 @@
  * Time: 13:59
  */
 
-define(["Utils"], function(Utils) {
+define(["jquery"], function($) {
   "use strict";
 
   var _gl;
@@ -29,22 +29,23 @@ define(["Utils"], function(Utils) {
 
   return {
     execute: function(meshData, glContext, callback) {
+      var transformedMesh = $.extend(true, {}, meshData);
       _gl = glContext;
 
       try {
-        meshData.numVertices = meshData.vertices.length;
-        meshData.vertices = _transformArrayIntoFloat32ArrayBuffer(meshData.vertices);
+        transformedMesh.numVertices = transformedMesh.vertices.length;
+        transformedMesh.vertices = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.vertices);
 
-        meshData.numNormals = meshData.normals.length;
-        meshData.normals = _transformArrayIntoFloat32ArrayBuffer(meshData.normals);
+        transformedMesh.numNormals = transformedMesh.normals.length;
+        transformedMesh.normals = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.normals);
 
-        meshData.numTexCoords = meshData.texCoords.length;
-        meshData.texCoords = _transformArrayIntoFloat32ArrayBuffer(meshData.texCoords);
+        transformedMesh.numTexCoords = transformedMesh.texCoords.length;
+        transformedMesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.texCoords);
 
-        meshData.numIndices = meshData.indices.length;
-        meshData.indices = _transformArrayIntoUInt16ElementArrayBuffer(meshData.indices);
+        transformedMesh.numIndices = transformedMesh.indices.length;
+        transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(transformedMesh.indices);
 
-        callback(null, meshData);
+        callback(null, transformedMesh);
       } catch (error) {
         callback(error);
       }
