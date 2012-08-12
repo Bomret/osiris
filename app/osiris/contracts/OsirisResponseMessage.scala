@@ -13,15 +13,6 @@ sealed trait OsirisResponseMessage {
   def getJson: JsValue
 }
 
-case class OsirisDebug(msg: String) extends OsirisResponseMessage {
-  def getJson = Json.toJson(
-    Map(
-      "status" -> "debug",
-      "data" -> msg
-    )
-  )
-}
-
 case class NodesSetupComplete() extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
@@ -59,15 +50,6 @@ case class OsirisError(private val error: Exception) extends OsirisResponseMessa
           "stack" -> Json.toJson(error.getStackTraceString)
         )
       )
-    )
-  )
-}
-
-case class RenderStartResponse() extends OsirisResponseMessage {
-  def getJson = Json.toJson(
-    Map(
-      "status" -> "ok",
-      "data" -> "StartRender"
     )
   )
 }

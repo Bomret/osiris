@@ -122,6 +122,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
                       case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
                         origin ! TransformRequest(id.name, FloatMath.transpose(mat))
                       })
+                      case None =>
                     }
                   })
               }
