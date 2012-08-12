@@ -28,13 +28,6 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
             }
 
             case "manipulate" => sirisOverlord ! ManipulationRequest(json)
-
-            case "start" => out(RenderStartResponse().getJson)
-
-            case "shutdown" => {
-              sirisOverlord ! Exit
-              exit()
-            }
           }
         }
 
@@ -43,8 +36,6 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
         case msg: TransformRequest => out(msg getJson)
 
         case msg: OsirisError => out(msg getJson)
-
-        case msg: OsirisDebug => out(msg getJson)
       }
     }
   }
