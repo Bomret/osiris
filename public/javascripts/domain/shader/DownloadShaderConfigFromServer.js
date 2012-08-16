@@ -4,7 +4,7 @@
  * Time: 12:23
  */
 
-define(["jquery"], function($) {
+define(["zepto"], function($) {
   "use strict";
 
   var _pathToShaderController = "/shaders";

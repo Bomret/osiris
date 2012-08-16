@@ -4,7 +4,7 @@
  * Time: 13:59
  */
 
-define(["jquery"], function($) {
+define(["zepto"], function($) {
   "use strict";
 
   var _gl;
@@ -29,7 +29,7 @@ define(["jquery"], function($) {
 
   return {
     execute: function(meshData, glContext, callback) {
-      var transformedMesh = $.extend(true, {}, meshData);
+      var transformedMesh = $.extend({}, meshData);
       _gl = glContext;
 
       try {

@@ -5,10 +5,13 @@
  */
 
 require.config({
-  // legacy non AMD scripts that add themselves to the global object
+  // Non AMD scripts that add themselves to the global object
   shim: {
     "async": {
       exports: "async"
+    },
+    "zepto": {
+      exports: "$"
     }
   },
 
@@ -17,7 +20,7 @@ require.config({
     Osiris: "Osiris",
 
     // libraries
-    jquery: "lib/jquery",
+    zepto: "lib/zepto",
     async: "lib/async",
     GlMatrix: "lib/glmatrix",
     WebGl: "lib/webgl-utils",
@@ -65,12 +68,13 @@ require.config({
   }
 });
 
-require(["Osiris"], function(Osiris) {
+require(["Osiris", "Log"], function(Osiris, Log) {
   "use strict";
 
   try {
     Osiris.init();
   } catch (error) {
-    window.alert(error.message);
+    window.alert("An unexpected error happended. Please see the console log for details.");
+    Log.error(error.message, error.stack);
   }
 });

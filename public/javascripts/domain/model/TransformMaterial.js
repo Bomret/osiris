@@ -4,7 +4,7 @@
  * Time: 23:45
  */
 
-define(["async", "jquery"], function(Async, $) {
+define(["async", "zepto"], function(Async, $) {
   "use strict";
 
   var _gl,
@@ -64,7 +64,7 @@ define(["async", "jquery"], function(Async, $) {
     execute: function(materialData, glContext, callback) {
       _gl = glContext;
       _callback = callback;
-      _transformedMaterial = $.extend(true, {}, materialData);
+      _transformedMaterial = $.extend({}, materialData);
 
       try {
         Async.parallel({

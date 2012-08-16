@@ -4,7 +4,7 @@
  * Time: 16:38
  */
 
-define(["jquery", "async", "GlMatrix", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function($, Async, GlMatrix, FindNodes, TransformModelNode, SendMessage, Messaging) {
+define(["zepto", "async", "GlMatrix", "FindNodes", "TransformModelNode", "SendMessage", "Messaging"], function($, Async, GlMatrix, FindNodes, TransformModelNode, SendMessage, Messaging) {
   "use strict";
 
   var _preparedScene,

@@ -4,7 +4,7 @@
  * Time: 15:25
  */
 
-define(["jquery", "async"], function($, Async) {
+define(["zepto", "async"], function($, Async) {
   "use strict";
 
   return  {

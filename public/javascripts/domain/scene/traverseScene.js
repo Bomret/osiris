@@ -4,7 +4,7 @@
  * Time: 15:11
  */
 
-define(["jquery"], function($) {
+define(["zepto"], function($) {
   "use strict";
 
   function _visit(node, executor) {

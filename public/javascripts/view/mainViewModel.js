@@ -4,7 +4,7 @@
  * Time: 01:47
  */
 
-define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
+define(["Log", "zepto", "Scene", "Shader"], function(Log, $, Scene, Shader) {
     "use strict";
 
     var _loadCallback,
@@ -23,7 +23,7 @@ define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
         _availableShaders.push(new Shader.ShaderConfigurationInformation(name, config));
       });
 
-      _currentShader = _availableShaders[$("#availableShaders option:selected").index()];
+      _currentShader = _availableShaders[$("#availableShaders option").index()];
     }
 
     function _setupAvailableScenes() {
@@ -31,7 +31,7 @@ define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
         _availableScenes.push(new Scene.SceneInformation(element.text, element.value));
       });
 
-      _currentScene = _availableScenes[$("#availableScenes option:selected").index()];
+      _currentScene = _availableScenes[$("#availableScenes option").index()];
     }
 
     function _setupRenderButton() {
@@ -43,7 +43,9 @@ define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
     }
 
     function _setupRenderCanvas() {
-      _renderCanvas = $("#renderCanvas").hide().get(0);
+      var canvas = $("#renderCanvas");
+      canvas.hide();
+      _renderCanvas = canvas.get(0);
     }
 
     function _setupStatusOutput() {

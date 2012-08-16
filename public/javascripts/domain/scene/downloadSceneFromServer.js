@@ -4,7 +4,7 @@
  * Time: 13:18
  */
 
-define(["jquery"], function($) {
+define(["zepto"], function($) {
   "use strict";
 
   var _pathToSceneController = "/scenes";

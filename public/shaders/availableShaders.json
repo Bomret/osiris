@@ -6,6 +6,13 @@
                 "path": "fancy",
                 "file": "fancy.config"
             }
+        },
+        {
+            "name": "Flat",
+            "config": {
+                "path": "flat",
+                "file": "flat.config"
+            }
         }
     ]
 }

@@ -4,7 +4,7 @@
  * Time: 14:13
  */
 
-define(["jquery", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, GlMatrix, TraverseScene) {
+define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, GlMatrix, TraverseScene) {
   "use strict";
 
   var _modelViewMatrixStack = [],
@@ -97,7 +97,7 @@ define(["jquery", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui,
 
   function _updateGlInfo(renderer) {
     $.each(renderer.options, function(key, value) {
-      if (Array.isArray(value)) {
+      if ($.isArray(value)) {
         $.each(value, function(index, val) {
           _gl[key](_gl[val]);
         });
