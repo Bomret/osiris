@@ -24,7 +24,7 @@ require.config({
     async: "lib/async",
     GlMatrix: "lib/glmatrix",
     WebGl: "lib/webgl-utils",
-    Log: "lib/Log",
+    Log: "lib/log",
 
     // infrastructure
     SendMessage: "infrastructure/SendMessageToServer",
