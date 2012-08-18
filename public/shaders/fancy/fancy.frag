@@ -9,17 +9,18 @@ uniform sampler2D uColorMap;
 uniform sampler2D uNormalMap;
 uniform sampler2D uSpecularMap;
 
-varying vec3 vVertexNormal;
+varying vec3 vTransformedVertexNormal;
 varying vec2 vVertexTexCoord;
 varying vec3 vVertexPosition;
 
 void main(void) {
 
     // Calculate fragment normal
-    vec3 normalMap = texture2D(uNormalMap, vVertexTexCoord).rgb * 2.0 - 1.0;
-	vec3 normal = normalize(vVertexNormal - normalMap);
+    //vec3 normalMap = normalize(texture2D(uNormalMap, vVertexTexCoord).rgb * 2.0 - 1.0);
+	//vec3 normal = normalize(vTransformedVertexNormal - normalMap);
+	vec3 normal = normalize(vTransformedVertexNormal);
 
-	vec3 vecToLight = normalize(uPointLightPosition - vVertexPosition);
+	vec3 vecToLight = normalize(vec3(uPointLightPosition - vVertexPosition));
 
 	// Calc diffuse light color of fragment
 	float diffuseLightWeighting = max(0.0, dot(normal, vecToLight));

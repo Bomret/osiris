@@ -2,7 +2,7 @@
     "scenes": [
         {
             "name": "Companions",
-            "file": "companions.json"
+            "file": "companions.scene"
         }
     ]
 }

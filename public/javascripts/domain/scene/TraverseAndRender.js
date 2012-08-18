@@ -131,13 +131,8 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, 
   }
 
   function _updateRenderMatrices() {
-    _gl.uniformMatrix4fv(_locations.modelViewMatrix, false, _modelViewMatrix);
     _gl.uniformMatrix4fv(_locations.projectionMatrix, false, _projectionMatrix);
-
-    var normalMatrix = GlMatrix.mat3.create();
-    GlMatrix.mat4.toInverseMat3(_modelViewMatrix, normalMatrix);
-    GlMatrix.mat3.transpose(normalMatrix);
-    _gl.uniformMatrix3fv(_locations.normalMatrix, false, normalMatrix);
+    _gl.uniformMatrix4fv(_locations.modelViewMatrix, false, _modelViewMatrix);
   }
 
   return {
