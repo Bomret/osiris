@@ -12,10 +12,9 @@ define(["zepto", "async", "GlMatrix", "FindNodes", "TransformModelNode", "SendMe
 
   function _onComplete(error) {
     if (error) {
-      _callback(error);
-    } else {
-      _callback(null, _preparedScene);
+      return _callback(error);
     }
+    _callback(null, _preparedScene);
   }
 
   return {

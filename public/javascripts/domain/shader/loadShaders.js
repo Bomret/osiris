@@ -11,10 +11,9 @@ define(["Log", "async", "DownloadShaderConfigFromServer", "BuildShaderProgram"],
 
   function _onComplete(error, builtShaderProgram) {
     if (error) {
-      _callback(error);
-    } else {
-      _callback(null, builtShaderProgram);
+      return _callback(error);
     }
+    _callback(null, builtShaderProgram);
   }
 
   return {
@@ -33,4 +32,5 @@ define(["Log", "async", "DownloadShaderConfigFromServer", "BuildShaderProgram"],
       ], _onComplete);
     }
   };
-});
+})
+;

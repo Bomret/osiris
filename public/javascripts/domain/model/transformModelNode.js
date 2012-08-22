@@ -12,13 +12,12 @@ define(["async", "TransformMesh", "TransformMaterial"], function(Async, Transfor
 
   function _onComplete(error, results) {
     if (error) {
-      _callback(error);
-    } else {
-      _transformedNode.mesh = results.transformedMesh;
-      _transformedNode.material = results.transformedMaterial;
-
-      _callback(null, _transformedNode);
+      return _callback(error);
     }
+    _transformedNode.mesh = results.transformedMesh;
+    _transformedNode.material = results.transformedMaterial;
+
+    _callback(null, _transformedNode);
   }
 
   return {

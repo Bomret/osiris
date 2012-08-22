@@ -11,10 +11,9 @@ define(["Log", "async", "DownloadSceneFromServer", "PrepareSceneForRendering"], 
 
   function _onComplete(error, preparedScene) {
     if (error) {
-      _callback(error);
-    } else {
-      _callback(null, preparedScene);
+      return _callback(error);
     }
+    _callback(null, preparedScene);
   }
 
   return {

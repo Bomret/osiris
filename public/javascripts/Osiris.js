@@ -13,16 +13,16 @@ define(["Log", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "Lo
 
   function _onSetupComplete(error, results) {
     if (error) {
-      _handleError(error);
-    } else {
-      Ui.updateStatus("info", "Setting up user input handling...");
-      Log.info("Setting up user input handling...");
-      HandleUserInput.execute(results.loadedScene, _handleError);
-
-      Ui.updateStatus("info", "Rendering...");
-      Log.info("Rendering...");
-      RenderScene.execute(results.loadedScene, results.glContext, results.loadedShaderProgram, _handleError);
+      return _handleError(error);
     }
+
+    Ui.updateStatus("info", "Setting up user input handling...");
+    Log.info("Setting up user input handling...");
+    HandleUserInput.execute(results.loadedScene, _handleError);
+
+    Ui.updateStatus("info", "Rendering...");
+    Log.info("Rendering...");
+    RenderScene.execute(results.loadedScene, results.glContext, results.loadedShaderProgram, _handleError);
   }
 
   return {

@@ -50,14 +50,13 @@ define(["async", "zepto"], function(Async, $) {
 
   function _onComplete(error, results) {
     if (error) {
-      _callback(error);
-    } else {
-      _transformedMaterial.colorMap = results.colorMap;
-      _transformedMaterial.normalMap = results.normalMap;
-      _transformedMaterial.specularMap = results.specularMap;
-
-      _callback(null, _transformedMaterial);
+      return _callback(error);
     }
+    _transformedMaterial.colorMap = results.colorMap;
+    _transformedMaterial.normalMap = results.normalMap;
+    _transformedMaterial.specularMap = results.specularMap;
+
+    _callback(null, _transformedMaterial);
   }
 
   return {
