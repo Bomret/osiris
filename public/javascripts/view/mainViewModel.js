@@ -35,7 +35,7 @@ define(["Log", "zepto", "Scene", "Shader"], function(Log, $, Scene, Shader) {
     }
 
     function _setupRenderButton() {
-      $("#startRender").click(function() {
+      $("#startRender").on("click", function() {
         $("#settings").hide();
         $("#renderCanvas").show();
         _loadCallback();
