@@ -48,7 +48,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
       physics ! PhysicsConfiguration(ConstVec3f(0.0f, -9.81f, 0.0f))
 
       physicsActor = physics
-    })(error => sender ! OsirisError(error))
+    })(error => sender ! OsirisError(error.getMessage, error.getStackTraceString))
   }
 
   override def shutdown() {
@@ -103,33 +103,30 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
 
       msg.nodes foreach {
         node => {
-          try {
-            val id = Symbol((node \ "id").as[String])
+          val id = Symbol((node \ "id").as[String])
 
-            handleEntity(id)(entity => entity match {
-              case Some(ent) => {
-                physicsActor ! SetTransformation(ent, _makeTransformation(node))
-              }
-              case None => {
-                realize(
-                  EntityDescription(
-                    _makePhysicShape(node)
-                  ),
-                  (e: Entity) => {
-                    registerEntity(id, e)
+          handleEntity(id)(entity => entity match {
+            case Some(ent) => {
+              physicsActor ! SetTransformation(ent, _makeTransformation(node))
+            }
+            case None => {
+              realize(
+                EntityDescription(
+                  _makePhysicShape(node)
+                ),
+                (e: Entity) => {
+                  registerEntity(id, e)
 
-                    e.get(Transformation) match {
-                      case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                        origin ! TransformRequest(id.name, FloatMath.transpose(mat))
-                      })
-                      case None =>
-                    }
-                  })
-              }
-            })
-          } catch {
-            case ex: Exception => origin ! OsirisError(ex)
-          }
+                  e.get(Transformation) match {
+                    case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
+                      origin ! TransformRequest(id.name, FloatMath.transpose(mat))
+                    })
+                    case None => origin ! OsirisError("The node '" + id + "' has no transformation")
+                  }
+                }
+              )
+            }
+          })
         }
       }
 
@@ -141,16 +138,15 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
     request => {
       val origin = sender
 
-      try {
-        handleEntity(request.nodeSymbol)(node => {
+      handleEntity(request.nodeSymbol)(node => node match {
+        case Some(n) => {
           if (request.manipulationType == "ApplyImpulse") {
             val data = request.manipulationData
             physicsActor ! ApplyImpulse(node.get, data)
           }
-        })
-      } catch {
-        case ex: Exception => origin ! OsirisError(ex)
-      }
+        }
+        case None => origin ! OsirisError("A node with id '" + request.nodeSymbol + "' was not registered.")
+      })
     }
   }
 }

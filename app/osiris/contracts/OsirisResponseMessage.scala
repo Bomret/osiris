@@ -40,14 +40,14 @@ case class TransformRequest(private val nodeId: String, private val transform: C
   )
 }
 
-case class OsirisError(private val error: Exception) extends OsirisResponseMessage {
+case class OsirisError(private val message: String, private val stack: String = "No stack trace available") extends OsirisResponseMessage {
   def getJson = Json.toJson(
     Map(
       "status" -> Json.toJson("error"),
       "data" -> Json.toJson(
         Map(
-          "message" -> Json.toJson(error.getMessage),
-          "stack" -> Json.toJson(error.getStackTraceString)
+          "message" -> Json.toJson(message),
+          "stack" -> Json.toJson(stack)
         )
       )
     )

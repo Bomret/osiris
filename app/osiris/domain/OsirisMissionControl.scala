@@ -23,10 +23,7 @@ class OsirisMissionControl(out: (JsValue) => Unit) extends Actor {
           val json = Json toJson msg.message
           (json \ "request").as[String]
           match {
-            case "setup" => {
-              sirisOverlord ! SetupRequest(json)
-            }
-
+            case "setup" => sirisOverlord ! SetupRequest(json)
             case "manipulate" => sirisOverlord ! ManipulationRequest(json)
           }
         }
