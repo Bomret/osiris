@@ -34,7 +34,7 @@ require.config({
 
     // domain
     // -- handling
-    HandleUserInput: "domain/handling/HandleUserInput",
+    HandleUserInput: "domain/input/HandleUserInput",
 
     // -- rendering
     SetupWebGlContext: "domain/rendering/SetupWebGlContext",
