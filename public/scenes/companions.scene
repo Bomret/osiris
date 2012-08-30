@@ -19,7 +19,6 @@
                         "optics": {
                             "type": "perspective",
                             "focalDistance": 60,
-                            "aspectRatio": "compute",
                             "near": 0.1,
                             "far": 100
                         }
@@ -33,14 +32,7 @@
                             "b": 0.0,
                             "a": 1.0
                         },
-                        "clear": 16640,
-                        "options": {
-                            "enable": [
-                                "DEPTH_TEST", "CULL_FACE"
-                            ],
-                            "cullFace": "BACK",
-                            "frontFace": "CCW"
-                        }
+                        "clear": 16640
                     },
                     {
                         "id": "keyboard",
@@ -122,7 +114,6 @@
                         "material": {
                             "name": "floor",
                             "colorMap": "tiles.png",
-                            "normalMap": "tiles_n.png",
                             "specularMap": "tiles_s.png"
                         },
                         "physics": {
@@ -208,7 +199,6 @@
                         "material": {
                             "name": "companion",
                             "colorMap": "cube.png",
-                            "normalMap": "cube_n.png",
                             "specularMap": "cube_s.png"
                         },
                         "physics": {
@@ -225,7 +215,7 @@
                         ]
                     },
                     {
-                        "id": "blob",
+                        "id": "companion2",
                         "type": "model",
                         "mesh": {
                             "vertices": [
@@ -296,7 +286,6 @@
                         "material": {
                             "name": "companion",
                             "colorMap": "cube.png",
-                            "normalMap": "cube_n.png",
                             "specularMap": "cube_s.png"
                         },
                         "physics": {

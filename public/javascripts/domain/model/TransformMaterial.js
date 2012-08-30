@@ -53,7 +53,6 @@ define(["async", "zepto"], function(Async, $) {
       return _callback(error);
     }
     _transformedMaterial.colorMap = results.colorMap;
-    _transformedMaterial.normalMap = results.normalMap;
     _transformedMaterial.specularMap = results.specularMap;
 
     _callback(null, _transformedMaterial);
@@ -68,16 +67,20 @@ define(["async", "zepto"], function(Async, $) {
       try {
         Async.parallel({
           colorMap: function(callback) {
-            var colorMapPath = "assets/materials/" + materialData.colorMap;
-            _createTexture(colorMapPath, callback);
-          },
-          normalMap: function(callback) {
-            var normalMapPath = "assets/materials/" + materialData.normalMap;
-            _createTexture(normalMapPath, callback);
+            if (materialData.colorMap !== undefined) {
+              var colorMapPath = "assets/materials/" + materialData.colorMap;
+              _createTexture(colorMapPath, callback);
+            } else {
+              callback(null, undefined);
+            }
           },
           specularMap: function(callback) {
-            var specularMapPath = "assets/materials/" + materialData.specularMap;
-            _createTexture(specularMapPath, callback);
+            if (materialData.specularMap !== undefined) {
+              var specularMapPath = "assets/materials/" + materialData.specularMap;
+              _createTexture(specularMapPath, callback);
+            } else {
+              callback(null, undefined);
+            }
           }
         }, _onComplete);
       } catch (error) {

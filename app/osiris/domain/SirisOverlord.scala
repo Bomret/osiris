@@ -106,9 +106,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
           val id = Symbol((node \ "id").as[String])
 
           handleEntity(id)(entity => entity match {
-            case Some(ent) => {
-              physicsActor ! SetTransformation(ent, _makeTransformation(node))
-            }
+            case Some(ent) => physicsActor ! SetTransformation(ent, _makeTransformation(node))
             case None => {
               realize(
                 EntityDescription(
@@ -118,9 +116,7 @@ class SirisOverlord extends SVarActorHW with EntityCreationHandling with IORegis
                   registerEntity(id, e)
 
                   e.get(Transformation) match {
-                    case Some(sVar) => observe(sVar, (mat: Mat4x4) => {
-                      origin ! TransformRequest(id.name, FloatMath.transpose(mat))
-                    })
+                    case Some(sVar) => observe(sVar, (mat: Mat4x4) => origin ! TransformRequest(id.name, FloatMath.transpose(mat)))
                     case None => origin ! OsirisError("The node '" + id + "' has no transformation")
                   }
                 }

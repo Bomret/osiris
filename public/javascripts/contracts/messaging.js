@@ -8,9 +8,9 @@ define(function() {
   "use strict";
 
   return {
-    SetupRequest: function(data) {
+    SetupRequest: function(nodes) {
       this.request = "setup";
-      this.data = data;
+      this.data = nodes;
     },
 
     ManipulationRequest: function(nodeId, manipulationType, manipulationData) {

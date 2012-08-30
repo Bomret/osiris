@@ -4,7 +4,7 @@
  * Time: 14:13
  */
 
-define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, GlMatrix, TraverseScene) {
+define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function($, Ui, GlMatrix, TraverseScene, Log) {
   "use strict";
 
   var _modelViewMatrixStack = [],
@@ -43,13 +43,17 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, 
   }
 
   function _updateAmbientLight(lightNode) {
-    _gl.uniform3fv(_locations.ambientLightColor, lightNode.color);
+    if (_locations.ambientLightColor) {
+      _gl.uniform3fv(_locations.ambientLightColor, lightNode.color);
+    }
   }
 
   function _updatePointLight(lightNode) {
-    _gl.uniform3fv(_locations.pointLightColor, lightNode.diffuseColor);
-    _gl.uniform3fv(_locations.pointLightPosition, lightNode.position);
-    _gl.uniform3fv(_locations.pointLightSpecularColor, lightNode.specularColor);
+    if (_locations.pointLightColor && _locations.pointLightPosition && _locations.pointLightSpecularColor) {
+      _gl.uniform3fv(_locations.pointLightColor, lightNode.diffuseColor);
+      _gl.uniform3fv(_locations.pointLightPosition, lightNode.position);
+      _gl.uniform3fv(_locations.pointLightSpecularColor, lightNode.specularColor);
+    }
   }
 
   function _renderModel(modelNode) {
@@ -59,23 +63,27 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, 
     _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
     _gl.vertexAttribPointer(_locations.vertexPosition, 3, _gl.FLOAT, false, 0, 0);
 
-    _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.texCoords);
-    _gl.vertexAttribPointer(_locations.vertexTexCoords, 2, _gl.FLOAT, false, 0, 0);
+    if (modelNode.mesh.texCoords !== undefined && _locations.vertexTexCoords !== undefined) {
+      _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.texCoords);
+      _gl.vertexAttribPointer(_locations.vertexTexCoords, 2, _gl.FLOAT, false, 0, 0);
+    }
 
-    _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.normals);
-    _gl.vertexAttribPointer(_locations.vertexNormal, 3, _gl.FLOAT, false, 0, 0);
+    if (modelNode.mesh.normals !== undefined && _locations.vertexNormal !== undefined) {
+      _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.normals);
+      _gl.vertexAttribPointer(_locations.vertexNormal, 3, _gl.FLOAT, false, 0, 0);
+    }
 
-    _gl.activeTexture(_gl.TEXTURE0);
-    _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.colorMap);
-    _gl.uniform1i(_locations.colorMap, 0);
+    if (modelNode.material.colorMap !== undefined && _locations.colorMap !== undefined) {
+      _gl.activeTexture(_gl.TEXTURE0);
+      _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.colorMap);
+      _gl.uniform1i(_locations.colorMap, 0);
+    }
 
-    _gl.activeTexture(_gl.TEXTURE1);
-    _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.normalMap);
-    _gl.uniform1i(_locations.normalMap, 1);
-
-    _gl.activeTexture(_gl.TEXTURE2);
-    _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.specularMap);
-    _gl.uniform1i(_locations.specularMap, 2);
+    if (modelNode.material.specularMap !== undefined && _locations.specularMap !== undefined) {
+      _gl.activeTexture(_gl.TEXTURE2);
+      _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.specularMap);
+      _gl.uniform1i(_locations.specularMap, 2);
+    }
 
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
 
@@ -85,38 +93,19 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, 
   }
 
   function _updateRenderer(renderer) {
-    if (_firstRun) {
-      _updateGlInfo(renderer);
-      _firstRun = false;
-    }
-
     var cColor = renderer.clearColor;
     _gl.clearColor(cColor.r, cColor.g, cColor.b, cColor.a);
     _gl.clear(renderer.clear);
   }
 
-  function _updateGlInfo(renderer) {
-    $.each(renderer.options, function(key, value) {
-      if ($.isArray(value)) {
-        $.each(value, function(index, val) {
-          _gl[key](_gl[val]);
-        });
-      } else {
-        _gl[key](_gl[value]);
-      }
-    });
-  }
-
   function _updateViewport(node) {
     var position = node.position,
       optics = node.optics,
-      aspectRatio = optics.aspectRatio;
+      aspectRatio;
 
-    if (aspectRatio === "compute") {
-      _canvas.width = Math.floor(window.innerWidth * 0.9);
-      _canvas.height = Math.floor(window.innerHeight * 0.9);
-      aspectRatio = _canvas.width / _canvas.height;
-    }
+    _canvas.width = Math.floor(window.innerWidth * 0.9);
+    _canvas.height = Math.floor(window.innerHeight * 0.9);
+    aspectRatio = _canvas.width / _canvas.height;
 
     _gl.viewport(0, 0, _canvas.width, _canvas.height);
 
@@ -140,7 +129,15 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene"], function($, Ui, 
       _gl = glContext;
       _locations = locations;
       _canvas = Ui.getRenderCanvas();
-      _firstRun = true;
+
+      if (_gl.isContextLost()) {
+        throw new Error("WebGL context is lost.");
+      }
+
+      _gl.enable(_gl.DEPTH_TEST);
+      _gl.enable(_gl.CULL_FACE);
+      _gl.cullFace(_gl.BACK);
+      _gl.frontFace(_gl.CCW);
 
       TraverseScene.execute(traversableScene, _process);
     }

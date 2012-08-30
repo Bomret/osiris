@@ -85,6 +85,7 @@ define(["Log", "zepto", "Scene", "Shader"], function(Log, $, Scene, Shader) {
           _statusOutput.html("<p><strong>Error:</strong> " + message + "</p>")
             .css("background-color", "#FFDDDD")
             .css("color", "#FF2222");
+          $("#renderCanvas").hide();
         }
       }
     };

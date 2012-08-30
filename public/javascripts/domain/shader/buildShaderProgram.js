@@ -37,6 +37,10 @@ define(["Shader"], function(Shader) {
       _gl = glContext;
 
       try {
+        if (_gl.isContextLost()) {
+          callback({message: "WebGL context was lost."});
+        }
+
         vertexShader = _createShaderFromSource(_gl.VERTEX_SHADER, config.vertexShader);
         fragmentShader = _createShaderFromSource(_gl.FRAGMENT_SHADER, config.fragmentShader);
         compiledProgram = _createShaderProgram(vertexShader, fragmentShader);

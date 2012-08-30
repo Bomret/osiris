@@ -32,14 +32,14 @@ define(["Log", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], fu
       _scene = renderableScene;
       _callback = callback;
 
-      try {
-        SetupShaderBindableLocations.execute(glContext, shaderProgram, function(error, locations) {
-          if (error) {
-            return callback(error);
-          }
-          _locations = locations;
-        });
+      SetupShaderBindableLocations.execute(glContext, shaderProgram, function(error, locations) {
+        if (error) {
+          return callback(error);
+        }
+        _locations = locations;
+      });
 
+      try {
         _drawScene();
       } catch (error) {
         callback(error);

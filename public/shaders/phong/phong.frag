@@ -6,7 +6,6 @@ uniform vec3 uPointLightSpecularColor;
 uniform vec3 uPointLightPosition;
 
 uniform sampler2D uColorMap;
-uniform sampler2D uNormalMap;
 uniform sampler2D uSpecularMap;
 
 varying vec3 vTransformedVertexNormal;
@@ -15,9 +14,7 @@ varying vec3 vVertexPosition;
 
 void main(void) {
 
-    // Calculate fragment normal
-    //vec3 normalMap = normalize(texture2D(uNormalMap, vVertexTexCoord).rgb * 2.0 - 1.0);
-	//vec3 normal = normalize(vTransformedVertexNormal - normalMap);
+    // Normalize fragment normal
 	vec3 normal = normalize(vTransformedVertexNormal);
 
 	vec3 vecToLight = normalize(vec3(uPointLightPosition - vVertexPosition));
@@ -28,8 +25,9 @@ void main(void) {
 
 	// Calc specular light color of fragment
 	vec3 specularLightColor;
+	float specularFactor;
 
-	float specularFactor = texture2D(uSpecularMap, vVertexTexCoord).r;
+    specularFactor = texture2D(uSpecularMap, vVertexTexCoord).r;
 
 	if (specularFactor == 0.0) { // Avoid unnecessary computation if specularfacor is 0.0
         specularLightColor = vec3 (0.0, 0.0, 0.0);

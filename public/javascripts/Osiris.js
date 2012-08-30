@@ -3,12 +3,15 @@
  * Date: 13.06.12
  */
 
-define(["Log", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "LoadScene", "RenderScene", "HandleUserInput"], function(Log, Async, Ui, SetupWebGlContext, LoadShaders, LoadScene, RenderScene, HandleUserInput) {
+define(["Log", "async", "MainViewModel", "SetupWebGlContext", "LoadShaderProgram", "LoadScene", "RenderScene", "HandleUserInput"], function(Log, Async, Ui, SetupWebGlContext, LoadShaderProgram, LoadScene, RenderScene, HandleUserInput) {
   "use strict";
 
   function _handleError(error) {
     Ui.updateStatus("error", "An error occurred: '" + error.message + "' See console log for details.");
-    Log.error("ERROR", error.stack);
+
+    if(error.stack) {
+      Log.error("ERROR", error.stack);
+    }
   }
 
   function _onSetupComplete(error, results) {
@@ -50,7 +53,7 @@ define(["Log", "async", "MainViewModel", "SetupWebGlContext", "LoadShaders", "Lo
           loadedShaderProgram: ["glContext", function(callback, results) {
             Ui.updateStatus("info", "Loading selected shader program...");
             Log.info("Loading selected shader program...");
-            LoadShaders.execute(Ui.getCurrentShader(), results.glContext, callback);
+            LoadShaderProgram.execute(Ui.getCurrentShader(), results.glContext, callback);
           }]
         },
         _onSetupComplete);

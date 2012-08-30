@@ -41,7 +41,7 @@ require.config({
     SetupShaderBindableLocations: "domain/rendering/SetupShaderBindableLocations",
 
     // -- shader
-    LoadShaders: "domain/shader/LoadShaders",
+    LoadShaderProgram: "domain/shader/LoadShaderProgram",
     DownloadShaderConfigFromServer: "domain/shader/DownloadShaderConfigFromServer",
     BuildShaderProgram: "domain/shader/BuildShaderProgram",
 
