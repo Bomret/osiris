@@ -8,31 +8,8 @@ define(["Log", "zepto", "Scene", "Shader"], function(Log, $, Scene, Shader) {
     "use strict";
 
     var _loadCallback,
-      _availableScenes = [],
-      _availableShaders = [],
-      _currentScene,
-      _currentShader,
       _renderCanvas,
       _statusOutput;
-
-    function _setupAvailableShaders() {
-      $("#availableShaders option").each(function(index, element) {
-        var name = element.text,
-          config = JSON.parse(element.value);
-
-        _availableShaders.push(new Shader.ShaderConfigurationInformation(name, config));
-      });
-
-      _currentShader = _availableShaders[$("#availableShaders option").index()];
-    }
-
-    function _setupAvailableScenes() {
-      $("#availableScenes option").each(function(index, element) {
-        _availableScenes.push(new Scene.SceneInformation(element.text, element.value));
-      });
-
-      _currentScene = _availableScenes[$("#availableScenes option").index()];
-    }
 
     function _setupRenderButton() {
       $("#startRender").on("click", function() {
@@ -59,17 +36,19 @@ define(["Log", "zepto", "Scene", "Shader"], function(Log, $, Scene, Shader) {
         _loadCallback = resetCallback;
         _setupRenderCanvas();
         _setupStatusOutput();
-        _setupAvailableShaders();
-        _setupAvailableScenes();
         _setupRenderButton();
       },
 
       getCurrentScene: function() {
-        return _currentScene;
+        var selectedOptions = $("#availableScenes option").not(function() {return !this.selected;});
+
+        return new Scene.SceneInformation(selectedOptions[0].text, selectedOptions[0].value);
       },
 
       getCurrentShader: function() {
-        return _currentShader;
+        var selectedOptions = $("#availableShaders option").not(function() {return !this.selected;});
+
+        return new Shader.ShaderConfigurationInformation(selectedOptions[0].text, JSON.parse(selectedOptions[0].value));
       },
 
       getRenderCanvas: function() {
