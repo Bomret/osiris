@@ -18,6 +18,8 @@ define(["Log", "WebGl", "TraverseAndRender", "SetupShaderBindableLocations"], fu
     if (!_isStopped) {
       _requestAnimationFrame(_drawScene);
       TraverseAndRender.execute(_scene, _gl, _locations);
+
+
     }
   }
 

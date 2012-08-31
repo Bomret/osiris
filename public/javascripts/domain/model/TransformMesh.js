@@ -29,21 +29,31 @@ define(["zepto"], function($) {
 
   return {
     execute: function(meshData, glContext, callback) {
-      var transformedMesh = $.extend({}, meshData);
+      var transformedMesh = {};
       _gl = glContext;
 
+      if (_gl.isContextLost()) {
+        callback({message: "WebGL context is lost in 'TransformMesh'."});
+      }
+
       try {
-        transformedMesh.numVertices = transformedMesh.vertices.length;
-        transformedMesh.vertices = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.vertices);
+        transformedMesh.numVertices = meshData.vertices.length;
+        transformedMesh.vertices = _transformArrayIntoFloat32ArrayBuffer(meshData.vertices);
 
-        transformedMesh.numNormals = transformedMesh.normals.length;
-        transformedMesh.normals = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.normals);
+        if (meshData.normals !== undefined) {
+          transformedMesh.numNormals = meshData.normals.length;
+          transformedMesh.normals = _transformArrayIntoFloat32ArrayBuffer(meshData.normals);
+        }
 
-        transformedMesh.numTexCoords = transformedMesh.texCoords.length;
-        transformedMesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(transformedMesh.texCoords);
+        if (meshData.texCoords !== undefined) {
+          transformedMesh.numTexCoords = meshData.texCoords.length;
+          transformedMesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(meshData.texCoords);
+        }
 
-        transformedMesh.numIndices = transformedMesh.indices.length;
-        transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(transformedMesh.indices);
+        if (meshData.indices !== undefined) {
+          transformedMesh.numIndices = meshData.indices.length;
+          transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(meshData.indices);
+        }
 
         callback(null, transformedMesh);
       } catch (error) {

@@ -13,12 +13,13 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     _locations,
     _modelViewMatrix = GlMatrix.mat4.create(),
     _projectionMatrix = GlMatrix.mat4.create(),
-    _firstRun,
     _lookupTable = {
       "renderInformation": _updateRenderer,
       "camera": _updateViewport,
       "ambientLight": _updateAmbientLight,
       "pointLight": _updatePointLight,
+      "directionalLight": _updateDirectionalLight,
+      "spotLight": _updateSpotlight,
       "model": _renderModel
     };
 
@@ -56,39 +57,64 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     }
   }
 
+  function _updateDirectionalLight(lightNode) {
+    if (_locations.directionalLightColor && _locations.directionalLightPosition && _locations.directionalLightSpecularColor) {
+      _gl.uniform3fv(_locations.directionalLightColor, lightNode.diffuseColor);
+      _gl.uniform3fv(_locations.directionalLightPosition, lightNode.position);
+      _gl.uniform3fv(_locations.directionalLightSpecularColor, lightNode.specularColor);
+    }
+  }
+
+  function _updateSpotlight(lightNode) {
+    if (_locations.spotLightColor && _locations.spotLightPosition && _locations.spotLightSpecularColor && _locations.spotLightDirection && _locations.spotLightExponent && _locations.spotLightCutOff) {
+      _gl.uniform3fv(_locations.spotLightColor, lightNode.diffuseColor);
+      _gl.uniform3fv(_locations.spotLightPosition, lightNode.position);
+      _gl.uniform3fv(_locations.spotLightSpecularColor, lightNode.specularColor);
+      _gl.uniform3fv(_locations.spotLightDirection, lightNode.direction);
+      _gl.uniform3fv(_locations.spotLightExponent, lightNode.exponent);
+      _gl.uniform3fv(_locations.spotLightCutOff, lightNode.cutOffAngle);
+    }
+  }
+
   function _renderModel(modelNode) {
+    var mesh = modelNode.mesh,
+      material = modelNode.material;
+
     _pushMatrix();
     GlMatrix.mat4.multiply(_modelViewMatrix, modelNode.transformation);
 
-    _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.vertices);
+    _gl.bindBuffer(_gl.ARRAY_BUFFER, mesh.vertices);
     _gl.vertexAttribPointer(_locations.vertexPosition, 3, _gl.FLOAT, false, 0, 0);
 
-    if (modelNode.mesh.texCoords !== undefined && _locations.vertexTexCoords !== undefined) {
-      _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.texCoords);
+    if (mesh.texCoords !== undefined && _locations.vertexTexCoords !== undefined) {
+      _gl.bindBuffer(_gl.ARRAY_BUFFER, mesh.texCoords);
       _gl.vertexAttribPointer(_locations.vertexTexCoords, 2, _gl.FLOAT, false, 0, 0);
     }
 
-    if (modelNode.mesh.normals !== undefined && _locations.vertexNormal !== undefined) {
-      _gl.bindBuffer(_gl.ARRAY_BUFFER, modelNode.mesh.normals);
+    if (mesh.normals !== undefined && _locations.vertexNormal !== undefined) {
+      _gl.bindBuffer(_gl.ARRAY_BUFFER, mesh.normals);
       _gl.vertexAttribPointer(_locations.vertexNormal, 3, _gl.FLOAT, false, 0, 0);
     }
 
-    if (modelNode.material.colorMap !== undefined && _locations.colorMap !== undefined) {
+    if (material.colorMap !== undefined && _locations.colorMap !== undefined) {
       _gl.activeTexture(_gl.TEXTURE0);
-      _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.colorMap);
+      _gl.bindTexture(_gl.TEXTURE_2D, material.colorMap);
       _gl.uniform1i(_locations.colorMap, 0);
     }
 
-    if (modelNode.material.specularMap !== undefined && _locations.specularMap !== undefined) {
-      _gl.activeTexture(_gl.TEXTURE2);
-      _gl.bindTexture(_gl.TEXTURE_2D, modelNode.material.specularMap);
-      _gl.uniform1i(_locations.specularMap, 2);
+    if (material.specularMap !== undefined && _locations.specularMap !== undefined) {
+      _gl.activeTexture(_gl.TEXTURE1);
+      _gl.bindTexture(_gl.TEXTURE_2D, material.specularMap);
+      _gl.uniform1i(_locations.specularMap, 1);
     }
 
-    _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, modelNode.mesh.indices);
-
     _updateRenderMatrices();
-    _gl.drawElements(_gl.TRIANGLES, modelNode.mesh.numIndices, _gl.UNSIGNED_SHORT, 0);
+    if (mesh.indices !== undefined) {
+      _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, mesh.indices);
+      _gl.drawElements(_gl.TRIANGLES, modelNode.mesh.numIndices, _gl.UNSIGNED_SHORT, 0);
+    } else {
+      _gl.drawArrays(_gl.TRIANGLES, 0, mesh.numVertices);
+    }
     _popMatrix();
   }
 
@@ -131,7 +157,7 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
       _canvas = Ui.getRenderCanvas();
 
       if (_gl.isContextLost()) {
-        throw new Error("WebGL context is lost.");
+        throw new Error("WebGL context is lost in 'TraverseAndRender'.");
       }
 
       _gl.enable(_gl.DEPTH_TEST);

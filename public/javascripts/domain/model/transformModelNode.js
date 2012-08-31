@@ -25,6 +25,10 @@ define(["async", "TransformMesh", "TransformMaterial"], function(Async, Transfor
       _callback = callback;
       _transformedNode = node;
 
+      if (glContext.isContextLost()) {
+        callback({message: "WebGL context is lost in TransformModelNode."});
+      }
+
       Async.parallel({
         transformedMesh: function(callback) {
           TransformMesh.execute(node.mesh, glContext, callback);
