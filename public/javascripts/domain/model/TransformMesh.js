@@ -4,7 +4,7 @@
  * Time: 13:59
  */
 
-define(["zepto"], function($) {
+define(function() {
   "use strict";
 
   var _gl;
@@ -40,6 +40,9 @@ define(["zepto"], function($) {
         transformedMesh.numVertices = meshData.vertices.length;
         transformedMesh.vertices = _transformArrayIntoFloat32ArrayBuffer(meshData.vertices);
 
+        transformedMesh.numIndices = meshData.indices.length;
+        transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(meshData.indices);
+
         if (meshData.normals !== undefined) {
           transformedMesh.numNormals = meshData.normals.length;
           transformedMesh.normals = _transformArrayIntoFloat32ArrayBuffer(meshData.normals);
@@ -48,11 +51,6 @@ define(["zepto"], function($) {
         if (meshData.texCoords !== undefined) {
           transformedMesh.numTexCoords = meshData.texCoords.length;
           transformedMesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(meshData.texCoords);
-        }
-
-        if (meshData.indices !== undefined) {
-          transformedMesh.numIndices = meshData.indices.length;
-          transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(meshData.indices);
         }
 
         callback(null, transformedMesh);

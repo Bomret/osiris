@@ -62,7 +62,7 @@ define(["async", "zepto"], function(Async, $) {
     execute: function(materialData, glContext, callback) {
       _gl = glContext;
       _callback = callback;
-      _transformedMaterial = $.extend({}, materialData);
+      _transformedMaterial = {};
 
       try {
         Async.parallel({
