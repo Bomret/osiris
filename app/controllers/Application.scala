@@ -5,12 +5,24 @@ import play.api.libs.json.{JsObject, Json}
 import play.api.Logger
 import play.api.libs.concurrent.Akka
 import play.api.Play.current
-import osiris.infrastructure.ReadTextFile
+import osiris.infrastructure.{OsirisConfiguration, ReadTextFile}
 import osiris.contracts.{SceneAndShaderInfos, ShaderConfiguration, SceneInformation}
 
+/**
+ * Augments the HTML page with information about the available scenes and shader programs, then serves it to the client.
+ * User: Stefan Reichel
+ * Date: 25.07.12
+ * Time: 18:13
+ */
 object Application extends Controller {
+
+  /**
+   * Reads the information about the currently available scenes from the filesystem and returns those.
+   *
+   * @return An [[scala.Array]] containing [[osiris.contracts.SceneInformation]] objects
+   */
   private def _readSceneInformation: Array[SceneInformation] = {
-    val scenesFileContent = ReadTextFile.fromPath("public/scenes/availableScenes.json")
+    val scenesFileContent = ReadTextFile.fromPath(OsirisConfiguration.SCENEPATH + "availableScenes.json")
 
     val json = Json.parse(scenesFileContent)
     val scenes: Array[JsObject] = (json \ "scenes").as[Array[JsObject]]
@@ -22,8 +34,13 @@ object Application extends Controller {
     })
   }
 
+  /**
+   * Reads the information about the available shader programs from the filesystem and returns those.
+   *
+   * @return An [[scala.Array]] containing [[osiris.contracts.ShaderConfiguration]] objects
+   */
   private def _readShaderInformation: Array[ShaderConfiguration] = {
-    val shadersFileContent = ReadTextFile fromPath ("public/shaders/availableShaders.json")
+    val shadersFileContent = ReadTextFile fromPath (OsirisConfiguration.SHADERPATH + "availableShaders.json")
 
     val json = Json.parse(shadersFileContent)
     val shaders: Array[JsObject] = (json \ "shaderConfigs").as[Array[JsObject]]
@@ -35,6 +52,11 @@ object Application extends Controller {
     })
   }
 
+  /**
+   * Retrieves the information about the currently available scenes and shader programs and returns those.
+   *
+   * @return An [[osiris.contracts.SceneAndShaderInfos]] object containing information about the currently available scenes and shader programs.
+   */
   private def _retrieveSceneAndShaderInformation: SceneAndShaderInfos = {
     val sceneInfos = _readSceneInformation
     val shaderInfos = _readShaderInformation
@@ -42,11 +64,9 @@ object Application extends Controller {
   }
 
   /**
-   * This Action does the necessary computations asynchronously to build the main page
-   * and serves it to the client.
+   * Does the necessary computations asynchronously to build the main page and serves it to the client.
    *
-   * If anything goes wrong the occuring exception will be logged to the application log
-   * and the client will get an Internal Server Error response.
+   * If anything goes wrong the occuring exception will be logged to the application log and the client will get an Internal Server Error response.
    *
    * @return The compiled main page or an Internal Server Error response if anything goes wrong
    */
