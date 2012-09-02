@@ -2,8 +2,9 @@
  * User: Stefan Reichel
  * Date: 09.08.12
  * Time: 23:45
+ *
+ * Transforms a material property to a renderable representation.
  */
-
 define(["async", "zepto"], function(Async, $) {
   "use strict";
 
@@ -12,8 +13,10 @@ define(["async", "zepto"], function(Async, $) {
     _transformedMaterial;
 
   /**
-   * This function is used to create a 2D WebGl conforming texture
-   * from a valid jpg, png or gif image specified by the given path.
+   * Creates a 2D WebGl conforming texture from a valid jpg, png or gif image specified by the given path.
+   *
+   * As soon as the texture creation is complete or an error occures the registered callback is executed.
+   *
    * Uses the JavaScript Image object to load the file.
    */
   function _createTexture(pathToImage, callback) {
@@ -31,7 +34,11 @@ define(["async", "zepto"], function(Async, $) {
   }
 
   /**
-   * Creates a valid WebGl conforming texture object from the given image and texture.
+   * Handles a downloaded image and transforms it into a WebGL conforming texture.
+   *
+   * When the texture was created successfully the registered callback is executed.
+   *
+   * @param image
    */
   function _handleLoadedImage(image, callback) {
     var texture = _gl.createTexture();
@@ -48,6 +55,13 @@ define(["async", "zepto"], function(Async, $) {
     callback(null, texture);
   }
 
+  /**
+   *
+   * @param error
+   * @param results
+   * @return {*}
+   * @private
+   */
   function _onComplete(error, results) {
     if (error) {
       return _callback(error);
