@@ -10,6 +10,7 @@ import osiris.contracts.{SceneAndShaderInfos, ShaderConfiguration, SceneInformat
 
 /**
  * Augments the HTML page with information about the available scenes and shader programs, then serves it to the client.
+ *
  * User: Stefan Reichel
  * Date: 25.07.12
  * Time: 18:13
