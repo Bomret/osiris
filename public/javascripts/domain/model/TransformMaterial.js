@@ -1,9 +1,10 @@
 /**
+ * Transforms a material into a renderable representation.
+ * Transform means the referenced data types relevant for rendering will be converted into a WebGL friendly format.
+ *
  * User: Stefan Reichel
  * Date: 09.08.12
  * Time: 23:45
- *
- * Transforms a material property to a renderable representation.
  */
 define(["async", "zepto"], function(Async, $) {
   "use strict";
@@ -13,13 +14,14 @@ define(["async", "zepto"], function(Async, $) {
     _transformedMaterial;
 
   /**
-   * Creates a 2D WebGl conforming texture from a valid jpg, png or gif image specified by the given path.
+   * Creates a 2D WebGl conforming texture from a valid jpg, png or gif image specified by the given url.
+   * As soon as the texture creation is complete or an error occurs the registered callback is executed.
    *
-   * As soon as the texture creation is complete or an error occures the registered callback is executed.
-   *
-   * Uses the JavaScript Image object to load the file.
+   * @param {String} urlToImage The URL to the image.
+   * @param {Function} callback A registered callback that signals the result of the operation (error or success).
+   * @private
    */
-  function _createTexture(pathToImage, callback) {
+  function _createTexture(urlToImage, callback) {
     var image = new Image();
 
     image.onload = function() {
@@ -30,19 +32,26 @@ define(["async", "zepto"], function(Async, $) {
       callback(error);
     };
 
-    image.src = pathToImage;
+    image.src = urlToImage;
   }
 
   /**
    * Handles a downloaded image and transforms it into a WebGL conforming texture.
+   * When the texture was created successfully the registered callback is executed with the reference to the texture as parameter. Otherwise the occurred error is handed to the callback.
    *
-   * When the texture was created successfully the registered callback is executed.
-   *
-   * @param image
+   * @param {Image} image A JavaScript image object
+   * @param {Function} callback A registered callback that signals the result of the operation (error or success).
+   * @private
    */
   function _handleLoadedImage(image, callback) {
-    var texture = _gl.createTexture();
+    var texture;
 
+    if (_gl.isContextLost()) {
+      callback(new Error.ContextLostError());
+      return;
+    }
+
+    texture = _gl.createTexture();
     _gl.bindTexture(_gl.TEXTURE_2D, texture);
     _gl.pixelStorei(_gl.UNPACK_FLIP_Y_WEBGL, true);
     _gl.texImage2D(_gl.TEXTURE_2D, 0, _gl.RGBA, _gl.RGBA, _gl.UNSIGNED_BYTE, image);
@@ -56,15 +65,16 @@ define(["async", "zepto"], function(Async, $) {
   }
 
   /**
+   * Executes the module's registered callback with either an occurred error or the results of the operation.
    *
-   * @param error
-   * @param results
-   * @return {*}
+   * @param {Error} error A possible error.
+   * @param {Object} results The transformed material.
    * @private
    */
   function _onComplete(error, results) {
     if (error) {
-      return _callback(error);
+      _callback(error);
+      return;
     }
     _transformedMaterial.colorMap = results.colorMap;
     _transformedMaterial.specularMap = results.specularMap;
@@ -73,33 +83,37 @@ define(["async", "zepto"], function(Async, $) {
   }
 
   return {
-    execute: function(materialData, glContext, callback) {
+
+    /**
+     * Starts the transformation of the given material into a renderable representation. The given callback is called in case an error happens or the transformation was successful. In the latter case the transformed material is handed to the callback.
+     *
+     * @param {Object} material The material to be transformed.
+     * @param {WebGLRenderingContext} glContext The application's WebGL context.
+     * @param {Function} callback A registered callback that signals the result of the operation (error or success).
+     */
+    execute: function(material, glContext, callback) {
       _gl = glContext;
       _callback = callback;
-      _transformedMaterial = {};
+      _transformedMaterial = material;
 
-      try {
-        Async.parallel({
-          colorMap: function(callback) {
-            if (materialData.colorMap !== undefined) {
-              var colorMapPath = "assets/materials/" + materialData.colorMap;
-              _createTexture(colorMapPath, callback);
-            } else {
-              callback(null, undefined);
-            }
-          },
-          specularMap: function(callback) {
-            if (materialData.specularMap !== undefined) {
-              var specularMapPath = "assets/materials/" + materialData.specularMap;
-              _createTexture(specularMapPath, callback);
-            } else {
-              callback(null, undefined);
-            }
+      Async.parallel({
+        colorMap: function(callback) {
+          if (material.colorMap !== undefined) {
+            var colorMapPath = "assets/materials/" + material.colorMap;
+            _createTexture(colorMapPath, callback);
+          } else {
+            callback(null, undefined);
           }
-        }, _onComplete);
-      } catch (error) {
-        callback(error);
-      }
+        },
+        specularMap: function(callback) {
+          if (material.specularMap !== undefined) {
+            var specularMapPath = "assets/materials/" + material.specularMap;
+            _createTexture(specularMapPath, callback);
+          } else {
+            callback(null, undefined);
+          }
+        }
+      }, _onComplete);
     }
   };
 });

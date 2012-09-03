@@ -1,10 +1,11 @@
 /**
+ * Traverses and renders a scene.
+ *
  * User: Stefan Reichel
  * Date: 03.08.12
  * Time: 14:13
  */
-
-define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function($, Ui, GlMatrix, TraverseScene, Log) {
+define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Error"], function($, Ui, GlMatrix, TraverseScene, Error) {
   "use strict";
 
   var _modelViewMatrixStack = [],
@@ -23,11 +24,21 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
       "model": _renderModel
     };
 
+  /**
+   * Saves acopy of the current model view matrix on a stack.
+   *
+   * @private
+   */
   function _pushMatrix() {
     var copy = GlMatrix.mat4.create(_modelViewMatrix);
     _modelViewMatrixStack.push(copy);
   }
 
+  /**
+   * Pops the last current model view matrix from a stack and replaces the current one with it.
+   *
+   * @private
+   */
   function _popMatrix() {
     if (_modelViewMatrixStack.length === 0) {
       throw "Invalid popMatrix!";
@@ -35,6 +46,12 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     _modelViewMatrix = _modelViewMatrixStack.pop();
   }
 
+  /**
+   * Decides how to handle the given node and calls the appropriate function.
+   *
+   * @param {Object} node The node to be handled.
+   * @private
+   */
   function _process(node) {
     var handleFunction = _lookupTable[node.type];
 
@@ -43,12 +60,24 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     }
   }
 
+  /**
+   * Updates the relevant values of the ambient light in the shaders.
+   *
+   * @param {Object} lightNode The ambient light node.
+   * @private
+   */
   function _updateAmbientLight(lightNode) {
     if (_locations.ambientLightColor) {
       _gl.uniform3fv(_locations.ambientLightColor, lightNode.color);
     }
   }
 
+  /**
+   * Updates the relevant values of the given point light in the shaders.
+   *
+   * @param {Object} lightNode The point light node.
+   * @private
+   */
   function _updatePointLight(lightNode) {
     if (_locations.pointLightColor && _locations.pointLightPosition && _locations.pointLightSpecularColor) {
       _gl.uniform3fv(_locations.pointLightColor, lightNode.diffuseColor);
@@ -57,6 +86,12 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     }
   }
 
+  /**
+   * Updates the relevant values of the given point light in the shaders.
+   *
+   * @param {Object} lightNode The directional light node.
+   * @private
+   */
   function _updateDirectionalLight(lightNode) {
     if (_locations.directionalLightColor && _locations.directionalLightPosition && _locations.directionalLightSpecularColor) {
       _gl.uniform3fv(_locations.directionalLightColor, lightNode.diffuseColor);
@@ -65,6 +100,12 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     }
   }
 
+  /**
+   * Updates the relevant values of the given point light in the shaders.
+   *
+   * @param {Object} lightNode The spot light node.
+   * @private
+   */
   function _updateSpotlight(lightNode) {
     if (_locations.spotLightColor && _locations.spotLightPosition && _locations.spotLightSpecularColor && _locations.spotLightDirection && _locations.spotLightExponent && _locations.spotLightCutOff) {
       _gl.uniform3fv(_locations.spotLightColor, lightNode.diffuseColor);
@@ -76,6 +117,12 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     }
   }
 
+  /**
+   * Draws the given model node.
+   *
+   * @param {Object} modelNode The model node
+   * @private
+   */
   function _renderModel(modelNode) {
     var mesh = modelNode.mesh,
       material = modelNode.material;
@@ -118,15 +165,27 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     _popMatrix();
   }
 
-  function _updateRenderer(renderer) {
-    var cColor = renderer.clearColor;
+  /**
+   * Updates the rendering information, like the clear color, with the information contained in the given node.
+   *
+   * @param {Object} renderingInformationNode The node containing the rendering information
+   * @private
+   */
+  function _updateRenderer(renderingInformationNode) {
+    var cColor = renderingInformationNode.clearColor;
     _gl.clearColor(cColor.r, cColor.g, cColor.b, cColor.a);
-    _gl.clear(renderer.clear);
+    _gl.clear(renderingInformationNode.clear);
   }
 
-  function _updateViewport(node) {
-    var position = node.position,
-      optics = node.optics,
+  /**
+   * Updates the WebGL viewport and the canvas size to adapt to browser window resizing.
+   *
+   * @param {object} cameraNode The camera node.
+   * @private
+   */
+  function _updateViewport(cameraNode) {
+    var position = cameraNode.position,
+      optics = cameraNode.optics,
       aspectRatio;
 
     _canvas.width = Math.floor(window.innerWidth * 0.9);
@@ -145,19 +204,31 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
     GlMatrix.mat4.lookAt(position.eye, position.target, position.up, _modelViewMatrix);
   }
 
+  /**
+   * Updates the model view and projection matrices in the shaders.
+   * @private
+   */
   function _updateRenderMatrices() {
     _gl.uniformMatrix4fv(_locations.projectionMatrix, false, _projectionMatrix);
     _gl.uniformMatrix4fv(_locations.modelViewMatrix, false, _modelViewMatrix);
   }
 
   return {
-    execute: function(traversableScene, glContext, locations) {
+
+    /**
+     * Starts the traversal and rendering of the given scene. The given locations object contains the locations of the bindable attributes and uniforms provided by the currently used shader program.
+     *
+     * @param {Object} scene The scene to be traversed and rendered.
+     * @param {WebGLRenderingContext} glContext The application's WebGL context.
+     * @param {Object} locations The locations of the bindable attributes and uniforms in the currently used shader program.
+     */
+    execute: function(scene, glContext, locations) {
       _gl = glContext;
       _locations = locations;
       _canvas = Ui.getRenderCanvas();
 
       if (_gl.isContextLost()) {
-        throw new Error("WebGL context is lost in 'TraverseAndRender'.");
+        throw new Error.ContextLostError();
       }
 
       _gl.enable(_gl.DEPTH_TEST);
@@ -165,7 +236,7 @@ define(["zepto", "MainViewModel", "GlMatrix", "TraverseScene", "Log"], function(
       _gl.cullFace(_gl.BACK);
       _gl.frontFace(_gl.CCW);
 
-      TraverseScene.execute(traversableScene, _process);
+      TraverseScene.execute(scene, _process);
     }
   };
 });

@@ -1,9 +1,10 @@
 /**
+ * The main configuration and startup module, bootstrapper. Configures all relevant information for RequireJs and initializes the Osiris renderer.
+ *
  * User: Stefan Reichel
  * Date: 28.06.12
  * Time: 14:11
  */
-
 require.config({
   // Non AMD scripts that add themselves to the global object
   shim: {
@@ -49,7 +50,6 @@ require.config({
     TransformModelNode: "domain/model/TransformModelNode",
     TransformMesh: "domain/model/TransformMesh",
     TransformMaterial: "domain/model/TransformMaterial",
-    ParseObjFile: "domain/model/ParseObjFile",
 
     // -- Scene
     LoadScene: "domain/scene/LoadScene",
@@ -62,12 +62,15 @@ require.config({
 
     // contracts
     Messaging: "contracts/Messaging",
-    Obj: "contracts/Obj",
     Shader: "contracts/Shader",
-    Scene: "contracts/Scene"
+    Scene: "contracts/Scene",
+    Error: "contracts/Error"
   }
 });
 
+/**
+ * Initialization of the Osiris renderer.
+ */
 require(["Osiris", "Log"], function(Osiris, Log) {
   "use strict";
 

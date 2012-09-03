@@ -1,59 +1,83 @@
 /**
+ * Transforms a 3D mesh into a renderable representation.
+ * Transform means the referenced data types relevant for rendering will be converted into a WebGL friendly format.
+ *
  * User: Stefan Reichel
  * Date: 03.08.12
  * Time: 13:59
  */
-
-define(function() {
+define(["Error"], function(Error) {
   "use strict";
 
   var _gl;
 
-  function _transformArrayIntoFloat32ArrayBuffer(element) {
+  /**
+   * Creates a new WebGLBuffer object and binds the given array to it as a Float32Array view.
+   *
+   * @param {Array} elements An array of elements to be bound as Float32Array view.
+   * @return {WebGLBuffer} A reference to the created WebGLBuffer object filled with the data provided by the given elements array.
+   * @private
+   */
+  function _transformArrayIntoFloat32ArrayBuffer(elements) {
     var buffer = _gl.createBuffer();
     _gl.bindBuffer(_gl.ARRAY_BUFFER, buffer);
-    _gl.bufferData(_gl.ARRAY_BUFFER, new Float32Array(element), _gl.STATIC_DRAW);
+    _gl.bufferData(_gl.ARRAY_BUFFER, new Float32Array(elements), _gl.STATIC_DRAW);
     _gl.bindBuffer(_gl.ARRAY_BUFFER, null);
 
     return buffer;
   }
 
-  function _transformArrayIntoUInt16ElementArrayBuffer(element) {
+  /**
+   * Creates a new WebGLBuffer object and binds the given array to it as a Uint16Array view.
+   *
+   * @param {Array} elements An array of elements to be bound as Uint16Array view.
+   * @return {WebGLBuffer} A reference to the created WebGLBuffer object filled with the data provided by the given elements array.
+   * @private
+   */
+  function _transformArrayIntoUint16ElementArrayBuffer(elements) {
     var buffer = _gl.createBuffer();
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, buffer);
-    _gl.bufferData(_gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(element), _gl.STATIC_DRAW);
+    _gl.bufferData(_gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(elements), _gl.STATIC_DRAW);
     _gl.bindBuffer(_gl.ELEMENT_ARRAY_BUFFER, null);
 
     return buffer;
   }
 
   return {
-    execute: function(meshData, glContext, callback) {
-      var transformedMesh = {};
+
+    /**
+     * Starts the transformation of the given mesh into a renderable representation. The given callback is called in case an error happens or the transformation was successful. In the latter case the transformed mesh is handed to the callback.
+     *
+     * @param {Object} mesh The 3D mesh to be transformed.
+     * @param {WebGLRenderingContext} glContext The application's WebGL context.
+     * @param {Function} callback A registered callback that signals the result of the operation (error or success).
+     */
+    execute: function(mesh, glContext, callback) {
       _gl = glContext;
 
       if (_gl.isContextLost()) {
-        callback({message: "WebGL context is lost in 'TransformMesh'."});
+        callback(new Error.ContextLostError());
+        return;
       }
 
       try {
-        transformedMesh.numVertices = meshData.vertices.length;
-        transformedMesh.vertices = _transformArrayIntoFloat32ArrayBuffer(meshData.vertices);
+        mesh.numVertices = mesh.vertices.length;
+        mesh.vertices = _transformArrayIntoFloat32ArrayBuffer(mesh.vertices);
 
-        transformedMesh.numIndices = meshData.indices.length;
-        transformedMesh.indices = _transformArrayIntoUInt16ElementArrayBuffer(meshData.indices);
+        mesh.numIndices = mesh.indices.length;
+        mesh.indices = _transformArrayIntoUint16ElementArrayBuffer(mesh.indices);
 
-        if (meshData.normals !== undefined) {
-          transformedMesh.numNormals = meshData.normals.length;
-          transformedMesh.normals = _transformArrayIntoFloat32ArrayBuffer(meshData.normals);
+        if (mesh.normals !== undefined) {
+          mesh.numNormals = mesh.normals.length;
+          mesh.normals = _transformArrayIntoFloat32ArrayBuffer(mesh.normals);
         }
 
-        if (meshData.texCoords !== undefined) {
-          transformedMesh.numTexCoords = meshData.texCoords.length;
-          transformedMesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(meshData.texCoords);
+        if (mesh.texCoords !== undefined) {
+          mesh.numTexCoords = mesh.texCoords.length;
+          mesh.texCoords = _transformArrayIntoFloat32ArrayBuffer(mesh.texCoords);
         }
 
-        callback(null, transformedMesh);
+        callback(null, mesh);
       } catch (error) {
         callback(error);
       }
