@@ -1,10 +1,17 @@
 {
     "shaderConfigs": [
         {
-            "name": "Fancy",
+            "name": "Phong",
             "config": {
-                "path": "fancy",
-                "file": "fancy.config"
+                "path": "phong",
+                "file": "phong.config"
+            }
+        },
+        {
+            "name": "Flat",
+            "config": {
+                "path": "flat",
+                "file": "flat.config"
             }
         }
     ]

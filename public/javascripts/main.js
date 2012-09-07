@@ -1,14 +1,18 @@
 /**
+ * The main configuration and startup module, bootstrapper. Configures all relevant information for RequireJs and initializes the Osiris renderer.
+ *
  * User: Stefan Reichel
  * Date: 28.06.12
  * Time: 14:11
  */
-
 require.config({
-  // legacy non AMD scripts that add themselves to the global object
+  // Non AMD scripts that add themselves to the global object
   shim: {
     "async": {
       exports: "async"
+    },
+    "zepto": {
+      exports: "$"
     }
   },
 
@@ -17,11 +21,11 @@ require.config({
     Osiris: "Osiris",
 
     // libraries
-    jquery: "lib/jquery",
+    zepto: "lib/zepto",
     async: "lib/async",
     GlMatrix: "lib/glmatrix",
     WebGl: "lib/webgl-utils",
-    Log: "lib/Log",
+    Log: "lib/log",
 
     // infrastructure
     SendMessage: "infrastructure/SendMessageToServer",
@@ -31,14 +35,14 @@ require.config({
 
     // domain
     // -- handling
-    HandleUserInput: "domain/handling/HandleUserInput",
+    HandleUserInput: "domain/input/HandleUserInput",
 
     // -- rendering
     SetupWebGlContext: "domain/rendering/SetupWebGlContext",
     SetupShaderBindableLocations: "domain/rendering/SetupShaderBindableLocations",
 
     // -- shader
-    LoadShaders: "domain/shader/LoadShaders",
+    LoadShaderProgram: "domain/shader/LoadShaderProgram",
     DownloadShaderConfigFromServer: "domain/shader/DownloadShaderConfigFromServer",
     BuildShaderProgram: "domain/shader/BuildShaderProgram",
 
@@ -46,7 +50,6 @@ require.config({
     TransformModelNode: "domain/model/TransformModelNode",
     TransformMesh: "domain/model/TransformMesh",
     TransformMaterial: "domain/model/TransformMaterial",
-    ParseObjFile: "domain/model/ParseObjFile",
 
     // -- Scene
     LoadScene: "domain/scene/LoadScene",
@@ -59,18 +62,22 @@ require.config({
 
     // contracts
     Messaging: "contracts/Messaging",
-    Obj: "contracts/Obj",
     Shader: "contracts/Shader",
-    Scene: "contracts/Scene"
+    Scene: "contracts/Scene",
+    Error: "contracts/Error"
   }
 });
 
-require(["Osiris"], function(Osiris) {
+/**
+ * Initialization of the Osiris renderer.
+ */
+require(["Osiris", "Log"], function(Osiris, Log) {
   "use strict";
 
   try {
     Osiris.init();
   } catch (error) {
-    window.alert(error.message);
+    window.alert("An unexpected error happended. Please see the console log for details.");
+    Log.error(error.message, error.stack);
   }
 });

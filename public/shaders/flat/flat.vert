@@ -9,5 +9,6 @@ varying vec2 vTexCoords;
 void main() {
     vTexCoords = aVertexTexCoords;
 
-    gl_Position = uProjectionMatrix * uModelViewMatrix * vec4(aVertexPosition, 1.0);
+    vec4 vertexEyePosition = uModelViewMatrix * vec4(aVertexPosition, 1.0);	// Convert vertex position to eye space
+    gl_Position = uProjectionMatrix * vertexEyePosition;	// Transform geometry
 }

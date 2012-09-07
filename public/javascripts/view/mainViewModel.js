@@ -1,79 +1,102 @@
 /**
+ * Provides an abstraction layer for the HTML page.
+ *
  * User: Stefan Reichel
  * Date: 02.07.12
  * Time: 01:47
  */
-
-define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
+define(["zepto", "Scene", "Shader"], function($, Scene, Shader) {
     "use strict";
 
     var _loadCallback,
-      _availableScenes = [],
-      _availableShaders = [],
-      _currentScene,
-      _currentShader,
       _renderCanvas,
       _statusOutput;
 
-    function _setupAvailableShaders() {
-      $("#availableShaders option").each(function(index, element) {
-        var name = element.text,
-          config = JSON.parse(element.value);
-
-        _availableShaders.push(new Shader.ShaderConfigurationInformation(name, config));
-      });
-
-      _currentShader = _availableShaders[$("#availableShaders option:selected").index()];
-    }
-
-    function _setupAvailableScenes() {
-      $("#availableScenes option").each(function(index, element) {
-        _availableScenes.push(new Scene.SceneInformation(element.text, element.value));
-      });
-
-      _currentScene = _availableScenes[$("#availableScenes option:selected").index()];
-    }
-
+    /**
+     * Registers the load callback with the start button.
+     *
+     * @private
+     */
     function _setupRenderButton() {
-      $("#startRender").click(function() {
+      $("#startRender").on("click", function() {
         $("#settings").hide();
         $("#renderCanvas").show();
         _loadCallback();
       });
     }
 
+    /**
+     * Sets up the private _renderCanvas variable.
+     *
+     * @private
+     */
     function _setupRenderCanvas() {
-      _renderCanvas = $("#renderCanvas").hide().get(0);
+      var canvas = $("#renderCanvas");
+      canvas.hide();
+      _renderCanvas = canvas.get(0);
     }
 
+    /**
+     * Sets up the status output with the initial message
+     *
+     * @private
+     */
     function _setupStatusOutput() {
       _statusOutput = $("#statusOutput");
-      _statusOutput.css("width", window.innerWidth);
       _statusOutput.html("<p>Please select the desired scene and shader below.</p>");
     }
 
     return {
+
+      /**
+       * Initializes the view model and runs the setup for all components.
+       *
+       * @param resetCallback
+       */
       init: function(resetCallback) {
         _loadCallback = resetCallback;
         _setupRenderCanvas();
         _setupStatusOutput();
-        _setupAvailableShaders();
-        _setupAvailableScenes();
         _setupRenderButton();
       },
 
+      /**
+       * Returns information about the currently selected scene.
+       *
+       * @return {SceneInformation}
+       */
       getCurrentScene: function() {
-        return _currentScene;
+        var selectedOptions = $("#availableScenes option").not(function() {return !this.selected;});
+
+        return new Scene.SceneInformation(selectedOptions[0].text, selectedOptions[0].value);
       },
 
+      /**
+       * Returns information about the currently selected shader program.
+       *
+       * @return {ShaderConfigurationInformation}
+       */
       getCurrentShader: function() {
-        return _currentShader;
+        var selectedOptions = $("#availableShaders option").not(function() {return !this.selected;});
+
+        return new Shader.ShaderConfigurationInformation(selectedOptions[0].text, JSON.parse(selectedOptions[0].value));
       },
 
+      /**
+       * Returns the render canvas.
+       *
+       * @return {HTMLCanvasElement}
+       */
       getRenderCanvas: function() {
         return _renderCanvas;
       },
 
+      /**
+       * Updates the status output to the given type and message. The currently available types are "info" and "error". Info messages are rendered in blue, error messages in red.
+       *
+       * @param {String} type The type of the message.
+       * @param {String} message The message to be displayed.
+       */
       updateStatus: function(type, message) {
         if (type === "info") {
           _statusOutput.html("<p><strong>Info:</strong> " + message + "</p>")
@@ -83,6 +106,7 @@ define(["Log", "jquery", "Scene", "Shader"], function(Log, $, Scene, Shader) {
           _statusOutput.html("<p><strong>Error:</strong> " + message + "</p>")
             .css("background-color", "#FFDDDD")
             .css("color", "#FF2222");
+          $("#renderCanvas").hide();
         }
       }
     };

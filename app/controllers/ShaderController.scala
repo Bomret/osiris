@@ -11,13 +11,19 @@ import osiris.contracts.types.ShaderType
 import osiris.contracts.types.ShaderType._
 
 /**
+ * Serves specific shader program configurations to the caller that match the specification contained in the request.
+ *
  * User: Stefan Reichel
  * Date: 19.07.12
  * Time: 14:59
  */
-
 object ShaderController extends Controller {
 
+  /**
+   * Parses the sent request and serves the matching shader program configuration to the caller. If there is no shader program configuration that matches the request a Not Found response will be sent. If something goes wrong an Internal Server Error is sent.
+   *
+   * It is assumed that the request contains a valid JSON object that specifies a scene.
+   */
   def getShaderConfigurationByFilename = Action(parse.json) {
     request =>
       try {
@@ -40,6 +46,12 @@ object ShaderController extends Controller {
       }
   }
 
+  /**
+   * Parses the given request and returns the matching shader program configuration.
+   *
+   * @param request The client request. Must contain a JSON body.
+   * @return A [[play.api.libs.json.JsValue]] containing the requested shader program configuration.
+   */
   private def _retrieveShaderConfiguration(request: Request[JsValue]): JsValue = {
     val name = (request.body \ "name").as[JsValue]
     val path = (request.body \ "config" \ "path").as[String] + "/"
@@ -60,10 +72,11 @@ object ShaderController extends Controller {
   }
 
   /**
+   * Retrieves the requested shader configuration file from the given path relative to the shader home dir in the filesystem.
    *
-   * @param request
-   * @param path
-   * @return
+   * @param request The client request. Must contain a JSON body.
+   * @param path The path where the requested shader configuration file can be found. Is assumed as relative to the shader home directory.
+   * @return The shader configuration file wrapped as [[play.api.libs.json.JsValue]] object.
    */
   private def _retrieveShaderConfigFile(request: Request[JsValue], path: String): JsValue = {
     val filename = (request.body \ "config" \ "file").as[String]
@@ -73,11 +86,12 @@ object ShaderController extends Controller {
   }
 
   /**
+   * Retrieves the shader code specified by the given parameters.
    *
-   * @param shaderType The type of the shader
-   * @param path The path to the directory this shader file lies in
-   * @param config The shader configuration object this shader is specified in
-   * @return The shader code wrapped as a JsValue object
+   * @param shaderType The type of the shader.
+   * @param path The path to the directory this shader file lies in.
+   * @param config The shader configuration object this shader is specified in.
+   * @return The shader code wrapped as a [[play.api.libs.json.JsValue]] object.
    */
   private def _retrieveShaderCode(shaderType: ShaderType, path: String, config: JsValue): JsValue = {
     val shaderFile = (config \ shaderType.toString \ "file").as[String]
